@@ -2825,6 +2825,73 @@ Inherited from Element.visible
     }
 
 
+    class Layout extends kendo.drawing.Group {
+        constructor(options?: LayoutOptions);
+        options: LayoutOptions;
+        /**
+        Gets or sets the layout rectangle.
+        @method
+        @returns The current rectangle.
+        */
+        rect(): kendo.geometry.Rect;
+        /**
+        Gets or sets the layout rectangle.
+        @method
+        @param rect - The layout rectangle.
+        */
+        rect(rect: kendo.geometry.Rect): void;
+        /**
+        Arranges the elements based on the current options.
+        @method
+        */
+        reflow(): void;
+    }
+
+    interface LayoutOptions {
+        name?: string;
+        /**
+        Specifies the alignment of the content.
+        @member {string}
+        */
+        alignContent?: string;
+        /**
+        Specifies the alignment of the items based.
+        @member {string}
+        */
+        alignItems?: string;
+        /**
+        Specifies how should the content be justified.
+        @member {string}
+        */
+        justifyContent?: string;
+        /**
+        Specifies the distance between the lines for wrapped layout.
+        @member {number}
+        */
+        lineSpacing?: number;
+        /**
+        Specifies the distance between the elements.
+        @member {number}
+        */
+        spacing?: number;
+        /**
+        Specifies layout orientation. The supported values are:
+        @member {string}
+        */
+        orientation?: string;
+        /**
+        Specifies the behavior when the elements size exceeds the rectangle size. If set to true, the elements will be moved to the next "line". If set to false, the layout will be scaled so that the elements fit in the rectangle.
+        @member {boolean}
+        */
+        wrap?: boolean;
+    }
+    interface LayoutEvent {
+        sender: Layout;
+        isDefaultPrevented(): boolean;
+        preventDefault: Function;
+    }
+
+
     class MultiPath extends kendo.drawing.Element {
         constructor(options?: MultiPathOptions);
         options: MultiPathOptions;
@@ -3761,6 +3828,14 @@ declare module kendo {
 
     module drawing {
         function /**
+        Aligns drawing elements x axis position to a given rectangle.
+        @method
+        @param elements - An array with the drawing elements that should be aligned.
+        @param rect - The rectangle in which the elements should be aligned.
+        @param alignment - Specifies how should the elements be aligned. The supported values are:
+        */
+        align(elements: any, rect: kendo.geometry.Rect, alignment: string): void;
+        function /**
         Converts the given DOM element to a Drawing API scene.The operation is asynchronous and returns a promise.The promise will be resolved with the root Group of the scene.
         @method
         @param element - The root DOM element to draw.
@@ -3791,6 +3866,49 @@ declare module kendo {
         @returns A promise that will be resolved with a SVG document encoded as a Data URI.
         */
         exportSVG(group: kendo.drawing.Group, options: any): JQueryPromise<any>;
+        function /**
+        Scales uniformly an element so that it fits in a given rectangle. No scaling will be applied if the element is already small enough to fit in the rectangle.
+        @method
+        @param element - The drawing element that should be fitted.
+        @param rect - The rectangle in which the elements should be fitted.
+        */
+        fit(element: kendo.drawing.Element, rect: kendo.geometry.Rect): void;
+        function /**
+        Stacks drawing elements horizontally.
+        @method
+        @param elements - An array with the drawing elements that should be stacked.
+        */
+        stack(elements: any): void;
+        function /**
+        Aligns drawing elements y axis position to a given rectangle.
+        @method
+        @param elements - An array with the drawing elements that should be aligned.
+        @param rect - The rectangle in which the elements should be aligned.
+        @param alignment - Specifies how should the elements be aligned. The supported values are:
+        */
+        vAlign(elements: any, rect: kendo.geometry.Rect, alignment: string): void;
+        function /**
+        Stacks drawing elements vertically.
+        @method
+        @param elements - An array with the drawing elements that should be stacked.
+        */
+        vStack(elements: any): void;
+        function /**
+        Stacks drawing elements vertically. Multiple stacks will be used if the elements height exceeds the given rectangle height.
+        @method
+        @param elements - An array with the drawing elements that should be wrapped.
+        @param rect - The rectangle in which the elements should be wrapped.
+        @returns An array with the stacks. Each stack is an Array holding the stack drawing elements.
+        */
+        vWrap(elements: any, rect: kendo.geometry.Rect): any;
+        function /**
+        Stacks drawing elements horizontally. Multiple stacks will be used if the elements width exceeds the given rectangle width.
+        @method
+        @param elements - An array with the drawing elements that should be wrapped.
+        @param rect - The rectangle in which the elements should be wrapped.
+        @returns An array with the stacks. Each stack is an Array holding the stack drawing elements.
+        */
+        wrap(elements: any, rect: kendo.geometry.Rect): any;
     }
 
     module effects {
@@ -7958,6 +8076,73 @@ Inherited from Element.visible
     }
     interface ImageEvent {
         sender: Image;
+        isDefaultPrevented(): boolean;
+        preventDefault: Function;
+    }
+
+
+    class Layout extends kendo.drawing.Group {
+        constructor(options?: LayoutOptions);
+        options: LayoutOptions;
+        /**
+        Gets or sets the layout rectangle.
+        @method
+        @returns The current rectangle.
+        */
+        rect(): kendo.geometry.Rect;
+        /**
+        Gets or sets the layout rectangle.
+        @method
+        @param rect - The layout rectangle.
+        */
+        rect(rect: kendo.geometry.Rect): void;
+        /**
+        Arranges the elements based on the current options.
+        @method
+        */
+        reflow(): void;
+    }
+
+    interface LayoutOptions {
+        name?: string;
+        /**
+        Specifies the alignment of the content.
+        @member {string}
+        */
+        alignContent?: string;
+        /**
+        Specifies the alignment of the items based.
+        @member {string}
+        */
+        alignItems?: string;
+        /**
+        Specifies how should the content be justified.
+        @member {string}
+        */
+        justifyContent?: string;
+        /**
+        Specifies the distance between the lines for wrapped layout.
+        @member {number}
+        */
+        lineSpacing?: number;
+        /**
+        Specifies the distance between the elements.
+        @member {number}
+        */
+        spacing?: number;
+        /**
+        Specifies layout orientation. The supported values are:
+        @member {string}
+        */
+        orientation?: string;
+        /**
+        Specifies the behavior when the elements size exceeds the rectangle size. If set to true, the elements will be moved to the next "line". If set to false, the layout will be scaled so that the elements fit in the rectangle.
+        @member {boolean}
+        */
+        wrap?: boolean;
+    }
+    interface LayoutEvent {
+        sender: Layout;
         isDefaultPrevented(): boolean;
         preventDefault: Function;
     }
