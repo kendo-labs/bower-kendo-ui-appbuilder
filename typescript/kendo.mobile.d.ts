@@ -6636,6 +6636,11 @@ declare module kendo.ooxml {
         */
         filter?: WorkbookSheetFilter;
         rows?: WorkbookSheetRow[];
+        /**
+        Sets the title of the exported workbook sheet.
+        @member {string}
+        */
+        title?: string;
     }
 
     interface WorkbookOptions {
