@@ -2574,6 +2574,89 @@ It can be replaced by calling the clip method.
 
 
 
+    class Gradient extends kendo.Class {
+        constructor(options?: GradientOptions);
+        options: GradientOptions;
+        /**
+        Adds a color stop to the gradient.
+        @method
+        @param offset - The stop offset from the start of the element.
+Ranges from 0 (start of gradient) to 1 (end of gradient).
+        @param color - The color in any of the following formats.| Format         | Description
+| ---            | --- | ---
+| red            | Basic or Extended CSS Color name
+| #ff0000        | Hex RGB value
+| rgb(255, 0, 0) | RGB valueSpecifying 'none', 'transparent' or '' (empty string) will clear the fill.
+        @param opacity - The fill opacity.
+Ranges from 0 (completely transparent) to 1 (completely opaque).
+        @returns The new gradient color stop.
+        */
+        addStop(offset: number, color: string, opacity: number): kendo.drawing.GradientStop;
+        /**
+        Removes a color stop from the gradient.
+        @method
+        @param stop - The gradient color stop to remove.
+        */
+        removeStop(stop: kendo.drawing.GradientStop): void;
+        /**
+                The array of gradient color stops.
+Contains GradientStop instances.
+                */
+                stops: any;
+    }
+
+    interface GradientOptions {
+        name?: string;
+        /**
+        The color stops of the gradient.
+Can contain either plain objects or GradientStop instances.
+        @member {any}
+        */
+        stops?: any;
+    }
+    interface GradientEvent {
+        sender: Gradient;
+        isDefaultPrevented(): boolean;
+        preventDefault: Function;
+    }
+
+
+    class GradientStop extends kendo.Class {
+        constructor(options?: GradientStopOptions);
+        options: GradientStopOptions;
+    }
+
+    interface GradientStopOptions {
+        name?: string;
+        /**
+        The stop offset from the start of the element.
+Ranges from 0 (start of gradient) to 1 (end of gradient).
+        @member {number}
+        */
+        offset?: number;
+        /**
+        The color in any of the following formats.| Format         | Description
+| ---            | --- | ---
+| red            | Basic or Extended CSS Color name
+| #ff0000        | Hex RGB value
+| rgb(255, 0, 0) | RGB valueSpecifying 'none', 'transparent' or '' (empty string) will clear the fill.
+        @member {string}
+        */
+        color?: string;
+        /**
+        The fill opacity.
+Ranges from 0 (completely transparent) to 1 (completely opaque).
+        @member {number}
+        */
+        opacity?: number;
+    }
+    interface GradientStopEvent {
+        sender: GradientStop;
+        isDefaultPrevented(): boolean;
+        preventDefault: Function;
+    }
+
+
     class Group extends kendo.drawing.Element {
         constructor(options?: GroupOptions);
         options: GroupOptions;
@@ -2887,6 +2970,89 @@ Inherited from Element.visible
     }
     interface LayoutEvent {
         sender: Layout;
+        isDefaultPrevented(): boolean;
+        preventDefault: Function;
+    }
+
+
+    class LinearGradient extends kendo.drawing.Gradient {
+        constructor(options?: LinearGradientOptions);
+        options: LinearGradientOptions;
+        /**
+        Adds a color stop to the gradient.
+Inherited from Gradient.addStop
+        @method
+        @param offset - 
+        @param color - The color of the stop.
+        @param opacity - The fill opacity.
+        @returns The new gradient color stop.
+        */
+        addStop(offset: number, color: string, opacity: number): kendo.drawing.GradientStop;
+        /**
+        Gets or sets the end point of the gradient.
+        @method
+        @returns The current end point of the gradient.
+        */
+        end(): kendo.geometry.Point;
+        /**
+        Gets or sets the end point of the gradient.
+        @method
+        @param end - The end point of the gradient.Coordinates are relative to the shape bounding box.
+For example [0, 0] is top left and [1, 1] is bottom right.
+        */
+        end(end: any): void;
+        /**
+        Gets or sets the end point of the gradient.
+        @method
+        @param end - The end point of the gradient.Coordinates are relative to the shape bounding box.
+For example [0, 0] is top left and [1, 1] is bottom right.
+        */
+        end(end: kendo.geometry.Point): void;
+        /**
+        Gets or sets the start point of the gradient.
+        @method
+        @returns The current start point of the gradient.
+        */
+        start(): kendo.geometry.Point;
+        /**
+        Gets or sets the start point of the gradient.
+        @method
+        @param start - The start point of the gradient.Coordinates are relative to the shape bounding box.
+For example [0, 0] is top left and [1, 1] is bottom right.
+        */
+        start(start: any): void;
+        /**
+        Gets or sets the start point of the gradient.
+        @method
+        @param start - The start point of the gradient.Coordinates are relative to the shape bounding box.
+For example [0, 0] is top left and [1, 1] is bottom right.
+        */
+        start(start: kendo.geometry.Point): void;
+        /**
+        Removes a color stop from the gradient.
+Inherited from Gradient.removeStop
+        @method
+        @param stop - The gradient color stop to remove.
+        */
+        removeStop(stop: kendo.drawing.GradientStop): void;
+        /**
+                The array of gradient color stops.
+Contains GradientStop instances.
+                */
+                stops: any;
+    }
+
+    interface LinearGradientOptions {
+        name?: string;
+        /**
+        The color stops of the gradient.
+Can contain either plain objects or GradientStop instances.
+        @member {any}
+        */
+        stops?: any;
+    }
+    interface LinearGradientEvent {
+        sender: LinearGradient;
         isDefaultPrevented(): boolean;
         preventDefault: Function;
     }
@@ -3424,6 +3590,92 @@ Inherited from Element.visible
     }
 
 
+    class RadialGradient extends kendo.drawing.Gradient {
+        constructor(options?: RadialGradientOptions);
+        options: RadialGradientOptions;
+        /**
+        Adds a color stop to the gradient.
+Inherited from Gradient.addStop
+        @method
+        @param offset - 
+        @param color - The color of the stop.
+        @param opacity - The fill opacity.
+        @returns The new gradient color stop.
+        */
+        addStop(offset: number, color: string, opacity: number): kendo.drawing.GradientStop;
+        /**
+        Gets or sets the center point of the gradient.
+        @method
+        @returns The current radius of the gradient.
+        */
+        center(): kendo.geometry.Point;
+        /**
+        Gets or sets the center point of the gradient.
+        @method
+        @param center - The center point of the gradient.Coordinates are relative to the shape bounding box.
+For example [0, 0] is top left and [1, 1] is bottom right.
+        */
+        center(center: any): void;
+        /**
+        Gets or sets the center point of the gradient.
+        @method
+        @param center - The center point of the gradient.Coordinates are relative to the shape bounding box.
+For example [0, 0] is top left and [1, 1] is bottom right.
+        */
+        center(center: kendo.geometry.Point): void;
+        /**
+        Gets or sets the radius of the gradient.
+        @method
+        @returns The current radius of the gradient.
+        */
+        radius(): number;
+        /**
+        Gets or sets the radius of the gradient.
+        @method
+        @param value - The new radius of the gradient.
+        */
+        radius(value: number): void;
+        /**
+        Removes a color stop from the gradient.
+Inherited from Gradient.removeStop
+        @method
+        @param stop - The gradient color stop to remove.
+        */
+        removeStop(stop: kendo.drawing.GradientStop): void;
+        /**
+                The array of gradient color stops.
+Contains GradientStop instances.
+                */
+                stops: any;
+    }
+
+    interface RadialGradientOptions {
+        name?: string;
+        /**
+        The center of the gradient.Coordinates are relative to the shape bounding box.
+For example [0, 0] is top left and [1, 1] is bottom right.
+        @member {any}
+        */
+        center?: any;
+        /**
+        The radius of the radial gradient relative to the shape bounding box.
+        @member {number}
+        */
+        radius?: number;
+        /**
+        The color stops of the gradient.
+Can contain either plain objects or GradientStop instances.
+        @member {any}
+        */
+        stops?: any;
+    }
+    interface RadialGradientEvent {
+        sender: RadialGradient;
+        isDefaultPrevented(): boolean;
+        preventDefault: Function;
+    }
+
+
     class Segment extends kendo.Class {
         options: SegmentOptions;
         /**
@@ -3767,6 +4019,14 @@ Inherited from Element.clip
         @member {kendo.drawing.FillOptions}
         */
         fill?: kendo.drawing.FillOptions;
+        /**
+        The font to use for rendering the text.
+Accepts the standard CSS font syntax.Examples of valid font values:
+* Size and family: "2em 'Open Sans', sans-serif"
+* Style, size and family: "italic 2em 'Open Sans', sans-serif"
+        @member {string}
+        */
+        font?: string;
         /**
         The element opacity.
 Inherited from Element.opacity
@@ -7835,6 +8095,89 @@ It can be replaced by calling the clip method.
 
 
 
+    class Gradient extends kendo.Class {
+        constructor(options?: GradientOptions);
+        options: GradientOptions;
+        /**
+        Adds a color stop to the gradient.
+        @method
+        @param offset - The stop offset from the start of the element.
+Ranges from 0 (start of gradient) to 1 (end of gradient).
+        @param color - The color in any of the following formats.| Format         | Description
+| ---            | --- | ---
+| red            | Basic or Extended CSS Color name
+| #ff0000        | Hex RGB value
+| rgb(255, 0, 0) | RGB valueSpecifying 'none', 'transparent' or '' (empty string) will clear the fill.
+        @param opacity - The fill opacity.
+Ranges from 0 (completely transparent) to 1 (completely opaque).
+        @returns The new gradient color stop.
+        */
+        addStop(offset: number, color: string, opacity: number): kendo.drawing.GradientStop;
+        /**
+        Removes a color stop from the gradient.
+        @method
+        @param stop - The gradient color stop to remove.
+        */
+        removeStop(stop: kendo.drawing.GradientStop): void;
+        /**
+                The array of gradient color stops.
+Contains GradientStop instances.
+                */
+                stops: any;
+    }
+
+    interface GradientOptions {
+        name?: string;
+        /**
+        The color stops of the gradient.
+Can contain either plain objects or GradientStop instances.
+        @member {any}
+        */
+        stops?: any;
+    }
+    interface GradientEvent {
+        sender: Gradient;
+        isDefaultPrevented(): boolean;
+        preventDefault: Function;
+    }
+
+
+    class GradientStop extends kendo.Class {
+        constructor(options?: GradientStopOptions);
+        options: GradientStopOptions;
+    }
+
+    interface GradientStopOptions {
+        name?: string;
+        /**
+        The stop offset from the start of the element.
+Ranges from 0 (start of gradient) to 1 (end of gradient).
+        @member {number}
+        */
+        offset?: number;
+        /**
+        The color in any of the following formats.| Format         | Description
+| ---            | --- | ---
+| red            | Basic or Extended CSS Color name
+| #ff0000        | Hex RGB value
+| rgb(255, 0, 0) | RGB valueSpecifying 'none', 'transparent' or '' (empty string) will clear the fill.
+        @member {string}
+        */
+        color?: string;
+        /**
+        The fill opacity.
+Ranges from 0 (completely transparent) to 1 (completely opaque).
+        @member {number}
+        */
+        opacity?: number;
+    }
+    interface GradientStopEvent {
+        sender: GradientStop;
+        isDefaultPrevented(): boolean;
+        preventDefault: Function;
+    }
+
+
     class Group extends kendo.drawing.Element {
         constructor(options?: GroupOptions);
         options: GroupOptions;
@@ -8148,6 +8491,89 @@ Inherited from Element.visible
     }
     interface LayoutEvent {
         sender: Layout;
+        isDefaultPrevented(): boolean;
+        preventDefault: Function;
+    }
+
+
+    class LinearGradient extends kendo.drawing.Gradient {
+        constructor(options?: LinearGradientOptions);
+        options: LinearGradientOptions;
+        /**
+        Adds a color stop to the gradient.
+Inherited from Gradient.addStop
+        @method
+        @param offset - 
+        @param color - The color of the stop.
+        @param opacity - The fill opacity.
+        @returns The new gradient color stop.
+        */
+        addStop(offset: number, color: string, opacity: number): kendo.drawing.GradientStop;
+        /**
+        Gets or sets the end point of the gradient.
+        @method
+        @returns The current end point of the gradient.
+        */
+        end(): kendo.geometry.Point;
+        /**
+        Gets or sets the end point of the gradient.
+        @method
+        @param end - The end point of the gradient.Coordinates are relative to the shape bounding box.
+For example [0, 0] is top left and [1, 1] is bottom right.
+        */
+        end(end: any): void;
+        /**
+        Gets or sets the end point of the gradient.
+        @method
+        @param end - The end point of the gradient.Coordinates are relative to the shape bounding box.
+For example [0, 0] is top left and [1, 1] is bottom right.
+        */
+        end(end: kendo.geometry.Point): void;
+        /**
+        Gets or sets the start point of the gradient.
+        @method
+        @returns The current start point of the gradient.
+        */
+        start(): kendo.geometry.Point;
+        /**
+        Gets or sets the start point of the gradient.
+        @method
+        @param start - The start point of the gradient.Coordinates are relative to the shape bounding box.
+For example [0, 0] is top left and [1, 1] is bottom right.
+        */
+        start(start: any): void;
+        /**
+        Gets or sets the start point of the gradient.
+        @method
+        @param start - The start point of the gradient.Coordinates are relative to the shape bounding box.
+For example [0, 0] is top left and [1, 1] is bottom right.
+        */
+        start(start: kendo.geometry.Point): void;
+        /**
+        Removes a color stop from the gradient.
+Inherited from Gradient.removeStop
+        @method
+        @param stop - The gradient color stop to remove.
+        */
+        removeStop(stop: kendo.drawing.GradientStop): void;
+        /**
+                The array of gradient color stops.
+Contains GradientStop instances.
+                */
+                stops: any;
+    }
+
+    interface LinearGradientOptions {
+        name?: string;
+        /**
+        The color stops of the gradient.
+Can contain either plain objects or GradientStop instances.
+        @member {any}
+        */
+        stops?: any;
+    }
+    interface LinearGradientEvent {
+        sender: LinearGradient;
         isDefaultPrevented(): boolean;
         preventDefault: Function;
     }
@@ -8685,6 +9111,92 @@ Inherited from Element.visible
     }
 
 
+    class RadialGradient extends kendo.drawing.Gradient {
+        constructor(options?: RadialGradientOptions);
+        options: RadialGradientOptions;
+        /**
+        Adds a color stop to the gradient.
+Inherited from Gradient.addStop
+        @method
+        @param offset - 
+        @param color - The color of the stop.
+        @param opacity - The fill opacity.
+        @returns The new gradient color stop.
+        */
+        addStop(offset: number, color: string, opacity: number): kendo.drawing.GradientStop;
+        /**
+        Gets or sets the center point of the gradient.
+        @method
+        @returns The current radius of the gradient.
+        */
+        center(): kendo.geometry.Point;
+        /**
+        Gets or sets the center point of the gradient.
+        @method
+        @param center - The center point of the gradient.Coordinates are relative to the shape bounding box.
+For example [0, 0] is top left and [1, 1] is bottom right.
+        */
+        center(center: any): void;
+        /**
+        Gets or sets the center point of the gradient.
+        @method
+        @param center - The center point of the gradient.Coordinates are relative to the shape bounding box.
+For example [0, 0] is top left and [1, 1] is bottom right.
+        */
+        center(center: kendo.geometry.Point): void;
+        /**
+        Gets or sets the radius of the gradient.
+        @method
+        @returns The current radius of the gradient.
+        */
+        radius(): number;
+        /**
+        Gets or sets the radius of the gradient.
+        @method
+        @param value - The new radius of the gradient.
+        */
+        radius(value: number): void;
+        /**
+        Removes a color stop from the gradient.
+Inherited from Gradient.removeStop
+        @method
+        @param stop - The gradient color stop to remove.
+        */
+        removeStop(stop: kendo.drawing.GradientStop): void;
+        /**
+                The array of gradient color stops.
+Contains GradientStop instances.
+                */
+                stops: any;
+    }
+
+    interface RadialGradientOptions {
+        name?: string;
+        /**
+        The center of the gradient.Coordinates are relative to the shape bounding box.
+For example [0, 0] is top left and [1, 1] is bottom right.
+        @member {any}
+        */
+        center?: any;
+        /**
+        The radius of the radial gradient relative to the shape bounding box.
+        @member {number}
+        */
+        radius?: number;
+        /**
+        The color stops of the gradient.
+Can contain either plain objects or GradientStop instances.
+        @member {any}
+        */
+        stops?: any;
+    }
+    interface RadialGradientEvent {
+        sender: RadialGradient;
+        isDefaultPrevented(): boolean;
+        preventDefault: Function;
+    }
+
+
     class Segment extends kendo.Class {
         options: SegmentOptions;
         /**
@@ -9028,6 +9540,14 @@ Inherited from Element.clip
         @member {kendo.drawing.FillOptions}
         */
         fill?: kendo.drawing.FillOptions;
+        /**
+        The font to use for rendering the text.
+Accepts the standard CSS font syntax.Examples of valid font values:
+* Size and family: "2em 'Open Sans', sans-serif"
+* Style, size and family: "italic 2em 'Open Sans', sans-serif"
+        @member {string}
+        */
+        font?: string;
         /**
         The element opacity.
 Inherited from Element.opacity
