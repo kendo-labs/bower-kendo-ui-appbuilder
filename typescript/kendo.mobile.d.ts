@@ -946,8 +946,8 @@ declare module kendo.data {
     }
 
     class ObservableArray extends Observable {
-        constructor(array?: any[]);
-        init(array?: any[]): void;
+        constructor(array: any[]);
+        init(array: any[]): void;
         [index: number]: any;
 
         empty(): void;
@@ -4804,6 +4804,11 @@ However, if the widget is placed in a scrollable view, the user may accidentally
         @param instant - When set to true the expand action will be performed without animation.
         */
         expand(instant?: boolean): void;
+        /**
+        Recalculates the content height.
+        @method
+        */
+        resize(): void;
         /**
         Toggles the content visibility.
         @method
