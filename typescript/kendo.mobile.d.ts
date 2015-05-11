@@ -1358,6 +1358,7 @@ declare module kendo.mobile {
         options: ApplicationOptions;
         hideLoading(): void;
         navigate(url: string, transition?: string): void;
+        replace(url: string, transition?: string): void;
         scroller(): kendo.mobile.ui.Scroller;
         showLoading(): void;
         view(): kendo.mobile.ui.View;
