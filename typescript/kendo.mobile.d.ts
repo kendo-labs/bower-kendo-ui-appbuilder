@@ -4102,7 +4102,7 @@ declare module kendo {
         @param element - The root DOM element to draw.
         @returns A promise that will be resolved with the root Group of the scene.
         */
-        drawDOM(element: HTMLElement): JQueryPromise<any>;
+        drawDOM(element: JQuery): JQueryPromise<any>;
         function /**
         Exports a group of drawing elements as an image.The export operation is asynchronous and returns a promise.The promise will be resolved with a PNG image encoded as a Data URI.
         @method
