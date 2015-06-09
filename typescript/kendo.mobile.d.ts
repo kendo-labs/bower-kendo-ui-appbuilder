@@ -1895,6 +1895,7 @@ The callee coordinates will remain unchanged.
 
 
     class Rect extends Observable {
+        constructor(origin: kendo.geometry.Point, size: kendo.geometry.Size);
         options: RectOptions;
         /**
         Returns the bounding box of this rectangle after applying the
@@ -2167,7 +2168,7 @@ Negative values or values greater than 360 will be normalized.
 }
 declare module kendo.drawing {
     class Arc extends kendo.drawing.Element {
-        constructor(options?: ArcOptions);
+        constructor(geometry: kendo.geometry.Arc, options?: ArcOptions);
         options: ArcOptions;
         /**
         Returns the bounding box of the element with transformations applied.
@@ -2315,7 +2316,7 @@ Inherited from Element.visible
 
 
     class Circle extends kendo.drawing.Element {
-        constructor(options?: CircleOptions);
+        constructor(geometry: kendo.geometry.Circle, options?: CircleOptions);
         options: CircleOptions;
         /**
         Returns the bounding box of the element with transformations applied.
@@ -2777,7 +2778,7 @@ Inherited from Element.visible
 
 
     class Image extends kendo.drawing.Element {
-        constructor(options?: ImageOptions);
+        constructor(src: string, rect: kendo.geometry.Rect);
         options: ImageOptions;
         /**
         Returns the bounding box of the element with transformations applied.
@@ -2910,7 +2911,7 @@ Inherited from Element.visible
 
 
     class Layout extends kendo.drawing.Group {
-        constructor(options?: LayoutOptions);
+        constructor(rect: kendo.geometry.Rect, options?: LayoutOptions);
         options: LayoutOptions;
         /**
         Gets or sets the layout rectangle.
@@ -3286,6 +3287,7 @@ Inherited from Element.visible
 
 
     class OptionsStore extends kendo.Class {
+        constructor(options?: OptionsStoreOptions);
         options: OptionsStoreOptions;
         /**
         Gets the value of the specified option.
@@ -3678,6 +3680,7 @@ Can contain either plain objects or GradientStop instances.
 
 
     class Segment extends kendo.Class {
+        constructor(anchor: kendo.geometry.Point, controlIn: kendo.geometry.Point, controlOut: kendo.geometry.Point);
         options: SegmentOptions;
         /**
         Gets or sets the segment anchor point.The setter returns the current Segment to allow chaining.
@@ -3892,7 +3895,7 @@ By default the surface will expand to fill the width of the first positioned con
 
 
     class Text extends kendo.drawing.Element {
-        constructor(options?: TextOptions);
+        constructor(content: string, position: kendo.geometry.Point, options?: TextOptions);
         options: TextOptions;
         /**
         Returns the bounding box of the element with transformations applied.
@@ -7421,6 +7424,7 @@ The callee coordinates will remain unchanged.
 
 
     class Rect extends Observable {
+        constructor(origin: kendo.geometry.Point, size: kendo.geometry.Size);
         options: RectOptions;
         /**
         Returns the bounding box of this rectangle after applying the
@@ -7693,7 +7697,7 @@ Negative values or values greater than 360 will be normalized.
 }
 declare module kendo.dataviz.drawing {
     class Arc extends kendo.drawing.Element {
-        constructor(options?: ArcOptions);
+        constructor(geometry: kendo.geometry.Arc, options?: ArcOptions);
         options: ArcOptions;
         /**
         Returns the bounding box of the element with transformations applied.
@@ -7841,7 +7845,7 @@ Inherited from Element.visible
 
 
     class Circle extends kendo.drawing.Element {
-        constructor(options?: CircleOptions);
+        constructor(geometry: kendo.geometry.Circle, options?: CircleOptions);
         options: CircleOptions;
         /**
         Returns the bounding box of the element with transformations applied.
@@ -8303,7 +8307,7 @@ Inherited from Element.visible
 
 
     class Image extends kendo.drawing.Element {
-        constructor(options?: ImageOptions);
+        constructor(src: string, rect: kendo.geometry.Rect);
         options: ImageOptions;
         /**
         Returns the bounding box of the element with transformations applied.
@@ -8436,7 +8440,7 @@ Inherited from Element.visible
 
 
     class Layout extends kendo.drawing.Group {
-        constructor(options?: LayoutOptions);
+        constructor(rect: kendo.geometry.Rect, options?: LayoutOptions);
         options: LayoutOptions;
         /**
         Gets or sets the layout rectangle.
@@ -8812,6 +8816,7 @@ Inherited from Element.visible
 
 
     class OptionsStore extends kendo.Class {
+        constructor(options?: OptionsStoreOptions);
         options: OptionsStoreOptions;
         /**
         Gets the value of the specified option.
@@ -9204,6 +9209,7 @@ Can contain either plain objects or GradientStop instances.
 
 
     class Segment extends kendo.Class {
+        constructor(anchor: kendo.geometry.Point, controlIn: kendo.geometry.Point, controlOut: kendo.geometry.Point);
         options: SegmentOptions;
         /**
         Gets or sets the segment anchor point.The setter returns the current Segment to allow chaining.
@@ -9418,7 +9424,7 @@ By default the surface will expand to fill the width of the first positioned con
 
 
     class Text extends kendo.drawing.Element {
-        constructor(options?: TextOptions);
+        constructor(content: string, position: kendo.geometry.Point, options?: TextOptions);
         options: TextOptions;
         /**
         Returns the bounding box of the element with transformations applied.
@@ -9598,8 +9604,6 @@ interface JQueryEventObject {
 }
 
 interface JQueryPromise<T> {
-    pipe(doneFilter?: (x: any) => any, failFilter?: (x: any) => any, progressFilter?: (x: any) => any): JQueryPromise<T>;
-    then(doneCallbacks: any, failCallbacks: any, progressCallbacks?: any): JQueryPromise<T>;
 }
 
 interface JQuery {
