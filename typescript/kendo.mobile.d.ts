@@ -4210,6 +4210,14 @@ declare module kendo {
     }
 
         function /**
+        Returns an object that contains common
+CSRF tokens
+found on the page.These include tokens used by ASP.NET, Ruby on Rails and others.
+        @method
+        @returns An object that contains common CSRF tokens found on the page
+        */
+        antiForgeryTokens(): any;
+        function /**
         Binds a HTML View to a View-Model.Model View ViewModel (MVVM) is a design pattern which helps developers separate the Model from the View. The View-Model part of MVVM is responsible for
 exposing the data objects from the Model in such a way that those objects are easily consumed in the View.
         @method
