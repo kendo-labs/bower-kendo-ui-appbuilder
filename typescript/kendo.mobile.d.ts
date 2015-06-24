@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI
+// type definitions for Kendo UI
 
 declare module kendo {
     function culture(): {
@@ -84,7 +84,7 @@ declare module kendo {
         };
     };
 
-    var cultures: {[culture:string] : {
+    var cultures: {[culture: string] : {
         name?: string;
         calendar?: {
             AM: string[];
@@ -180,7 +180,7 @@ declare module kendo {
     function observable(data: any): kendo.data.ObservableObject;
     function observableHierarchy(array: any[]): kendo.data.ObservableArray;
 
-    function render(template:(data: any) => string, data: any[]): string;
+    function render(template: (data: any) => string, data: any[]): string;
     function template(template: string, options?: TemplateOptions): (data: any) => string;
 
     function guid(): string;
@@ -210,7 +210,7 @@ declare module kendo {
         F2: number;
         F10: number;
         F12: number;
-    }
+    };
 
     var support: {
         touch: boolean;
@@ -238,7 +238,7 @@ declare module kendo {
             opera: boolean;
             version: string;
         };
-    }
+    };
 
     interface TemplateOptions {
         paramName?: string;
@@ -271,21 +271,21 @@ declare module kendo {
 
     interface ViewEvent {
         sender: View;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
     class View extends Observable {
         constructor(element: Element, options?: ViewOptions);
         constructor(element: string, options?: ViewOptions);
-        init(element: Element, options?: ViewOptions): void;
-        init(element: string, options?: ViewOptions): void;
-        render(container?: any): JQuery;
-        destroy(): void;
         element: JQuery;
         content: any;
         tagName: string;
         model: Object;
+        init(element: Element, options?: ViewOptions): void;
+        init(element: string, options?: ViewOptions): void;
+        render(container?: any): JQuery;
+        destroy(): void;
     }
 
     class ViewContainer extends Observable {
@@ -293,15 +293,15 @@ declare module kendo {
     }
 
     class Layout extends View {
-        showIn(selector: string, view: View): void;
         containers: { [selector: string]: ViewContainer; };
+        showIn(selector: string, view: View): void;
     }
 
     class History extends Observable {
-        start(options: Object): void;
-        stop(): void;
         current: string;
         root: string;
+        start(options: Object): void;
+        stop(): void;
         change(callback: Function): void;
         navigate(location: string, silent?: boolean): void;
     }
@@ -316,9 +316,9 @@ declare module kendo {
 
     interface RouterEvent {
         sender: Router;
-        isDefaultPrevented(): boolean;
-        preventDefault: Function;
         url: string;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
     class Route extends Class {
@@ -329,12 +329,12 @@ declare module kendo {
 
     class Router extends Observable {
         constructor(options?: RouterOptions);
+        routes: Route[];
         init(options?: RouterOptions): void;
         start(): void;
         destroy(): void;
         route(route: string, callback: Function): void;
         navigate(location: string, silent?: boolean): void;
-        routes: Route[];
     }
 
 }
@@ -453,8 +453,8 @@ declare module kendo.data {
         source: any;
         parents: any[];
         path: string;
-        dependencies: { [path: string]: boolean; };
         observable: boolean;
+        dependencies: { [path: string]: boolean; };
         constructor(parents: any[], path: string);
         change(e: Object): void;
         start(source: kendo.Observable): void;
@@ -487,17 +487,16 @@ declare module kendo.data {
 
     class Binder extends Class {
         static fn: Binder;
-        static extend(prototype: Object): Binder;
-
         element: any;
         bindings: Bindings;
+        options: BinderOptions;
         constructor(element: any, bindings: Bindings, options?: BinderOptions);
+        static extend(prototype: Object): Binder;
         init(element: any, bindings: Bindings, options?: BinderOptions): void;
         bind(binding: Binding, attribute: string): void;
         destroy(): void;
         refresh(): void;
         refresh(attribute: string): void;
-        options: BinderOptions;
     }
 
     interface BinderOptions {
@@ -505,32 +504,35 @@ declare module kendo.data {
 
     class ObservableObject extends Observable{
         constructor(value?: any);
+        uid: string;
         init(value?: any): void;
         get(name: string): any;
         parent(): ObservableObject;
         set(name: string, value: any): void;
         toJSON(): Object;
-        uid: string;
     }
 
     class Model extends ObservableObject {
+        static idField: string;
+        static fields: DataSourceSchemaModelFields;
+
         idField: string;
         _defaultId: any;
         fields: DataSourceSchemaModelFields;
         defaults: {
             [field: string]: any;
         };
-        constructor(data?: any);
-        init(data?: any):void;
-        accept(data?: any): void;
-        dirty: boolean;
         id: any;
-        editable(field: string): boolean;
-        isNew(): boolean;
-        static idField: string;
-        static fields: DataSourceSchemaModelFields;
+        dirty: boolean;
+
         static define(options: DataSourceSchemaModelWithFieldsObject): typeof Model;
         static define(options: DataSourceSchemaModelWithFieldsArray): typeof Model;
+
+        constructor(data?: any);
+        init(data?: any): void;
+        accept(data?: any): void;
+        editable(field: string): boolean;
+        isNew(): boolean;
     }
 
     interface SchedulerEventData {
@@ -548,8 +550,10 @@ declare module kendo.data {
     }
 
     class SchedulerEvent extends Model {
+        static idField: string;
+        static fields: DataSourceSchemaModelFields;
+
         constructor(data?: SchedulerEventData);
-        init(data?: SchedulerEventData): void;
 
         description: string;
         end: Date;
@@ -562,10 +566,11 @@ declare module kendo.data {
         recurrenceRule: string;
         recurrenceException: string;
         title: string;
-        static idField: string;
-        static fields: DataSourceSchemaModelFields;
+
         static define(options: DataSourceSchemaModelWithFieldsObject): typeof SchedulerEvent;
         static define(options: DataSourceSchemaModelWithFieldsArray): typeof SchedulerEvent;
+
+        init(data?: SchedulerEventData): void;
         clone(options: any, updateUid: boolean): SchedulerEvent;
         duration(): number;
         expand(start: Date, end: Date, zone: any): SchedulerEvent[];
@@ -579,19 +584,19 @@ declare module kendo.data {
     }
 
     class TreeListModel extends Model {
-        constructor(data?: any);
-        init(data?: any): void;
+        static idField: string;
+        static fields: DataSourceSchemaModelFields;
 
         id: any;
         parentId: any;
 
-        loaded(value: boolean): void;
-        loaded(): boolean;
-
-        static idField: string;
-        static fields: DataSourceSchemaModelFields;
         static define(options: DataSourceSchemaModelWithFieldsObject): typeof TreeListModel;
         static define(options: DataSourceSchemaModelWithFieldsArray): typeof TreeListModel;
+
+        constructor(data?: any);
+        init(data?: any): void;
+        loaded(value: boolean): void;
+        loaded(): boolean;
     }
 
     class TreeListDataSource extends DataSource {
@@ -615,8 +620,8 @@ declare module kendo.data {
     }
 
     class GanttTask extends Model {
-        constructor(data?: any);
-        init(data?: any): void;
+        static idField: string;
+        static fields: DataSourceSchemaModelFields;
 
         id: any;
 		parentId: number;
@@ -627,24 +632,28 @@ declare module kendo.data {
 		percentComplete: number;
 		summary: boolean;
 		expanded: boolean;
-        static idField: string;
-        static fields: DataSourceSchemaModelFields;
+
         static define(options: DataSourceSchemaModelWithFieldsObject): typeof GanttTask;
         static define(options: DataSourceSchemaModelWithFieldsArray): typeof GanttTask;
+
+        constructor(data?: any);
+        init(data?: any): void;
     }
 
     class GanttDependency extends Model {
-        constructor(data?: any);
-        init(data?: any): void;
+        static idField: string;
+        static fields: DataSourceSchemaModelFields;
 
         id: any;
 		predecessorId: number;
 		successorId: number;
 		type: number;
-        static idField: string;
-        static fields: DataSourceSchemaModelFields;
+
         static define(options: DataSourceSchemaModelWithFieldsObject): typeof GanttDependency;
         static define(options: DataSourceSchemaModelWithFieldsArray): typeof GanttDependency;
+
+        constructor(data?: any);
+        init(data?: any): void;
     }
 
     class Node extends Model {
@@ -832,13 +841,14 @@ declare module kendo.data {
     }
 
     interface DataSourceTransport {
-        parameterMap?(data: DataSourceTransportParameterMapData, type: string): any;
         create?: DataSourceTransportCreate;
         destroy?: DataSourceTransportDestroy;
         push?: Function;
         read?: DataSourceTransportRead;
         signalr?: DataSourceTransportSignalr;
         update?: DataSourceTransportUpdate;
+
+        parameterMap?(data: DataSourceTransportParameterMapData, type: string): any;
     }
 
     interface DataSourceTransportSignalrClient {
@@ -946,10 +956,11 @@ declare module kendo.data {
     }
 
     class ObservableArray extends Observable {
-        constructor(array: any[]);
-        init(array: any[]): void;
+        length: number;
         [index: number]: any;
 
+        constructor(array: any[]);
+        init(array: any[]): void;
         empty(): void;
         every(callback: (item: Object, index: number, source: ObservableArray) => boolean): boolean;
         filter(callback: (item: Object, index: number, source: ObservableArray) => boolean): any[];
@@ -957,7 +968,6 @@ declare module kendo.data {
         forEach(callback: (item: Object, index: number, source: ObservableArray) => void ): void;
         indexOf(item: any): number;
         join(separator: string): string;
-        length: number;
         map(callback: (item: Object, index: number, source: ObservableArray) => any): any[];
         parent(): ObservableObject;
         pop(): ObservableObject;
@@ -982,10 +992,12 @@ declare module kendo.data {
     }
 
     class DataSource extends Observable{
+        options: DataSourceOptions;
+
+        static create(options?: DataSourceOptions): DataSource;
+
         constructor(options?: DataSourceOptions);
         init(options?: DataSourceOptions): void;
-        static create(options?: DataSourceOptions): DataSource;
-        options: DataSourceOptions;
         add(model: Object): kendo.data.Model;
         add(model: kendo.data.Model): kendo.data.Model;
         aggregate(val: any): void;
@@ -1217,7 +1229,7 @@ declare module kendo.data {
 }
 
 declare module kendo.data.transports {
-    var odata : DataSourceTransport;
+    var odata: DataSourceTransport;
 }
 
 declare module kendo.ui {
@@ -1225,6 +1237,11 @@ declare module kendo.ui {
 
     class Widget extends Observable {
         static fn: Widget;
+
+        element: JQuery;
+        options: Object;
+        events: string[];
+
         static extend(prototype: Object): Widget;
 
         constructor(element: Element, options?: Object);
@@ -1234,11 +1251,8 @@ declare module kendo.ui {
         init(element: JQuery, options?: Object): void;
         init(selector: String, options?: Object): void;
         destroy(): void;
-        element: JQuery;
         setOptions(options: Object): void;
         resize(force?: boolean): void;
-        options: Object;
-        events: string[];
     }
 
     function plugin(widget: typeof kendo.ui.Widget, register?: typeof kendo.ui, prefix?: String): void;
@@ -1353,17 +1367,18 @@ declare module kendo.mobile {
     function init(element: Element): void;
 
     class Application extends Observable {
+        options: ApplicationOptions;
+        router: kendo.Router;
+        pane: kendo.mobile.ui.Pane;
+
         constructor(element?: any, options?: ApplicationOptions);
         init(element?: any, options?: ApplicationOptions): void;
-        options: ApplicationOptions;
         hideLoading(): void;
         navigate(url: string, transition?: string): void;
         replace(url: string, transition?: string): void;
         scroller(): kendo.mobile.ui.Scroller;
         showLoading(): void;
         view(): kendo.mobile.ui.View;
-        router: kendo.Router;
-        pane: kendo.mobile.ui.Pane;
     }
 
     interface ApplicationOptions {
@@ -1408,7 +1423,42 @@ declare module kendo.mobile.ui {
 }
 declare module kendo.geometry {
     class Arc extends Observable {
+
+
         options: ArcOptions;
+
+        /**
+                A flag indicating if the arc should be drawn in clockwise or anticlockwise direction.
+Defaults to clockwise direction.
+                */
+                anticlockwise: boolean;
+        /**
+                The location of the arc center.
+                */
+                center: kendo.geometry.Point;
+        /**
+                The end angle of the arc in decimal degrees.
+Measured in clockwise direction with 0 pointing "right".
+Negative values or values greater than 360 will be normalized.
+                */
+                endAngle: number;
+        /**
+                The x radius of the arc.
+                */
+                radiusX: number;
+        /**
+                The y radius of the arc.
+                */
+                radiusY: number;
+        /**
+                The start angle of the arc in decimal degrees.
+Measured in clockwise direction with 0 pointing "right".
+Negative values or values greater than 360 will be normalized.
+                */
+                startAngle: number;
+
+
+
         /**
         Returns the bounding box of this arc after applying the specified transformation matrix.
         @method
@@ -1506,35 +1556,7 @@ Measured in clockwise direction with 0 pointing "right".
         @returns The current arc instance.
         */
         setStartAngle(value: number): kendo.geometry.Arc;
-        /**
-                A flag indicating if the arc should be drawn in clockwise or anticlockwise direction.
-Defaults to clockwise direction.
-                */
-                anticlockwise: boolean;
-        /**
-                The location of the arc center.
-                */
-                center: kendo.geometry.Point;
-        /**
-                The end angle of the arc in decimal degrees.
-Measured in clockwise direction with 0 pointing "right".
-Negative values or values greater than 360 will be normalized.
-                */
-                endAngle: number;
-        /**
-                The x radius of the arc.
-                */
-                radiusX: number;
-        /**
-                The y radius of the arc.
-                */
-                radiusY: number;
-        /**
-                The start angle of the arc in decimal degrees.
-Measured in clockwise direction with 0 pointing "right".
-Negative values or values greater than 360 will be normalized.
-                */
-                startAngle: number;
+
     }
 
     interface ArcOptions {
@@ -1542,13 +1564,27 @@ Negative values or values greater than 360 will be normalized.
     }
     interface ArcEvent {
         sender: Arc;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class Circle extends Observable {
+
+
         options: CircleOptions;
+
+        /**
+                The location of the circle center.
+                */
+                center: kendo.geometry.Point;
+        /**
+                The radius of the circle.
+                */
+                radius: number;
+
+
+
         /**
         Returns the bounding box of this circle after applying the
 specified transformation matrix.
@@ -1611,14 +1647,7 @@ Negative values or values greater than 360 will be normalized.
         @returns The current circle instance.
         */
         setRadius(value: number): kendo.geometry.Circle;
-        /**
-                The location of the circle center.
-                */
-                center: kendo.geometry.Point;
-        /**
-                The radius of the circle.
-                */
-                radius: number;
+
     }
 
     interface CircleOptions {
@@ -1626,13 +1655,47 @@ Negative values or values greater than 360 will be normalized.
     }
     interface CircleEvent {
         sender: Circle;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class Matrix extends Observable {
+
+
         options: MatrixOptions;
+
+        /**
+                The a (1, 1) member of the matrix.
+                */
+                a: number;
+        /**
+                The b (2, 1) member of the matrix.
+                */
+                b: number;
+        /**
+                The a (1, 2) member of the matrix.
+                */
+                c: number;
+        /**
+                The d (2, 2) member of the matrix.
+                */
+                d: number;
+        /**
+                The e (1, 3) member of the matrix.
+                */
+                e: number;
+        /**
+                The f (2, 3) member of the matrix.
+                */
+                f: number;
+
+
+        static rotate(angle: number, x: number, y: number): kendo.geometry.Matrix;
+        static scale(scaleX: number, scaleY: number): kendo.geometry.Matrix;
+        static translate(x: number, y: number): kendo.geometry.Matrix;
+        static unit(): kendo.geometry.Matrix;
+
         /**
         Creates a new instance with the same element values.
         @method
@@ -1676,34 +1739,7 @@ The current instance elements are not altered.
         @returns A string representation of the matrix, e.g. "1, 0, 0, 1, 0, 0".
         */
         toString(digits: number, separator: string): string;
-        static rotate(angle: number, x: number, y: number): kendo.geometry.Matrix;
-        static scale(scaleX: number, scaleY: number): kendo.geometry.Matrix;
-        static translate(x: number, y: number): kendo.geometry.Matrix;
-        static unit(): kendo.geometry.Matrix;
-        /**
-                The a (1, 1) member of the matrix.
-                */
-                a: number;
-        /**
-                The b (2, 1) member of the matrix.
-                */
-                b: number;
-        /**
-                The a (1, 2) member of the matrix.
-                */
-                c: number;
-        /**
-                The d (2, 2) member of the matrix.
-                */
-                d: number;
-        /**
-                The e (1, 3) member of the matrix.
-                */
-                e: number;
-        /**
-                The f (2, 3) member of the matrix.
-                */
-                f: number;
+
     }
 
     interface MatrixOptions {
@@ -1711,13 +1747,34 @@ The current instance elements are not altered.
     }
     interface MatrixEvent {
         sender: Matrix;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class Point extends Observable {
+
+
         options: PointOptions;
+
+        /**
+                The x coordinate of the point.
+                */
+                x: number;
+        /**
+                The y coordinate of the point.
+                */
+                y: number;
+
+
+        static create(x: number, y: number): kendo.geometry.Point;
+        static create(x: any, y: number): kendo.geometry.Point;
+        static create(x: kendo.geometry.Point, y: number): kendo.geometry.Point;
+        static min(): kendo.geometry.Point;
+        static max(): kendo.geometry.Point;
+        static minPoint(): kendo.geometry.Point;
+        static maxPoint(): kendo.geometry.Point;
+
         /**
         Creates a new instance with the same coordinates.
         @method
@@ -1867,21 +1924,7 @@ The callee coordinates will remain unchanged.
         @returns The current point instance.
         */
         translateWith(vector: any): kendo.geometry.Point;
-        static create(x: number, y: number): kendo.geometry.Point;
-        static create(x: any, y: number): kendo.geometry.Point;
-        static create(x: kendo.geometry.Point, y: number): kendo.geometry.Point;
-        static min(): kendo.geometry.Point;
-        static max(): kendo.geometry.Point;
-        static minPoint(): kendo.geometry.Point;
-        static maxPoint(): kendo.geometry.Point;
-        /**
-                The x coordinate of the point.
-                */
-                x: number;
-        /**
-                The y coordinate of the point.
-                */
-                y: number;
+
     }
 
     interface PointOptions {
@@ -1889,14 +1932,30 @@ The callee coordinates will remain unchanged.
     }
     interface PointEvent {
         sender: Point;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class Rect extends Observable {
-        constructor(origin: kendo.geometry.Point, size: kendo.geometry.Size);
+
+
         options: RectOptions;
+
+        /**
+                The origin (top-left corner) of the rectangle.
+                */
+                origin: kendo.geometry.Point;
+        /**
+                The size of the rectangle.
+                */
+                size: kendo.geometry.Size;
+
+        constructor(origin: kendo.geometry.Point, size: kendo.geometry.Size);
+
+        static fromPoints(pointA: kendo.geometry.Point, pointB: kendo.geometry.Point): kendo.geometry.Rect;
+        static union(rectA: kendo.geometry.Rect, rectB: kendo.geometry.Rect): kendo.geometry.Rect;
+
         /**
         Returns the bounding box of this rectangle after applying the
 specified transformation matrix.
@@ -2002,16 +2061,7 @@ This is also the rectangle origin
         @returns The rectangle width.
         */
         width(): number;
-        static fromPoints(pointA: kendo.geometry.Point, pointB: kendo.geometry.Point): kendo.geometry.Rect;
-        static union(rectA: kendo.geometry.Rect, rectB: kendo.geometry.Rect): kendo.geometry.Rect;
-        /**
-                The origin (top-left corner) of the rectangle.
-                */
-                origin: kendo.geometry.Point;
-        /**
-                The size of the rectangle.
-                */
-                size: kendo.geometry.Size;
+
     }
 
     interface RectOptions {
@@ -2019,13 +2069,30 @@ This is also the rectangle origin
     }
     interface RectEvent {
         sender: Rect;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class Size extends Observable {
+
+
         options: SizeOptions;
+
+        /**
+                The horizontal size.
+                */
+                width: number;
+        /**
+                The vertical size.
+                */
+                height: number;
+
+
+        static create(width: number, height: number): kendo.geometry.Size;
+        static create(width: any, height: number): kendo.geometry.Size;
+        static create(width: kendo.geometry.Size, height: number): kendo.geometry.Size;
+
         /**
         Creates a new instance with the same width and height.
         @method
@@ -2065,17 +2132,7 @@ This is also the rectangle origin
         @returns The current Size instance.
         */
         setHeight(value: number): kendo.geometry.Size;
-        static create(width: number, height: number): kendo.geometry.Size;
-        static create(width: any, height: number): kendo.geometry.Size;
-        static create(width: kendo.geometry.Size, height: number): kendo.geometry.Size;
-        /**
-                The horizontal size.
-                */
-                width: number;
-        /**
-                The vertical size.
-                */
-                height: number;
+
     }
 
     interface SizeOptions {
@@ -2083,13 +2140,19 @@ This is also the rectangle origin
     }
     interface SizeEvent {
         sender: Size;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class Transformation extends Observable {
+
+
         options: TransformationOptions;
+
+
+
+
         /**
         Creates a new instance with the same transformation matrix.
         @method
@@ -2153,6 +2216,7 @@ Negative values or values greater than 360 will be normalized.
         @returns The current transformation instance.
         */
         translate(x: number, y: number): kendo.geometry.Transformation;
+
     }
 
     interface TransformationOptions {
@@ -2160,16 +2224,22 @@ Negative values or values greater than 360 will be normalized.
     }
     interface TransformationEvent {
         sender: Transformation;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
 }
 declare module kendo.drawing {
     class Arc extends kendo.drawing.Element {
-        constructor(geometry: kendo.geometry.Arc, options?: ArcOptions);
+
+
         options: ArcOptions;
+
+
+        constructor(geometry: kendo.geometry.Arc, options?: ArcOptions);
+
+
         /**
         Returns the bounding box of the element with transformations applied.
 Inherited from Element.bbox
@@ -2269,6 +2339,7 @@ Inherited from Element.visible
         @param visible - A flag indicating if the element should be visible.
         */
         visible(visible: boolean): void;
+
     }
 
     interface ArcOptions {
@@ -2310,14 +2381,20 @@ Inherited from Element.visible
     }
     interface ArcEvent {
         sender: Arc;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class Circle extends kendo.drawing.Element {
-        constructor(geometry: kendo.geometry.Circle, options?: CircleOptions);
+
+
         options: CircleOptions;
+
+
+        constructor(geometry: kendo.geometry.Circle, options?: CircleOptions);
+
+
         /**
         Returns the bounding box of the element with transformations applied.
 Inherited from Element.bbox
@@ -2417,6 +2494,7 @@ Inherited from Element.visible
         @param visible - A flag indicating if the element should be visible.
         */
         visible(visible: boolean): void;
+
     }
 
     interface CircleOptions {
@@ -2458,14 +2536,20 @@ Inherited from Element.visible
     }
     interface CircleEvent {
         sender: Circle;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class Element extends kendo.Class {
-        constructor(options?: ElementOptions);
+
+
         options: ElementOptions;
+
+
+        constructor(options?: ElementOptions);
+
+
         /**
         Returns the bounding box of the element with transformations applied.
         @method
@@ -2526,6 +2610,7 @@ Inherited from Element.visible
         @param visible - A flag indicating if the element should be visible.
         */
         visible(visible: boolean): void;
+
     }
 
     interface ElementOptions {
@@ -2554,12 +2639,15 @@ It can be replaced by calling the clip method.
     }
     interface ElementEvent {
         sender: Element;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     interface FillOptions  {
+
+
+
         /**
                 The fill color in any of the following formats.| Format         | Description
 | ---            | --- | ---
@@ -2572,13 +2660,28 @@ It can be replaced by calling the clip method.
                 The fill opacity. Ranges from 0 (completely transparent) to 1 (completely opaque).
                 */
                 opacity: number;
+
+
+
+
     }
 
 
 
     class Gradient extends kendo.Class {
-        constructor(options?: GradientOptions);
+
+
         options: GradientOptions;
+
+        /**
+                The array of gradient color stops.
+Contains GradientStop instances.
+                */
+                stops: any;
+
+        constructor(options?: GradientOptions);
+
+
         /**
         Adds a color stop to the gradient.
         @method
@@ -2600,11 +2703,7 @@ Ranges from 0 (completely transparent) to 1 (completely opaque).
         @param stop - The gradient color stop to remove.
         */
         removeStop(stop: kendo.drawing.GradientStop): void;
-        /**
-                The array of gradient color stops.
-Contains GradientStop instances.
-                */
-                stops: any;
+
     }
 
     interface GradientOptions {
@@ -2618,14 +2717,21 @@ Can contain either plain objects or GradientStop instances.
     }
     interface GradientEvent {
         sender: Gradient;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class GradientStop extends kendo.Class {
-        constructor(options?: GradientStopOptions);
+
+
         options: GradientStopOptions;
+
+
+        constructor(options?: GradientStopOptions);
+
+
+
     }
 
     interface GradientStopOptions {
@@ -2654,14 +2760,24 @@ Ranges from 0 (completely transparent) to 1 (completely opaque).
     }
     interface GradientStopEvent {
         sender: GradientStop;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class Group extends kendo.drawing.Element {
-        constructor(options?: GroupOptions);
+
+
         options: GroupOptions;
+
+        /**
+                The children of this group.
+                */
+                children: any;
+
+        constructor(options?: GroupOptions);
+
+
         /**
         Appends the specified element as a last child of the group.
         @method
@@ -2732,10 +2848,7 @@ Inherited from Element.opacityThe opacity of any child groups and elements will 
         @param visible - A flag indicating if the element should be visible.
         */
         visible(visible: boolean): void;
-        /**
-                The children of this group.
-                */
-                children: any;
+
     }
 
     interface GroupOptions {
@@ -2772,14 +2885,20 @@ Inherited from Element.visible
     }
     interface GroupEvent {
         sender: Group;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class Image extends kendo.drawing.Element {
-        constructor(src: string, rect: kendo.geometry.Rect);
+
+
         options: ImageOptions;
+
+
+        constructor(src: string, rect: kendo.geometry.Rect);
+
+
         /**
         Returns the bounding box of the element with transformations applied.
 Inherited from Element.bbox
@@ -2874,6 +2993,7 @@ Inherited from Element.visible
         @param visible - A flag indicating if the element should be visible.
         */
         visible(visible: boolean): void;
+
     }
 
     interface ImageOptions {
@@ -2905,14 +3025,20 @@ Inherited from Element.visible
     }
     interface ImageEvent {
         sender: Image;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class Layout extends kendo.drawing.Group {
-        constructor(rect: kendo.geometry.Rect, options?: LayoutOptions);
+
+
         options: LayoutOptions;
+
+
+        constructor(rect: kendo.geometry.Rect, options?: LayoutOptions);
+
+
         /**
         Gets or sets the layout rectangle.
         @method
@@ -2930,6 +3056,7 @@ Inherited from Element.visible
         @method
         */
         reflow(): void;
+
     }
 
     interface LayoutOptions {
@@ -2972,14 +3099,25 @@ Inherited from Element.visible
     }
     interface LayoutEvent {
         sender: Layout;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class LinearGradient extends kendo.drawing.Gradient {
-        constructor(options?: LinearGradientOptions);
+
+
         options: LinearGradientOptions;
+
+        /**
+                The array of gradient color stops.
+Contains GradientStop instances.
+                */
+                stops: any;
+
+        constructor(options?: LinearGradientOptions);
+
+
         /**
         Adds a color stop to the gradient.
 Inherited from Gradient.addStop
@@ -3037,11 +3175,7 @@ Inherited from Gradient.removeStop
         @param stop - The gradient color stop to remove.
         */
         removeStop(stop: kendo.drawing.GradientStop): void;
-        /**
-                The array of gradient color stops.
-Contains GradientStop instances.
-                */
-                stops: any;
+
     }
 
     interface LinearGradientOptions {
@@ -3055,14 +3189,24 @@ Can contain either plain objects or GradientStop instances.
     }
     interface LinearGradientEvent {
         sender: LinearGradient;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class MultiPath extends kendo.drawing.Element {
-        constructor(options?: MultiPathOptions);
+
+
         options: MultiPathOptions;
+
+        /**
+                A collection of sub-paths.
+                */
+                paths: any;
+
+        constructor(options?: MultiPathOptions);
+
+
         /**
         Returns the bounding box of the element with transformations applied.
 Inherited from Element.bbox
@@ -3236,10 +3380,7 @@ Inherited from Element.visible
         @param visible - A flag indicating if the element should be visible.
         */
         visible(visible: boolean): void;
-        /**
-                A collection of sub-paths.
-                */
-                paths: any;
+
     }
 
     interface MultiPathOptions {
@@ -3281,14 +3422,27 @@ Inherited from Element.visible
     }
     interface MultiPathEvent {
         sender: MultiPath;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class OptionsStore extends kendo.Class {
-        constructor(options?: OptionsStoreOptions);
+
+
         options: OptionsStoreOptions;
+
+        /**
+                An optional observer for the options store.Upon field modification, the optionsChange(e) method on the observer will be called
+with a single argument containing two fields:
+* field - The fully qualified field name
+* value - The new field value
+                */
+                observer: any;
+
+        constructor(options?: OptionsStoreOptions);
+
+
         /**
         Gets the value of the specified option.
         @method
@@ -3306,13 +3460,7 @@ Must be a fully qualified name (e.g. "foo.bar") for nested options.
 will not trigger options change on the observer (if any).
         */
         set(field: string, value: any): void;
-        /**
-                An optional observer for the options store.Upon field modification, the optionsChange(e) method on the observer will be called
-with a single argument containing two fields:
-* field - The fully qualified field name
-* value - The new field value
-                */
-                observer: any;
+
     }
 
     interface OptionsStoreOptions {
@@ -3320,12 +3468,15 @@ with a single argument containing two fields:
     }
     interface OptionsStoreEvent {
         sender: OptionsStore;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     interface PDFOptions  {
+
+
+
         /**
                 The creator of the PDF document.
                 */
@@ -3360,13 +3511,30 @@ The default "auto" means paper size is determined by content.Supported values:
                 Sets the title of the PDF file.
                 */
                 title: string;
+
+
+
+
     }
 
 
 
     class Path extends kendo.drawing.Element {
-        constructor(options?: PathOptions);
+
+
         options: PathOptions;
+
+        /**
+                A collection of the path segments.
+                */
+                segments: any;
+
+        constructor(options?: PathOptions);
+
+        static fromPoints(points: any): kendo.drawing.Path;
+        static fromRect(rect: kendo.geometry.Rect): kendo.drawing.Path;
+        static parse(svgPath: string, options?: any): kendo.drawing.Path;
+
         /**
         Returns the bounding box of the element with transformations applied.
 Inherited from Element.bbox
@@ -3540,13 +3708,7 @@ Inherited from Element.visible
         @param visible - A flag indicating if the element should be visible.
         */
         visible(visible: boolean): void;
-        static fromPoints(points: any): kendo.drawing.Path;
-        static fromRect(rect: kendo.geometry.Rect): kendo.drawing.Path;
-        static parse(svgPath: string, options?: any): kendo.drawing.Path;
-        /**
-                A collection of the path segments.
-                */
-                segments: any;
+
     }
 
     interface PathOptions {
@@ -3588,14 +3750,25 @@ Inherited from Element.visible
     }
     interface PathEvent {
         sender: Path;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class RadialGradient extends kendo.drawing.Gradient {
-        constructor(options?: RadialGradientOptions);
+
+
         options: RadialGradientOptions;
+
+        /**
+                The array of gradient color stops.
+Contains GradientStop instances.
+                */
+                stops: any;
+
+        constructor(options?: RadialGradientOptions);
+
+
         /**
         Adds a color stop to the gradient.
 Inherited from Gradient.addStop
@@ -3645,11 +3818,7 @@ Inherited from Gradient.removeStop
         @param stop - The gradient color stop to remove.
         */
         removeStop(stop: kendo.drawing.GradientStop): void;
-        /**
-                The array of gradient color stops.
-Contains GradientStop instances.
-                */
-                stops: any;
+
     }
 
     interface RadialGradientOptions {
@@ -3674,14 +3843,20 @@ Can contain either plain objects or GradientStop instances.
     }
     interface RadialGradientEvent {
         sender: RadialGradient;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class Segment extends kendo.Class {
-        constructor(anchor: kendo.geometry.Point, controlIn: kendo.geometry.Point, controlOut: kendo.geometry.Point);
+
+
         options: SegmentOptions;
+
+
+        constructor(anchor: kendo.geometry.Point, controlIn: kendo.geometry.Point, controlOut: kendo.geometry.Point);
+
+
         /**
         Gets or sets the segment anchor point.The setter returns the current Segment to allow chaining.
         @method
@@ -3718,6 +3893,7 @@ Can contain either plain objects or GradientStop instances.
         @param value - The new control point.
         */
         controlOut(value: kendo.geometry.Point): void;
+
     }
 
     interface SegmentOptions {
@@ -3725,12 +3901,15 @@ Can contain either plain objects or GradientStop instances.
     }
     interface SegmentEvent {
         sender: Segment;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     interface StrokeOptions  {
+
+
+
         /**
                 The stroke color in any of the following formats.| Value          | Description
 | ---            | --- | ---
@@ -3775,13 +3954,25 @@ Can contain either plain objects or GradientStop instances.
                 The stroke width in pixels.
                 */
                 width: number;
+
+
+
+
     }
 
 
 
     class Surface extends kendo.Observable {
-        constructor(options?: SurfaceOptions);
+
+
         options: SurfaceOptions;
+
+
+        constructor(options?: SurfaceOptions);
+
+        static create(element: JQuery, options?: any): kendo.drawing.Surface;
+        static create(element: Element, options?: any): kendo.drawing.Surface;
+
         /**
         Clears the drawing surface.
         @method
@@ -3807,8 +3998,7 @@ Existing elements will remain visible.
         @param force - Whether to proceed with resizing even if the container dimensions have not changed.
         */
         resize(force?: boolean): void;
-        static create(element: JQuery, options?: any): kendo.drawing.Surface;
-        static create(element: Element, options?: any): kendo.drawing.Surface;
+
     }
 
     interface SurfaceOptions {
@@ -3850,8 +4040,8 @@ By default the surface will expand to fill the width of the first positioned con
     }
     interface SurfaceEvent {
         sender: Surface;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
     interface SurfaceClickEvent extends SurfaceEvent {
@@ -3895,8 +4085,14 @@ By default the surface will expand to fill the width of the first positioned con
 
 
     class Text extends kendo.drawing.Element {
-        constructor(content: string, position: kendo.geometry.Point, options?: TextOptions);
+
+
         options: TextOptions;
+
+
+        constructor(content: string, position: kendo.geometry.Point, options?: TextOptions);
+
+
         /**
         Returns the bounding box of the element with transformations applied.
 Inherited from Element.bbox
@@ -4008,6 +4204,7 @@ Inherited from Element.visible
         @param visible - A flag indicating if the element should be visible.
         */
         visible(visible: boolean): void;
+
     }
 
     interface TextOptions {
@@ -4057,15 +4254,21 @@ Inherited from Element.visible
     }
     interface TextEvent {
         sender: Text;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
 }
 declare module kendo {
     class Color extends Observable {
+
+
         options: ColorOptions;
+
+
+
+
         /**
         Computes the relative luminance between two colors.
         @method
@@ -4078,6 +4281,7 @@ declare module kendo {
         @returns returns true if the two colors are the same. Otherwise, false
         */
         equals(): boolean;
+
     }
 
     interface ColorOptions {
@@ -4085,8 +4289,8 @@ declare module kendo {
     }
     interface ColorEvent {
         sender: Color;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
@@ -4467,13 +4671,20 @@ All descendant elements are traversed.
 }
 declare module kendo.mobile.ui {
     class ActionSheet extends kendo.mobile.ui.Widget {
+
         static fn: ActionSheet;
-        static extend(proto: Object): ActionSheet;
+
+        options: ActionSheetOptions;
+
 
         element: JQuery;
         wrapper: JQuery;
+
+        static extend(proto: Object): ActionSheet;
+
         constructor(element: Element, options?: ActionSheetOptions);
-        options: ActionSheetOptions;
+
+
         /**
         Close the ActionSheet.
         @method
@@ -4491,6 +4702,7 @@ declare module kendo.mobile.ui {
         @param context - (optional) The context of the ActionSheet, available in the callback methods.
         */
         open(target: JQuery, context: any): void;
+
     }
 
     interface ActionSheetPopup {
@@ -4539,8 +4751,8 @@ declare module kendo.mobile.ui {
     }
     interface ActionSheetEvent {
         sender: ActionSheet;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
     interface ActionSheetOpenEvent extends ActionSheetEvent {
@@ -4558,18 +4770,26 @@ declare module kendo.mobile.ui {
 
 
     class BackButton extends kendo.mobile.ui.Widget {
+
         static fn: BackButton;
-        static extend(proto: Object): BackButton;
+
+        options: BackButtonOptions;
+
 
         element: JQuery;
         wrapper: JQuery;
+
+        static extend(proto: Object): BackButton;
+
         constructor(element: Element, options?: BackButtonOptions);
-        options: BackButtonOptions;
+
+
         /**
         Prepares the BackButton for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
         @method
         */
         destroy(): void;
+
     }
 
     interface BackButtonOptions {
@@ -4581,8 +4801,8 @@ declare module kendo.mobile.ui {
     }
     interface BackButtonEvent {
         sender: BackButton;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
     interface BackButtonClickEvent extends BackButtonEvent {
@@ -4600,13 +4820,20 @@ declare module kendo.mobile.ui {
 
 
     class Button extends kendo.mobile.ui.Widget {
+
         static fn: Button;
-        static extend(proto: Object): Button;
+
+        options: ButtonOptions;
+
 
         element: JQuery;
         wrapper: JQuery;
+
+        static extend(proto: Object): Button;
+
         constructor(element: Element, options?: ButtonOptions);
-        options: ButtonOptions;
+
+
         /**
         Introduced in Q1 2013 SP Sets a badge on the Button with the specified value. If invoked without parameters, returns the current badge value. Set the value to false to remove the badge.
         @method
@@ -4632,6 +4859,7 @@ declare module kendo.mobile.ui {
         @param enable - Whether to enable or disable the widget.
         */
         enable(enable: boolean): void;
+
     }
 
     interface ButtonOptions {
@@ -4664,8 +4892,8 @@ Setting the clickOn to down usually makes sense for buttons in the header or in 
     }
     interface ButtonEvent {
         sender: Button;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
     interface ButtonClickEvent extends ButtonEvent {
@@ -4683,13 +4911,20 @@ Setting the clickOn to down usually makes sense for buttons in the header or in 
 
 
     class ButtonGroup extends kendo.mobile.ui.Widget {
+
         static fn: ButtonGroup;
-        static extend(proto: Object): ButtonGroup;
+
+        options: ButtonGroupOptions;
+
 
         element: JQuery;
         wrapper: JQuery;
+
+        static extend(proto: Object): ButtonGroup;
+
         constructor(element: Element, options?: ButtonGroupOptions);
-        options: ButtonGroupOptions;
+
+
         /**
         Introduced in Q1 2013 SP Sets a badge on one of the ButtonGroup buttons with the specified value. If invoked without parameters, returns the button's current badge value. Set the value to false to remove the badge.
         @method
@@ -4751,6 +4986,7 @@ Setting the clickOn to down usually makes sense for buttons in the header or in 
         @param li - LI element or index of the Button.
         */
         select(li: number): void;
+
     }
 
     interface ButtonGroupOptions {
@@ -4778,8 +5014,8 @@ However, if the widget is placed in a scrollable view, the user may accidentally
     }
     interface ButtonGroupEvent {
         sender: ButtonGroup;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
     interface ButtonGroupSelectEvent extends ButtonGroupEvent {
@@ -4792,13 +5028,20 @@ However, if the widget is placed in a scrollable view, the user may accidentally
 
 
     class Collapsible extends kendo.mobile.ui.Widget {
+
         static fn: Collapsible;
-        static extend(proto: Object): Collapsible;
+
+        options: CollapsibleOptions;
+
 
         element: JQuery;
         wrapper: JQuery;
+
+        static extend(proto: Object): Collapsible;
+
         constructor(element: Element, options?: CollapsibleOptions);
-        options: CollapsibleOptions;
+
+
         /**
         Collapses the content.
         @method
@@ -4827,6 +5070,7 @@ However, if the widget is placed in a scrollable view, the user may accidentally
         @param instant - When set to true the expand/collapse action will be performed without animation.
         */
         toggle(instant?: boolean): void;
+
     }
 
     interface CollapsibleOptions {
@@ -4867,24 +5111,32 @@ However, if the widget is placed in a scrollable view, the user may accidentally
     }
     interface CollapsibleEvent {
         sender: Collapsible;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class DetailButton extends kendo.mobile.ui.Widget {
+
         static fn: DetailButton;
-        static extend(proto: Object): DetailButton;
+
+        options: DetailButtonOptions;
+
 
         element: JQuery;
         wrapper: JQuery;
+
+        static extend(proto: Object): DetailButton;
+
         constructor(element: Element, options?: DetailButtonOptions);
-        options: DetailButtonOptions;
+
+
         /**
         Prepares the DetailButton for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
         @method
         */
         destroy(): void;
+
     }
 
     interface DetailButtonOptions {
@@ -4896,8 +5148,8 @@ However, if the widget is placed in a scrollable view, the user may accidentally
     }
     interface DetailButtonEvent {
         sender: DetailButton;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
     interface DetailButtonClickEvent extends DetailButtonEvent {
@@ -4915,13 +5167,20 @@ However, if the widget is placed in a scrollable view, the user may accidentally
 
 
     class Drawer extends kendo.mobile.ui.Widget {
+
         static fn: Drawer;
-        static extend(proto: Object): Drawer;
+
+        options: DrawerOptions;
+
 
         element: JQuery;
         wrapper: JQuery;
+
+        static extend(proto: Object): Drawer;
+
         constructor(element: Element, options?: DrawerOptions);
-        options: DrawerOptions;
+
+
         /**
         Prepares the Drawer for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
         @method
@@ -4937,6 +5196,7 @@ However, if the widget is placed in a scrollable view, the user may accidentally
         @method
         */
         show(): void;
+
     }
 
     interface DrawerOptions {
@@ -4995,8 +5255,8 @@ The option has effect only if swipeToOpen is set to true.
     }
     interface DrawerEvent {
         sender: Drawer;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
     interface DrawerAfterHideEvent extends DrawerEvent {
@@ -5013,13 +5273,21 @@ The option has effect only if swipeToOpen is set to true.
 
 
     class Layout extends kendo.mobile.ui.Widget {
+
         static fn: Layout;
-        static extend(proto: Object): Layout;
+
+        options: LayoutOptions;
+
 
         element: JQuery;
         wrapper: JQuery;
+
+        static extend(proto: Object): Layout;
+
         constructor(element: Element, options?: LayoutOptions);
-        options: LayoutOptions;
+
+
+
     }
 
     interface LayoutOptions {
@@ -5050,8 +5318,8 @@ on all platforms.
     }
     interface LayoutEvent {
         sender: Layout;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
     interface LayoutHideEvent extends LayoutEvent {
@@ -5090,14 +5358,21 @@ on all platforms.
 
 
     class ListView extends kendo.mobile.ui.Widget {
+
         static fn: ListView;
-        static extend(proto: Object): ListView;
+
+        options: ListViewOptions;
+
+        dataSource: kendo.data.DataSource;
 
         element: JQuery;
         wrapper: JQuery;
+
+        static extend(proto: Object): ListView;
+
         constructor(element: Element, options?: ListViewOptions);
-        options: ListViewOptions;
-        dataSource: kendo.data.DataSource;
+
+
         /**
         Appends new items generated by rendering the given data items with the listview template to the bottom of the listview.
         @method
@@ -5151,6 +5426,7 @@ on all platforms.
         @param dataSource - 
         */
         setDataSource(dataSource: kendo.data.DataSource): void;
+
     }
 
     interface ListViewFilterable {
@@ -5303,8 +5579,8 @@ Previously loaded pages in the DataSource are also discarded.
     }
     interface ListViewEvent {
         sender: ListView;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
     interface ListViewClickEvent extends ListViewEvent {
@@ -5333,13 +5609,20 @@ Note: The dataItem must be from a non-primitive type (Object).
 
 
     class Loader extends kendo.mobile.ui.Widget {
+
         static fn: Loader;
-        static extend(proto: Object): Loader;
+
+        options: LoaderOptions;
+
 
         element: JQuery;
         wrapper: JQuery;
+
+        static extend(proto: Object): Loader;
+
         constructor(element: Element, options?: LoaderOptions);
-        options: LoaderOptions;
+
+
         /**
         Hide the loading animation.
         @method
@@ -5350,6 +5633,7 @@ Note: The dataItem must be from a non-primitive type (Object).
         @method
         */
         show(): void;
+
     }
 
     interface LoaderOptions {
@@ -5357,19 +5641,26 @@ Note: The dataItem must be from a non-primitive type (Object).
     }
     interface LoaderEvent {
         sender: Loader;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class ModalView extends kendo.mobile.ui.Widget {
+
         static fn: ModalView;
-        static extend(proto: Object): ModalView;
+
+        options: ModalViewOptions;
+
 
         element: JQuery;
         wrapper: JQuery;
+
+        static extend(proto: Object): ModalView;
+
         constructor(element: Element, options?: ModalViewOptions);
-        options: ModalViewOptions;
+
+
         /**
         Close the ModalView
         @method
@@ -5386,6 +5677,7 @@ Note: The dataItem must be from a non-primitive type (Object).
         @param target - (optional) The target of the ModalView
         */
         open(target: JQuery): void;
+
     }
 
     interface ModalViewOptions {
@@ -5424,8 +5716,8 @@ Note: The dataItem must be from a non-primitive type (Object).
     }
     interface ModalViewEvent {
         sender: ModalView;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
     interface ModalViewBeforeOpenEvent extends ModalViewEvent {
@@ -5452,13 +5744,20 @@ Note: The dataItem must be from a non-primitive type (Object).
 
 
     class NavBar extends kendo.mobile.ui.Widget {
+
         static fn: NavBar;
-        static extend(proto: Object): NavBar;
+
+        options: NavBarOptions;
+
 
         element: JQuery;
         wrapper: JQuery;
+
+        static extend(proto: Object): NavBar;
+
         constructor(element: Element, options?: NavBarOptions);
-        options: NavBarOptions;
+
+
         /**
         Prepares the NavBar for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
         @method
@@ -5470,6 +5769,7 @@ Note: The dataItem must be from a non-primitive type (Object).
         @param value - The text of title
         */
         title(value: string): void;
+
     }
 
     interface NavBarOptions {
@@ -5477,19 +5777,26 @@ Note: The dataItem must be from a non-primitive type (Object).
     }
     interface NavBarEvent {
         sender: NavBar;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class Pane extends kendo.mobile.ui.Widget {
+
         static fn: Pane;
-        static extend(proto: Object): Pane;
+
+        options: PaneOptions;
+
 
         element: JQuery;
         wrapper: JQuery;
+
+        static extend(proto: Object): Pane;
+
         constructor(element: Element, options?: PaneOptions);
-        options: PaneOptions;
+
+
         /**
         Prepares the Pane for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
         @method
@@ -5530,6 +5837,7 @@ Note: The dataItem must be from a non-primitive type (Object).
         @returns the view instance.
         */
         view(): kendo.mobile.ui.View;
+
     }
 
     interface PaneOptions {
@@ -5575,8 +5883,8 @@ Note: The dataItem must be from a non-primitive type (Object).
     }
     interface PaneEvent {
         sender: Pane;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
     interface PaneNavigateEvent extends PaneEvent {
@@ -5597,13 +5905,20 @@ Note: The dataItem must be from a non-primitive type (Object).
 
 
     class PopOver extends kendo.mobile.ui.Widget {
+
         static fn: PopOver;
-        static extend(proto: Object): PopOver;
+
+        options: PopOverOptions;
+
 
         element: JQuery;
         wrapper: JQuery;
+
+        static extend(proto: Object): PopOver;
+
         constructor(element: Element, options?: PopOverOptions);
-        options: PopOverOptions;
+
+
         /**
         Close the popover.
         @method
@@ -5620,6 +5935,7 @@ Note: The dataItem must be from a non-primitive type (Object).
         @param target - The target of the Popover, to which the visual arrow will point to. This parameter is required for a tablet OS.
         */
         open(target: JQuery): void;
+
     }
 
     interface PopOverPane {
@@ -5681,8 +5997,8 @@ Note: The dataItem must be from a non-primitive type (Object).
     }
     interface PopOverEvent {
         sender: PopOver;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
     interface PopOverCloseEvent extends PopOverEvent {
@@ -5698,14 +6014,21 @@ Note: The dataItem must be from a non-primitive type (Object).
 
 
     class ScrollView extends kendo.mobile.ui.Widget {
+
         static fn: ScrollView;
-        static extend(proto: Object): ScrollView;
+
+        options: ScrollViewOptions;
+
+        dataSource: kendo.data.DataSource;
 
         element: JQuery;
         wrapper: JQuery;
+
+        static extend(proto: Object): ScrollView;
+
         constructor(element: Element, options?: ScrollViewOptions);
-        options: ScrollViewOptions;
-        dataSource: kendo.data.DataSource;
+
+
         /**
         Update the ScrollView HTML content.
         @method
@@ -5758,6 +6081,7 @@ Note: The dataItem must be from a non-primitive type (Object).
         @returns The currently displayed dataItem.
         */
         value(dataItem: any): any;
+
     }
 
     interface ScrollViewOptions {
@@ -5837,8 +6161,8 @@ Note: The dataItem must be from a non-primitive type (Object).
     }
     interface ScrollViewEvent {
         sender: ScrollView;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
     interface ScrollViewChangingEvent extends ScrollViewEvent {
@@ -5887,13 +6211,20 @@ Note: The dataItem must be from a non-primitive type (Object).
 
 
     class Scroller extends kendo.mobile.ui.Widget {
+
         static fn: Scroller;
-        static extend(proto: Object): Scroller;
+
+        options: ScrollerOptions;
+
 
         element: JQuery;
         wrapper: JQuery;
+
+        static extend(proto: Object): Scroller;
+
         constructor(element: Element, options?: ScrollerOptions);
-        options: ScrollerOptions;
+
+
         /**
         Scrolls the scroll container to the specified location with animation. The arguments should be negative numbers.
         @method
@@ -5954,6 +6285,7 @@ Note: The dataItem must be from a non-primitive type (Object).
         @method
         */
         zoomOut(): void;
+
     }
 
     interface ScrollerMessages {
@@ -6032,8 +6364,8 @@ Native scrolling is only enabled on platforms that support it: iOS > 4, Android 
     }
     interface ScrollerEvent {
         sender: Scroller;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
     interface ScrollerScrollEvent extends ScrollerEvent {
@@ -6051,13 +6383,20 @@ Native scrolling is only enabled on platforms that support it: iOS > 4, Android 
 
 
     class SplitView extends kendo.mobile.ui.Widget {
+
         static fn: SplitView;
-        static extend(proto: Object): SplitView;
+
+        options: SplitViewOptions;
+
 
         element: JQuery;
         wrapper: JQuery;
+
+        static extend(proto: Object): SplitView;
+
         constructor(element: Element, options?: SplitViewOptions);
-        options: SplitViewOptions;
+
+
         /**
         Prepares the SplitView for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
         @method
@@ -6073,6 +6412,7 @@ Native scrolling is only enabled on platforms that support it: iOS > 4, Android 
         @method
         */
         collapsePanes(): void;
+
     }
 
     interface SplitViewOptions {
@@ -6093,8 +6433,8 @@ Native scrolling is only enabled on platforms that support it: iOS > 4, Android 
     }
     interface SplitViewEvent {
         sender: SplitView;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
     interface SplitViewInitEvent extends SplitViewEvent {
@@ -6115,13 +6455,20 @@ Native scrolling is only enabled on platforms that support it: iOS > 4, Android 
 
 
     class Switch extends kendo.mobile.ui.Widget {
+
         static fn: Switch;
-        static extend(proto: Object): Switch;
+
+        options: SwitchOptions;
+
 
         element: JQuery;
         wrapper: JQuery;
+
+        static extend(proto: Object): Switch;
+
         constructor(element: Element, options?: SwitchOptions);
-        options: SwitchOptions;
+
+
         /**
         Get/Set the checked state of the widget.
         @method
@@ -6155,6 +6502,7 @@ Native scrolling is only enabled on platforms that support it: iOS > 4, Android 
         @method
         */
         toggle(): void;
+
     }
 
     interface SwitchOptions {
@@ -6186,8 +6534,8 @@ Native scrolling is only enabled on platforms that support it: iOS > 4, Android 
     }
     interface SwitchEvent {
         sender: Switch;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
     interface SwitchChangeEvent extends SwitchEvent {
@@ -6200,13 +6548,20 @@ Native scrolling is only enabled on platforms that support it: iOS > 4, Android 
 
 
     class TabStrip extends kendo.mobile.ui.Widget {
+
         static fn: TabStrip;
-        static extend(proto: Object): TabStrip;
+
+        options: TabStripOptions;
+
 
         element: JQuery;
         wrapper: JQuery;
+
+        static extend(proto: Object): TabStrip;
+
         constructor(element: Element, options?: TabStripOptions);
-        options: TabStripOptions;
+
+
         /**
         Introduced in Q1 2013 SP Sets a badge on one of the tabs with the specified value. If invoked without second parameter, returns the tab's current badge value. Set the value to false to remove the badge.
         @method
@@ -6273,6 +6628,7 @@ Native scrolling is only enabled on platforms that support it: iOS > 4, Android 
         @method
         */
         clear(): void;
+
     }
 
     interface TabStripOptions {
@@ -6289,8 +6645,8 @@ Native scrolling is only enabled on platforms that support it: iOS > 4, Android 
     }
     interface TabStripEvent {
         sender: TabStrip;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
     interface TabStripSelectEvent extends TabStripEvent {
@@ -6303,13 +6659,20 @@ Native scrolling is only enabled on platforms that support it: iOS > 4, Android 
 
 
     class View extends kendo.mobile.ui.Widget {
+
         static fn: View;
-        static extend(proto: Object): View;
+
+        options: ViewOptions;
+
 
         element: JQuery;
         wrapper: JQuery;
+
+        static extend(proto: Object): View;
+
         constructor(element: Element, options?: ViewOptions);
-        options: ViewOptions;
+
+
         /**
         Retrieves the current content holder of the View - this is the content element if the View is stretched or the scroll container otherwise.
         @method
@@ -6326,6 +6689,7 @@ Native scrolling is only enabled on platforms that support it: iOS > 4, Android 
         @param enable - Omitting the parameter or passing true enables the view. Passing false disables the view.
         */
         enable(enable: boolean): void;
+
     }
 
     interface ViewOptions {
@@ -6402,8 +6766,8 @@ Native scrolling is only enabled on platforms that support it: iOS > 5+, Android
     }
     interface ViewEvent {
         sender: View;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
     interface ViewAfterShowEvent extends ViewEvent {
@@ -6474,13 +6838,20 @@ Native scrolling is only enabled on platforms that support it: iOS > 5+, Android
 }
 declare module kendo.ui {
     class Touch extends kendo.ui.Widget {
+
         static fn: Touch;
-        static extend(proto: Object): Touch;
+
+        options: TouchOptions;
+
 
         element: JQuery;
         wrapper: JQuery;
+
+        static extend(proto: Object): Touch;
+
         constructor(element: Element, options?: TouchOptions);
-        options: TouchOptions;
+
+
         /**
         Cancels the current touch event sequence. Calling cancel in a touchstart or dragmove will disable subsequent move or tap/end/hold event handlers from being called.
         @method
@@ -6491,6 +6862,7 @@ declare module kendo.ui {
         @method
         */
         destroy(): void;
+
     }
 
     interface TouchOptions {
@@ -6589,8 +6961,8 @@ Notice: After the last finger is moved, the dragend event is fired.
     }
     interface TouchEvent {
         sender: Touch;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
     interface TouchTouchstartEvent extends TouchEvent {
@@ -6770,18 +7142,25 @@ Notice: After the last finger is moved, the dragend event is fired.
 }
 declare module kendo.ooxml {
     class Workbook extends Observable {
-        constructor(options?: WorkbookOptions);
+
+
         options: WorkbookOptions;
+
+        /**
+                The sheets of the workbook. Every sheet represents a page from the final Excel file.See sheets configuration.
+                */
+                sheets: WorkbookSheet[];
+
+        constructor(options?: WorkbookOptions);
+
+
         /**
         Creates an Excel file that represents the current workbook and returns it as a data URL.
         @method
         @returns the Excel file as data URL.
         */
         toDataURL(): string;
-        /**
-                The sheets of the workbook. Every sheet represents a page from the final Excel file.See sheets configuration.
-                */
-                sheets: WorkbookSheet[];
+
     }
 
     interface WorkbookSheetColumn {
@@ -6936,8 +7315,8 @@ declare module kendo.ooxml {
     }
     interface WorkbookEvent {
         sender: Workbook;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
@@ -6945,7 +7324,42 @@ declare module kendo.ooxml {
 
 declare module kendo.dataviz.geometry {
     class Arc extends Observable {
+
+
         options: ArcOptions;
+
+        /**
+                A flag indicating if the arc should be drawn in clockwise or anticlockwise direction.
+Defaults to clockwise direction.
+                */
+                anticlockwise: boolean;
+        /**
+                The location of the arc center.
+                */
+                center: kendo.geometry.Point;
+        /**
+                The end angle of the arc in decimal degrees.
+Measured in clockwise direction with 0 pointing "right".
+Negative values or values greater than 360 will be normalized.
+                */
+                endAngle: number;
+        /**
+                The x radius of the arc.
+                */
+                radiusX: number;
+        /**
+                The y radius of the arc.
+                */
+                radiusY: number;
+        /**
+                The start angle of the arc in decimal degrees.
+Measured in clockwise direction with 0 pointing "right".
+Negative values or values greater than 360 will be normalized.
+                */
+                startAngle: number;
+
+
+
         /**
         Returns the bounding box of this arc after applying the specified transformation matrix.
         @method
@@ -7043,35 +7457,7 @@ Measured in clockwise direction with 0 pointing "right".
         @returns The current arc instance.
         */
         setStartAngle(value: number): kendo.geometry.Arc;
-        /**
-                A flag indicating if the arc should be drawn in clockwise or anticlockwise direction.
-Defaults to clockwise direction.
-                */
-                anticlockwise: boolean;
-        /**
-                The location of the arc center.
-                */
-                center: kendo.geometry.Point;
-        /**
-                The end angle of the arc in decimal degrees.
-Measured in clockwise direction with 0 pointing "right".
-Negative values or values greater than 360 will be normalized.
-                */
-                endAngle: number;
-        /**
-                The x radius of the arc.
-                */
-                radiusX: number;
-        /**
-                The y radius of the arc.
-                */
-                radiusY: number;
-        /**
-                The start angle of the arc in decimal degrees.
-Measured in clockwise direction with 0 pointing "right".
-Negative values or values greater than 360 will be normalized.
-                */
-                startAngle: number;
+
     }
 
     interface ArcOptions {
@@ -7079,13 +7465,27 @@ Negative values or values greater than 360 will be normalized.
     }
     interface ArcEvent {
         sender: Arc;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class Circle extends Observable {
+
+
         options: CircleOptions;
+
+        /**
+                The location of the circle center.
+                */
+                center: kendo.geometry.Point;
+        /**
+                The radius of the circle.
+                */
+                radius: number;
+
+
+
         /**
         Returns the bounding box of this circle after applying the
 specified transformation matrix.
@@ -7148,14 +7548,7 @@ Negative values or values greater than 360 will be normalized.
         @returns The current circle instance.
         */
         setRadius(value: number): kendo.geometry.Circle;
-        /**
-                The location of the circle center.
-                */
-                center: kendo.geometry.Point;
-        /**
-                The radius of the circle.
-                */
-                radius: number;
+
     }
 
     interface CircleOptions {
@@ -7163,13 +7556,47 @@ Negative values or values greater than 360 will be normalized.
     }
     interface CircleEvent {
         sender: Circle;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class Matrix extends Observable {
+
+
         options: MatrixOptions;
+
+        /**
+                The a (1, 1) member of the matrix.
+                */
+                a: number;
+        /**
+                The b (2, 1) member of the matrix.
+                */
+                b: number;
+        /**
+                The a (1, 2) member of the matrix.
+                */
+                c: number;
+        /**
+                The d (2, 2) member of the matrix.
+                */
+                d: number;
+        /**
+                The e (1, 3) member of the matrix.
+                */
+                e: number;
+        /**
+                The f (2, 3) member of the matrix.
+                */
+                f: number;
+
+
+        static rotate(angle: number, x: number, y: number): kendo.geometry.Matrix;
+        static scale(scaleX: number, scaleY: number): kendo.geometry.Matrix;
+        static translate(x: number, y: number): kendo.geometry.Matrix;
+        static unit(): kendo.geometry.Matrix;
+
         /**
         Creates a new instance with the same element values.
         @method
@@ -7213,34 +7640,7 @@ The current instance elements are not altered.
         @returns A string representation of the matrix, e.g. "1, 0, 0, 1, 0, 0".
         */
         toString(digits: number, separator: string): string;
-        static rotate(angle: number, x: number, y: number): kendo.geometry.Matrix;
-        static scale(scaleX: number, scaleY: number): kendo.geometry.Matrix;
-        static translate(x: number, y: number): kendo.geometry.Matrix;
-        static unit(): kendo.geometry.Matrix;
-        /**
-                The a (1, 1) member of the matrix.
-                */
-                a: number;
-        /**
-                The b (2, 1) member of the matrix.
-                */
-                b: number;
-        /**
-                The a (1, 2) member of the matrix.
-                */
-                c: number;
-        /**
-                The d (2, 2) member of the matrix.
-                */
-                d: number;
-        /**
-                The e (1, 3) member of the matrix.
-                */
-                e: number;
-        /**
-                The f (2, 3) member of the matrix.
-                */
-                f: number;
+
     }
 
     interface MatrixOptions {
@@ -7248,13 +7648,34 @@ The current instance elements are not altered.
     }
     interface MatrixEvent {
         sender: Matrix;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class Point extends Observable {
+
+
         options: PointOptions;
+
+        /**
+                The x coordinate of the point.
+                */
+                x: number;
+        /**
+                The y coordinate of the point.
+                */
+                y: number;
+
+
+        static create(x: number, y: number): kendo.geometry.Point;
+        static create(x: any, y: number): kendo.geometry.Point;
+        static create(x: kendo.geometry.Point, y: number): kendo.geometry.Point;
+        static min(): kendo.geometry.Point;
+        static max(): kendo.geometry.Point;
+        static minPoint(): kendo.geometry.Point;
+        static maxPoint(): kendo.geometry.Point;
+
         /**
         Creates a new instance with the same coordinates.
         @method
@@ -7404,21 +7825,7 @@ The callee coordinates will remain unchanged.
         @returns The current point instance.
         */
         translateWith(vector: any): kendo.geometry.Point;
-        static create(x: number, y: number): kendo.geometry.Point;
-        static create(x: any, y: number): kendo.geometry.Point;
-        static create(x: kendo.geometry.Point, y: number): kendo.geometry.Point;
-        static min(): kendo.geometry.Point;
-        static max(): kendo.geometry.Point;
-        static minPoint(): kendo.geometry.Point;
-        static maxPoint(): kendo.geometry.Point;
-        /**
-                The x coordinate of the point.
-                */
-                x: number;
-        /**
-                The y coordinate of the point.
-                */
-                y: number;
+
     }
 
     interface PointOptions {
@@ -7426,14 +7833,30 @@ The callee coordinates will remain unchanged.
     }
     interface PointEvent {
         sender: Point;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class Rect extends Observable {
-        constructor(origin: kendo.geometry.Point, size: kendo.geometry.Size);
+
+
         options: RectOptions;
+
+        /**
+                The origin (top-left corner) of the rectangle.
+                */
+                origin: kendo.geometry.Point;
+        /**
+                The size of the rectangle.
+                */
+                size: kendo.geometry.Size;
+
+        constructor(origin: kendo.geometry.Point, size: kendo.geometry.Size);
+
+        static fromPoints(pointA: kendo.geometry.Point, pointB: kendo.geometry.Point): kendo.geometry.Rect;
+        static union(rectA: kendo.geometry.Rect, rectB: kendo.geometry.Rect): kendo.geometry.Rect;
+
         /**
         Returns the bounding box of this rectangle after applying the
 specified transformation matrix.
@@ -7539,16 +7962,7 @@ This is also the rectangle origin
         @returns The rectangle width.
         */
         width(): number;
-        static fromPoints(pointA: kendo.geometry.Point, pointB: kendo.geometry.Point): kendo.geometry.Rect;
-        static union(rectA: kendo.geometry.Rect, rectB: kendo.geometry.Rect): kendo.geometry.Rect;
-        /**
-                The origin (top-left corner) of the rectangle.
-                */
-                origin: kendo.geometry.Point;
-        /**
-                The size of the rectangle.
-                */
-                size: kendo.geometry.Size;
+
     }
 
     interface RectOptions {
@@ -7556,13 +7970,30 @@ This is also the rectangle origin
     }
     interface RectEvent {
         sender: Rect;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class Size extends Observable {
+
+
         options: SizeOptions;
+
+        /**
+                The horizontal size.
+                */
+                width: number;
+        /**
+                The vertical size.
+                */
+                height: number;
+
+
+        static create(width: number, height: number): kendo.geometry.Size;
+        static create(width: any, height: number): kendo.geometry.Size;
+        static create(width: kendo.geometry.Size, height: number): kendo.geometry.Size;
+
         /**
         Creates a new instance with the same width and height.
         @method
@@ -7602,17 +8033,7 @@ This is also the rectangle origin
         @returns The current Size instance.
         */
         setHeight(value: number): kendo.geometry.Size;
-        static create(width: number, height: number): kendo.geometry.Size;
-        static create(width: any, height: number): kendo.geometry.Size;
-        static create(width: kendo.geometry.Size, height: number): kendo.geometry.Size;
-        /**
-                The horizontal size.
-                */
-                width: number;
-        /**
-                The vertical size.
-                */
-                height: number;
+
     }
 
     interface SizeOptions {
@@ -7620,13 +8041,19 @@ This is also the rectangle origin
     }
     interface SizeEvent {
         sender: Size;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class Transformation extends Observable {
+
+
         options: TransformationOptions;
+
+
+
+
         /**
         Creates a new instance with the same transformation matrix.
         @method
@@ -7690,6 +8117,7 @@ Negative values or values greater than 360 will be normalized.
         @returns The current transformation instance.
         */
         translate(x: number, y: number): kendo.geometry.Transformation;
+
     }
 
     interface TransformationOptions {
@@ -7697,16 +8125,22 @@ Negative values or values greater than 360 will be normalized.
     }
     interface TransformationEvent {
         sender: Transformation;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
 }
 declare module kendo.dataviz.drawing {
     class Arc extends kendo.drawing.Element {
-        constructor(geometry: kendo.geometry.Arc, options?: ArcOptions);
+
+
         options: ArcOptions;
+
+
+        constructor(geometry: kendo.geometry.Arc, options?: ArcOptions);
+
+
         /**
         Returns the bounding box of the element with transformations applied.
 Inherited from Element.bbox
@@ -7806,6 +8240,7 @@ Inherited from Element.visible
         @param visible - A flag indicating if the element should be visible.
         */
         visible(visible: boolean): void;
+
     }
 
     interface ArcOptions {
@@ -7847,14 +8282,20 @@ Inherited from Element.visible
     }
     interface ArcEvent {
         sender: Arc;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class Circle extends kendo.drawing.Element {
-        constructor(geometry: kendo.geometry.Circle, options?: CircleOptions);
+
+
         options: CircleOptions;
+
+
+        constructor(geometry: kendo.geometry.Circle, options?: CircleOptions);
+
+
         /**
         Returns the bounding box of the element with transformations applied.
 Inherited from Element.bbox
@@ -7954,6 +8395,7 @@ Inherited from Element.visible
         @param visible - A flag indicating if the element should be visible.
         */
         visible(visible: boolean): void;
+
     }
 
     interface CircleOptions {
@@ -7995,14 +8437,20 @@ Inherited from Element.visible
     }
     interface CircleEvent {
         sender: Circle;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class Element extends kendo.Class {
-        constructor(options?: ElementOptions);
+
+
         options: ElementOptions;
+
+
+        constructor(options?: ElementOptions);
+
+
         /**
         Returns the bounding box of the element with transformations applied.
         @method
@@ -8063,6 +8511,7 @@ Inherited from Element.visible
         @param visible - A flag indicating if the element should be visible.
         */
         visible(visible: boolean): void;
+
     }
 
     interface ElementOptions {
@@ -8091,12 +8540,15 @@ It can be replaced by calling the clip method.
     }
     interface ElementEvent {
         sender: Element;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     interface FillOptions  {
+
+
+
         /**
                 The fill color in any of the following formats.| Format         | Description
 | ---            | --- | ---
@@ -8109,13 +8561,28 @@ It can be replaced by calling the clip method.
                 The fill opacity. Ranges from 0 (completely transparent) to 1 (completely opaque).
                 */
                 opacity: number;
+
+
+
+
     }
 
 
 
     class Gradient extends kendo.Class {
-        constructor(options?: GradientOptions);
+
+
         options: GradientOptions;
+
+        /**
+                The array of gradient color stops.
+Contains GradientStop instances.
+                */
+                stops: any;
+
+        constructor(options?: GradientOptions);
+
+
         /**
         Adds a color stop to the gradient.
         @method
@@ -8137,11 +8604,7 @@ Ranges from 0 (completely transparent) to 1 (completely opaque).
         @param stop - The gradient color stop to remove.
         */
         removeStop(stop: kendo.drawing.GradientStop): void;
-        /**
-                The array of gradient color stops.
-Contains GradientStop instances.
-                */
-                stops: any;
+
     }
 
     interface GradientOptions {
@@ -8155,14 +8618,21 @@ Can contain either plain objects or GradientStop instances.
     }
     interface GradientEvent {
         sender: Gradient;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class GradientStop extends kendo.Class {
-        constructor(options?: GradientStopOptions);
+
+
         options: GradientStopOptions;
+
+
+        constructor(options?: GradientStopOptions);
+
+
+
     }
 
     interface GradientStopOptions {
@@ -8191,14 +8661,24 @@ Ranges from 0 (completely transparent) to 1 (completely opaque).
     }
     interface GradientStopEvent {
         sender: GradientStop;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class Group extends kendo.drawing.Element {
-        constructor(options?: GroupOptions);
+
+
         options: GroupOptions;
+
+        /**
+                The children of this group.
+                */
+                children: any;
+
+        constructor(options?: GroupOptions);
+
+
         /**
         Appends the specified element as a last child of the group.
         @method
@@ -8269,10 +8749,7 @@ Inherited from Element.opacityThe opacity of any child groups and elements will 
         @param visible - A flag indicating if the element should be visible.
         */
         visible(visible: boolean): void;
-        /**
-                The children of this group.
-                */
-                children: any;
+
     }
 
     interface GroupOptions {
@@ -8309,14 +8786,20 @@ Inherited from Element.visible
     }
     interface GroupEvent {
         sender: Group;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class Image extends kendo.drawing.Element {
-        constructor(src: string, rect: kendo.geometry.Rect);
+
+
         options: ImageOptions;
+
+
+        constructor(src: string, rect: kendo.geometry.Rect);
+
+
         /**
         Returns the bounding box of the element with transformations applied.
 Inherited from Element.bbox
@@ -8411,6 +8894,7 @@ Inherited from Element.visible
         @param visible - A flag indicating if the element should be visible.
         */
         visible(visible: boolean): void;
+
     }
 
     interface ImageOptions {
@@ -8442,14 +8926,20 @@ Inherited from Element.visible
     }
     interface ImageEvent {
         sender: Image;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class Layout extends kendo.drawing.Group {
-        constructor(rect: kendo.geometry.Rect, options?: LayoutOptions);
+
+
         options: LayoutOptions;
+
+
+        constructor(rect: kendo.geometry.Rect, options?: LayoutOptions);
+
+
         /**
         Gets or sets the layout rectangle.
         @method
@@ -8467,6 +8957,7 @@ Inherited from Element.visible
         @method
         */
         reflow(): void;
+
     }
 
     interface LayoutOptions {
@@ -8509,14 +9000,25 @@ Inherited from Element.visible
     }
     interface LayoutEvent {
         sender: Layout;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class LinearGradient extends kendo.drawing.Gradient {
-        constructor(options?: LinearGradientOptions);
+
+
         options: LinearGradientOptions;
+
+        /**
+                The array of gradient color stops.
+Contains GradientStop instances.
+                */
+                stops: any;
+
+        constructor(options?: LinearGradientOptions);
+
+
         /**
         Adds a color stop to the gradient.
 Inherited from Gradient.addStop
@@ -8574,11 +9076,7 @@ Inherited from Gradient.removeStop
         @param stop - The gradient color stop to remove.
         */
         removeStop(stop: kendo.drawing.GradientStop): void;
-        /**
-                The array of gradient color stops.
-Contains GradientStop instances.
-                */
-                stops: any;
+
     }
 
     interface LinearGradientOptions {
@@ -8592,14 +9090,24 @@ Can contain either plain objects or GradientStop instances.
     }
     interface LinearGradientEvent {
         sender: LinearGradient;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class MultiPath extends kendo.drawing.Element {
-        constructor(options?: MultiPathOptions);
+
+
         options: MultiPathOptions;
+
+        /**
+                A collection of sub-paths.
+                */
+                paths: any;
+
+        constructor(options?: MultiPathOptions);
+
+
         /**
         Returns the bounding box of the element with transformations applied.
 Inherited from Element.bbox
@@ -8773,10 +9281,7 @@ Inherited from Element.visible
         @param visible - A flag indicating if the element should be visible.
         */
         visible(visible: boolean): void;
-        /**
-                A collection of sub-paths.
-                */
-                paths: any;
+
     }
 
     interface MultiPathOptions {
@@ -8818,14 +9323,27 @@ Inherited from Element.visible
     }
     interface MultiPathEvent {
         sender: MultiPath;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class OptionsStore extends kendo.Class {
-        constructor(options?: OptionsStoreOptions);
+
+
         options: OptionsStoreOptions;
+
+        /**
+                An optional observer for the options store.Upon field modification, the optionsChange(e) method on the observer will be called
+with a single argument containing two fields:
+* field - The fully qualified field name
+* value - The new field value
+                */
+                observer: any;
+
+        constructor(options?: OptionsStoreOptions);
+
+
         /**
         Gets the value of the specified option.
         @method
@@ -8843,13 +9361,7 @@ Must be a fully qualified name (e.g. "foo.bar") for nested options.
 will not trigger options change on the observer (if any).
         */
         set(field: string, value: any): void;
-        /**
-                An optional observer for the options store.Upon field modification, the optionsChange(e) method on the observer will be called
-with a single argument containing two fields:
-* field - The fully qualified field name
-* value - The new field value
-                */
-                observer: any;
+
     }
 
     interface OptionsStoreOptions {
@@ -8857,12 +9369,15 @@ with a single argument containing two fields:
     }
     interface OptionsStoreEvent {
         sender: OptionsStore;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     interface PDFOptions  {
+
+
+
         /**
                 The creator of the PDF document.
                 */
@@ -8897,13 +9412,30 @@ The default "auto" means paper size is determined by content.Supported values:
                 Sets the title of the PDF file.
                 */
                 title: string;
+
+
+
+
     }
 
 
 
     class Path extends kendo.drawing.Element {
-        constructor(options?: PathOptions);
+
+
         options: PathOptions;
+
+        /**
+                A collection of the path segments.
+                */
+                segments: any;
+
+        constructor(options?: PathOptions);
+
+        static fromPoints(points: any): kendo.drawing.Path;
+        static fromRect(rect: kendo.geometry.Rect): kendo.drawing.Path;
+        static parse(svgPath: string, options?: any): kendo.drawing.Path;
+
         /**
         Returns the bounding box of the element with transformations applied.
 Inherited from Element.bbox
@@ -9077,13 +9609,7 @@ Inherited from Element.visible
         @param visible - A flag indicating if the element should be visible.
         */
         visible(visible: boolean): void;
-        static fromPoints(points: any): kendo.drawing.Path;
-        static fromRect(rect: kendo.geometry.Rect): kendo.drawing.Path;
-        static parse(svgPath: string, options?: any): kendo.drawing.Path;
-        /**
-                A collection of the path segments.
-                */
-                segments: any;
+
     }
 
     interface PathOptions {
@@ -9125,14 +9651,25 @@ Inherited from Element.visible
     }
     interface PathEvent {
         sender: Path;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class RadialGradient extends kendo.drawing.Gradient {
-        constructor(options?: RadialGradientOptions);
+
+
         options: RadialGradientOptions;
+
+        /**
+                The array of gradient color stops.
+Contains GradientStop instances.
+                */
+                stops: any;
+
+        constructor(options?: RadialGradientOptions);
+
+
         /**
         Adds a color stop to the gradient.
 Inherited from Gradient.addStop
@@ -9182,11 +9719,7 @@ Inherited from Gradient.removeStop
         @param stop - The gradient color stop to remove.
         */
         removeStop(stop: kendo.drawing.GradientStop): void;
-        /**
-                The array of gradient color stops.
-Contains GradientStop instances.
-                */
-                stops: any;
+
     }
 
     interface RadialGradientOptions {
@@ -9211,14 +9744,20 @@ Can contain either plain objects or GradientStop instances.
     }
     interface RadialGradientEvent {
         sender: RadialGradient;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     class Segment extends kendo.Class {
-        constructor(anchor: kendo.geometry.Point, controlIn: kendo.geometry.Point, controlOut: kendo.geometry.Point);
+
+
         options: SegmentOptions;
+
+
+        constructor(anchor: kendo.geometry.Point, controlIn: kendo.geometry.Point, controlOut: kendo.geometry.Point);
+
+
         /**
         Gets or sets the segment anchor point.The setter returns the current Segment to allow chaining.
         @method
@@ -9255,6 +9794,7 @@ Can contain either plain objects or GradientStop instances.
         @param value - The new control point.
         */
         controlOut(value: kendo.geometry.Point): void;
+
     }
 
     interface SegmentOptions {
@@ -9262,12 +9802,15 @@ Can contain either plain objects or GradientStop instances.
     }
     interface SegmentEvent {
         sender: Segment;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
     interface StrokeOptions  {
+
+
+
         /**
                 The stroke color in any of the following formats.| Value          | Description
 | ---            | --- | ---
@@ -9312,13 +9855,25 @@ Can contain either plain objects or GradientStop instances.
                 The stroke width in pixels.
                 */
                 width: number;
+
+
+
+
     }
 
 
 
     class Surface extends kendo.Observable {
-        constructor(options?: SurfaceOptions);
+
+
         options: SurfaceOptions;
+
+
+        constructor(options?: SurfaceOptions);
+
+        static create(element: JQuery, options?: any): kendo.drawing.Surface;
+        static create(element: Element, options?: any): kendo.drawing.Surface;
+
         /**
         Clears the drawing surface.
         @method
@@ -9344,8 +9899,7 @@ Existing elements will remain visible.
         @param force - Whether to proceed with resizing even if the container dimensions have not changed.
         */
         resize(force?: boolean): void;
-        static create(element: JQuery, options?: any): kendo.drawing.Surface;
-        static create(element: Element, options?: any): kendo.drawing.Surface;
+
     }
 
     interface SurfaceOptions {
@@ -9387,8 +9941,8 @@ By default the surface will expand to fill the width of the first positioned con
     }
     interface SurfaceEvent {
         sender: Surface;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
     interface SurfaceClickEvent extends SurfaceEvent {
@@ -9432,8 +9986,14 @@ By default the surface will expand to fill the width of the first positioned con
 
 
     class Text extends kendo.drawing.Element {
-        constructor(content: string, position: kendo.geometry.Point, options?: TextOptions);
+
+
         options: TextOptions;
+
+
+        constructor(content: string, position: kendo.geometry.Point, options?: TextOptions);
+
+
         /**
         Returns the bounding box of the element with transformations applied.
 Inherited from Element.bbox
@@ -9545,6 +10105,7 @@ Inherited from Element.visible
         @param visible - A flag indicating if the element should be visible.
         */
         visible(visible: boolean): void;
+
     }
 
     interface TextOptions {
@@ -9594,8 +10155,8 @@ Inherited from Element.visible
     }
     interface TextEvent {
         sender: Text;
-        isDefaultPrevented(): boolean;
         preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
 
@@ -9629,86 +10190,86 @@ interface JQuery {
 
     kendoMobileActionSheet(): JQuery;
     kendoMobileActionSheet(options: kendo.mobile.ui.ActionSheetOptions): JQuery;
-    data(key: "kendoMobileActionSheet") : kendo.mobile.ui.ActionSheet;
+    data(key: "kendoMobileActionSheet"): kendo.mobile.ui.ActionSheet;
 
     kendoMobileBackButton(): JQuery;
     kendoMobileBackButton(options: kendo.mobile.ui.BackButtonOptions): JQuery;
-    data(key: "kendoMobileBackButton") : kendo.mobile.ui.BackButton;
+    data(key: "kendoMobileBackButton"): kendo.mobile.ui.BackButton;
 
     kendoMobileButton(): JQuery;
     kendoMobileButton(options: kendo.mobile.ui.ButtonOptions): JQuery;
-    data(key: "kendoMobileButton") : kendo.mobile.ui.Button;
+    data(key: "kendoMobileButton"): kendo.mobile.ui.Button;
 
     kendoMobileButtonGroup(): JQuery;
     kendoMobileButtonGroup(options: kendo.mobile.ui.ButtonGroupOptions): JQuery;
-    data(key: "kendoMobileButtonGroup") : kendo.mobile.ui.ButtonGroup;
+    data(key: "kendoMobileButtonGroup"): kendo.mobile.ui.ButtonGroup;
 
     kendoMobileCollapsible(): JQuery;
     kendoMobileCollapsible(options: kendo.mobile.ui.CollapsibleOptions): JQuery;
-    data(key: "kendoMobileCollapsible") : kendo.mobile.ui.Collapsible;
+    data(key: "kendoMobileCollapsible"): kendo.mobile.ui.Collapsible;
 
     kendoMobileDetailButton(): JQuery;
     kendoMobileDetailButton(options: kendo.mobile.ui.DetailButtonOptions): JQuery;
-    data(key: "kendoMobileDetailButton") : kendo.mobile.ui.DetailButton;
+    data(key: "kendoMobileDetailButton"): kendo.mobile.ui.DetailButton;
 
     kendoMobileDrawer(): JQuery;
     kendoMobileDrawer(options: kendo.mobile.ui.DrawerOptions): JQuery;
-    data(key: "kendoMobileDrawer") : kendo.mobile.ui.Drawer;
+    data(key: "kendoMobileDrawer"): kendo.mobile.ui.Drawer;
 
     kendoMobileLayout(): JQuery;
     kendoMobileLayout(options: kendo.mobile.ui.LayoutOptions): JQuery;
-    data(key: "kendoMobileLayout") : kendo.mobile.ui.Layout;
+    data(key: "kendoMobileLayout"): kendo.mobile.ui.Layout;
 
     kendoMobileListView(): JQuery;
     kendoMobileListView(options: kendo.mobile.ui.ListViewOptions): JQuery;
-    data(key: "kendoMobileListView") : kendo.mobile.ui.ListView;
+    data(key: "kendoMobileListView"): kendo.mobile.ui.ListView;
 
     kendoMobileLoader(): JQuery;
     kendoMobileLoader(options: kendo.mobile.ui.LoaderOptions): JQuery;
-    data(key: "kendoMobileLoader") : kendo.mobile.ui.Loader;
+    data(key: "kendoMobileLoader"): kendo.mobile.ui.Loader;
 
     kendoMobileModalView(): JQuery;
     kendoMobileModalView(options: kendo.mobile.ui.ModalViewOptions): JQuery;
-    data(key: "kendoMobileModalView") : kendo.mobile.ui.ModalView;
+    data(key: "kendoMobileModalView"): kendo.mobile.ui.ModalView;
 
     kendoMobileNavBar(): JQuery;
     kendoMobileNavBar(options: kendo.mobile.ui.NavBarOptions): JQuery;
-    data(key: "kendoMobileNavBar") : kendo.mobile.ui.NavBar;
+    data(key: "kendoMobileNavBar"): kendo.mobile.ui.NavBar;
 
     kendoMobilePane(): JQuery;
     kendoMobilePane(options: kendo.mobile.ui.PaneOptions): JQuery;
-    data(key: "kendoMobilePane") : kendo.mobile.ui.Pane;
+    data(key: "kendoMobilePane"): kendo.mobile.ui.Pane;
 
     kendoMobilePopOver(): JQuery;
     kendoMobilePopOver(options: kendo.mobile.ui.PopOverOptions): JQuery;
-    data(key: "kendoMobilePopOver") : kendo.mobile.ui.PopOver;
+    data(key: "kendoMobilePopOver"): kendo.mobile.ui.PopOver;
 
     kendoMobileScrollView(): JQuery;
     kendoMobileScrollView(options: kendo.mobile.ui.ScrollViewOptions): JQuery;
-    data(key: "kendoMobileScrollView") : kendo.mobile.ui.ScrollView;
+    data(key: "kendoMobileScrollView"): kendo.mobile.ui.ScrollView;
 
     kendoMobileScroller(): JQuery;
     kendoMobileScroller(options: kendo.mobile.ui.ScrollerOptions): JQuery;
-    data(key: "kendoMobileScroller") : kendo.mobile.ui.Scroller;
+    data(key: "kendoMobileScroller"): kendo.mobile.ui.Scroller;
 
     kendoMobileSplitView(): JQuery;
     kendoMobileSplitView(options: kendo.mobile.ui.SplitViewOptions): JQuery;
-    data(key: "kendoMobileSplitView") : kendo.mobile.ui.SplitView;
+    data(key: "kendoMobileSplitView"): kendo.mobile.ui.SplitView;
 
     kendoMobileSwitch(): JQuery;
     kendoMobileSwitch(options: kendo.mobile.ui.SwitchOptions): JQuery;
-    data(key: "kendoMobileSwitch") : kendo.mobile.ui.Switch;
+    data(key: "kendoMobileSwitch"): kendo.mobile.ui.Switch;
 
     kendoMobileTabStrip(): JQuery;
     kendoMobileTabStrip(options: kendo.mobile.ui.TabStripOptions): JQuery;
-    data(key: "kendoMobileTabStrip") : kendo.mobile.ui.TabStrip;
+    data(key: "kendoMobileTabStrip"): kendo.mobile.ui.TabStrip;
 
     kendoMobileView(): JQuery;
     kendoMobileView(options: kendo.mobile.ui.ViewOptions): JQuery;
-    data(key: "kendoMobileView") : kendo.mobile.ui.View;
+    data(key: "kendoMobileView"): kendo.mobile.ui.View;
 
     kendoTouch(): JQuery;
     kendoTouch(options: kendo.ui.TouchOptions): JQuery;
-    data(key: "kendoTouch") : kendo.ui.Touch;
+    data(key: "kendoTouch"): kendo.ui.Touch;
 
 }
