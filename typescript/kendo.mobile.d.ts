@@ -4422,7 +4422,7 @@ found on the page.These include tokens used by ASP.NET, Ruby on Rails and others
         */
         antiForgeryTokens(): any;
         function /**
-        Binds a HTML View to a View-Model.Model View ViewModel (MVVM) is a design pattern which helps developers separate the Model from the View. The View-Model part of MVVM is responsible for
+        Binds a HTML View to a View-Model and initializes Kendo UI widgets from DOM elements based on data-role attributes, similar to kendo.init().Model View ViewModel (MVVM) is a design pattern which helps developers separate the Model from the View. The View-Model part of MVVM is responsible for
 exposing the data objects from the Model in such a way that those objects are easily consumed in the View.
         @method
         @param element - The root element(s) from which the binding starts. Can be a valid jQuery string selector, a DOM element or a jQuery object.
@@ -4433,7 +4433,7 @@ kendo.ui will be used. Multiple namespaces can be passed.
         */
         bind(element: string, viewModel: any, namespace?: any): void;
         function /**
-        Binds a HTML View to a View-Model.Model View ViewModel (MVVM) is a design pattern which helps developers separate the Model from the View. The View-Model part of MVVM is responsible for
+        Binds a HTML View to a View-Model and initializes Kendo UI widgets from DOM elements based on data-role attributes, similar to kendo.init().Model View ViewModel (MVVM) is a design pattern which helps developers separate the Model from the View. The View-Model part of MVVM is responsible for
 exposing the data objects from the Model in such a way that those objects are easily consumed in the View.
         @method
         @param element - The root element(s) from which the binding starts. Can be a valid jQuery string selector, a DOM element or a jQuery object.
@@ -4444,7 +4444,7 @@ kendo.ui will be used. Multiple namespaces can be passed.
         */
         bind(element: string, viewModel: kendo.data.ObservableObject, namespace?: any): void;
         function /**
-        Binds a HTML View to a View-Model.Model View ViewModel (MVVM) is a design pattern which helps developers separate the Model from the View. The View-Model part of MVVM is responsible for
+        Binds a HTML View to a View-Model and initializes Kendo UI widgets from DOM elements based on data-role attributes, similar to kendo.init().Model View ViewModel (MVVM) is a design pattern which helps developers separate the Model from the View. The View-Model part of MVVM is responsible for
 exposing the data objects from the Model in such a way that those objects are easily consumed in the View.
         @method
         @param element - The root element(s) from which the binding starts. Can be a valid jQuery string selector, a DOM element or a jQuery object.
@@ -4455,7 +4455,7 @@ kendo.ui will be used. Multiple namespaces can be passed.
         */
         bind(element: JQuery, viewModel: any, namespace?: any): void;
         function /**
-        Binds a HTML View to a View-Model.Model View ViewModel (MVVM) is a design pattern which helps developers separate the Model from the View. The View-Model part of MVVM is responsible for
+        Binds a HTML View to a View-Model and initializes Kendo UI widgets from DOM elements based on data-role attributes, similar to kendo.init().Model View ViewModel (MVVM) is a design pattern which helps developers separate the Model from the View. The View-Model part of MVVM is responsible for
 exposing the data objects from the Model in such a way that those objects are easily consumed in the View.
         @method
         @param element - The root element(s) from which the binding starts. Can be a valid jQuery string selector, a DOM element or a jQuery object.
@@ -4466,7 +4466,7 @@ kendo.ui will be used. Multiple namespaces can be passed.
         */
         bind(element: JQuery, viewModel: kendo.data.ObservableObject, namespace?: any): void;
         function /**
-        Binds a HTML View to a View-Model.Model View ViewModel (MVVM) is a design pattern which helps developers separate the Model from the View. The View-Model part of MVVM is responsible for
+        Binds a HTML View to a View-Model and initializes Kendo UI widgets from DOM elements based on data-role attributes, similar to kendo.init().Model View ViewModel (MVVM) is a design pattern which helps developers separate the Model from the View. The View-Model part of MVVM is responsible for
 exposing the data objects from the Model in such a way that those objects are easily consumed in the View.
         @method
         @param element - The root element(s) from which the binding starts. Can be a valid jQuery string selector, a DOM element or a jQuery object.
@@ -4477,7 +4477,7 @@ kendo.ui will be used. Multiple namespaces can be passed.
         */
         bind(element: Element, viewModel: any, namespace?: any): void;
         function /**
-        Binds a HTML View to a View-Model.Model View ViewModel (MVVM) is a design pattern which helps developers separate the Model from the View. The View-Model part of MVVM is responsible for
+        Binds a HTML View to a View-Model and initializes Kendo UI widgets from DOM elements based on data-role attributes, similar to kendo.init().Model View ViewModel (MVVM) is a design pattern which helps developers separate the Model from the View. The View-Model part of MVVM is responsible for
 exposing the data objects from the Model in such a way that those objects are easily consumed in the View.
         @method
         @param element - The root element(s) from which the binding starts. Can be a valid jQuery string selector, a DOM element or a jQuery object.
