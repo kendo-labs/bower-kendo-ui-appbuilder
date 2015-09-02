@@ -6233,6 +6233,11 @@ Note: The dataItem must be from a non-primitive type (Object).
         */
         animatedScrollTo(x: number, y: number): void;
         /**
+        Updates the scroller dimensions. Should be called after the contents of the scroller update their size
+        @method
+        */
+        contentResized(): void;
+        /**
         Prepares the Scroller for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
         @method
         */
