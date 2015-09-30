@@ -335,6 +335,7 @@ declare module kendo {
         destroy(): void;
         route(route: string, callback: Function): void;
         navigate(location: string, silent?: boolean): void;
+        replace(location: string, silent?: boolean): void;
     }
 
 }
@@ -624,14 +625,14 @@ declare module kendo.data {
         static fields: DataSourceSchemaModelFields;
 
         id: any;
-		parentId: number;
-		orderId: number;
-		title: string;
-		start: Date;
-		end: Date;
-		percentComplete: number;
-		summary: boolean;
-		expanded: boolean;
+        parentId: number;
+        orderId: number;
+        title: string;
+        start: Date;
+        end: Date;
+        percentComplete: number;
+        summary: boolean;
+        expanded: boolean;
 
         static define(options: DataSourceSchemaModelWithFieldsObject): typeof GanttTask;
         static define(options: DataSourceSchemaModelWithFieldsArray): typeof GanttTask;
@@ -645,9 +646,9 @@ declare module kendo.data {
         static fields: DataSourceSchemaModelFields;
 
         id: any;
-		predecessorId: number;
-		successorId: number;
-		type: number;
+        predecessorId: number;
+        successorId: number;
+        type: number;
 
         static define(options: DataSourceSchemaModelWithFieldsObject): typeof GanttDependency;
         static define(options: DataSourceSchemaModelWithFieldsArray): typeof GanttDependency;
@@ -1028,6 +1029,12 @@ declare module kendo.data {
         page(page: number): void;
         pageSize(): number;
         pageSize(size: number): void;
+        pushCreate(model: Object): void;
+        pushCreate(models: any[]): void;
+        pushDestroy(model: Object): void;
+        pushDestroy(models: any[]): void;
+        pushUpdate(model: Object): void;
+        pushUpdate(models: any[]): void;
         query(options?: any): JQueryPromise<any>;
         read(data?: any): JQueryPromise<any>;
         remove(model: kendo.data.ObservableObject): void;
@@ -1085,7 +1092,7 @@ declare module kendo.data {
         dir?: string;
     }
 
-    interface DataSourceTransportCreate {
+    interface DataSourceTransportCreate extends JQueryAjaxSettings {
         cache?: boolean;
         contentType?: string;
         data?: any;
@@ -1094,7 +1101,7 @@ declare module kendo.data {
         url?: any;
     }
 
-    interface DataSourceTransportDestroy {
+    interface DataSourceTransportDestroy extends JQueryAjaxSettings {
         cache?: boolean;
         contentType?: string;
         data?: any;
@@ -1103,7 +1110,7 @@ declare module kendo.data {
         url?: any;
     }
 
-    interface DataSourceTransportRead {
+    interface DataSourceTransportRead extends JQueryAjaxSettings {
         cache?: boolean;
         contentType?: string;
         data?: any;
@@ -1112,7 +1119,7 @@ declare module kendo.data {
         url?: any;
     }
 
-    interface DataSourceTransportUpdate {
+    interface DataSourceTransportUpdate extends JQueryAjaxSettings {
         cache?: boolean;
         contentType?: string;
         data?: any;
@@ -1420,815 +1427,6 @@ declare module kendo.mobile.ui {
         x?: number;
         y?: number;
     }
-}
-declare module kendo.geometry {
-    class Arc extends Observable {
-
-
-        options: ArcOptions;
-
-        /**
-                A flag indicating if the arc should be drawn in clockwise or anticlockwise direction.
-Defaults to clockwise direction.
-                */
-                anticlockwise: boolean;
-        /**
-                The location of the arc center.
-                */
-                center: kendo.geometry.Point;
-        /**
-                The end angle of the arc in decimal degrees.
-Measured in clockwise direction with 0 pointing "right".
-Negative values or values greater than 360 will be normalized.
-                */
-                endAngle: number;
-        /**
-                The x radius of the arc.
-                */
-                radiusX: number;
-        /**
-                The y radius of the arc.
-                */
-                radiusY: number;
-        /**
-                The start angle of the arc in decimal degrees.
-Measured in clockwise direction with 0 pointing "right".
-Negative values or values greater than 360 will be normalized.
-                */
-                startAngle: number;
-
-
-
-        /**
-        Returns the bounding box of this arc after applying the specified transformation matrix.
-        @method
-        @param matrix - Transformation matrix to apply.
-        @returns The bounding box after applying the transformation matrix.
-        */
-        bbox(matrix: kendo.geometry.Matrix): kendo.geometry.Rect;
-        /**
-        Gets the arc anticlokwise flag.
-        @method
-        @returns The anticlokwise flag of the arc.
-        */
-        getAnticlockwise(): boolean;
-        /**
-        Gets the arc center location.
-        @method
-        @returns The location of the arc center.
-        */
-        getCenter(): kendo.geometry.Point;
-        /**
-        Gets the end angle of the arc in decimal degrees.
-Measured in clockwise direction with 0 pointing "right".
-        @method
-        @returns The end angle of the arc.
-        */
-        getEndAngle(): number;
-        /**
-        Gets the x radius of the arc.
-        @method
-        @returns The x radius of the arc.
-        */
-        getRadiusX(): number;
-        /**
-        Gets the y radius of the arc.
-        @method
-        @returns The y radius of the arc.
-        */
-        getRadiusY(): number;
-        /**
-        Gets the start angle of the arc in decimal degrees.
-Measured in clockwise direction with 0 pointing "right".
-        @method
-        @returns The start angle of the arc.
-        */
-        getStartAngle(): number;
-        /**
-        Gets the location of a point on the arc's circumference at a given angle.
-        @method
-        @param angle - Angle in decimal degrees. Measured in clockwise direction with 0 pointing "right".
-Negative values or values greater than 360 will be normalized.
-        @returns The point on the arc's circumference.
-        */
-        pointAt(angle: number): kendo.geometry.Point;
-        /**
-        Sets the arc anticlokwise flag.
-        @method
-        @param value - The new anticlockwise value.
-        @returns The current arc instance.
-        */
-        setAnticlockwise(value: boolean): kendo.geometry.Arc;
-        /**
-        Sets the arc center location.
-        @method
-        @param value - The new arc center.
-        @returns The current arc instance.
-        */
-        setCenter(value: kendo.geometry.Point): kendo.geometry.Arc;
-        /**
-        Sets the end angle of the arc in decimal degrees.
-Measured in clockwise direction with 0 pointing "right".
-        @method
-        @param value - The new arc end angle.
-        @returns The current arc instance.
-        */
-        setEndAngle(value: number): kendo.geometry.Arc;
-        /**
-        Sets the x radius of the arc.
-        @method
-        @param value - The new arc x radius.
-        @returns The current arc instance.
-        */
-        setRadiusX(value: number): kendo.geometry.Arc;
-        /**
-        Sets the y radius of the arc.
-        @method
-        @param value - The new arc y radius.
-        @returns The current arc instance.
-        */
-        setRadiusY(value: number): kendo.geometry.Arc;
-        /**
-        Sets the start angle of the arc in decimal degrees.
-Measured in clockwise direction with 0 pointing "right".
-        @method
-        @param value - The new arc atart angle.
-        @returns The current arc instance.
-        */
-        setStartAngle(value: number): kendo.geometry.Arc;
-
-    }
-
-    interface ArcOptions {
-        name?: string;
-    }
-    interface ArcEvent {
-        sender: Arc;
-        preventDefault: Function;
-        isDefaultPrevented(): boolean;
-    }
-
-
-    class Circle extends Observable {
-
-
-        options: CircleOptions;
-
-        /**
-                The location of the circle center.
-                */
-                center: kendo.geometry.Point;
-        /**
-                The radius of the circle.
-                */
-                radius: number;
-
-
-
-        /**
-        Returns the bounding box of this circle after applying the
-specified transformation matrix.
-        @method
-        @param matrix - Transformation matrix to apply.
-        @returns The bounding box after applying the transformation matrix.
-        */
-        bbox(matrix: kendo.geometry.Matrix): kendo.geometry.Rect;
-        /**
-        Creates a new instance with the same center and radius.
-        @method
-        @returns A new Circle instance with the same center and radius.
-        */
-        clone(): kendo.geometry.Circle;
-        /**
-        Compares this circle with another instance.
-        @method
-        @param other - The circle to compare with.
-        @returns true if the point coordinates match; false otherwise.
-        */
-        equals(other: kendo.geometry.Circle): boolean;
-        /**
-        Gets the circle center location.
-        @method
-        @returns The location of the circle center.
-        */
-        getCenter(): kendo.geometry.Point;
-        /**
-        Gets the circle radius.
-        @method
-        @returns The radius of the circle.
-        */
-        getRadius(): number;
-        /**
-        Gets the location of a point on the circle's circumference at a given angle.
-        @method
-        @param angle - Angle in decimal degrees. Measured in clockwise direction with 0 pointing "right".
-Negative values or values greater than 360 will be normalized.
-        @returns The point on the circle's circumference.
-        */
-        pointAt(angle: number): kendo.geometry.Point;
-        /**
-        Sets the location of the circle center.
-        @method
-        @param value - The new center Point or equivalent [x, y] array.
-        @returns The location of the circle center.
-        */
-        setCenter(value: kendo.geometry.Point): kendo.geometry.Point;
-        /**
-        Sets the location of the circle center.
-        @method
-        @param value - The new center Point or equivalent [x, y] array.
-        @returns The location of the circle center.
-        */
-        setCenter(value: any): kendo.geometry.Point;
-        /**
-        Sets the circle radius.
-        @method
-        @param value - The new circle radius.
-        @returns The current circle instance.
-        */
-        setRadius(value: number): kendo.geometry.Circle;
-
-    }
-
-    interface CircleOptions {
-        name?: string;
-    }
-    interface CircleEvent {
-        sender: Circle;
-        preventDefault: Function;
-        isDefaultPrevented(): boolean;
-    }
-
-
-    class Matrix extends Observable {
-
-
-        options: MatrixOptions;
-
-        /**
-                The a (1, 1) member of the matrix.
-                */
-                a: number;
-        /**
-                The b (2, 1) member of the matrix.
-                */
-                b: number;
-        /**
-                The a (1, 2) member of the matrix.
-                */
-                c: number;
-        /**
-                The d (2, 2) member of the matrix.
-                */
-                d: number;
-        /**
-                The e (1, 3) member of the matrix.
-                */
-                e: number;
-        /**
-                The f (2, 3) member of the matrix.
-                */
-                f: number;
-
-
-        static rotate(angle: number, x: number, y: number): kendo.geometry.Matrix;
-        static scale(scaleX: number, scaleY: number): kendo.geometry.Matrix;
-        static translate(x: number, y: number): kendo.geometry.Matrix;
-        static unit(): kendo.geometry.Matrix;
-
-        /**
-        Creates a new instance with the same element values.
-        @method
-        @returns A new Matrix instance with the same element values.
-        */
-        clone(): kendo.geometry.Matrix;
-        /**
-        Compares this matrix with another instance.
-        @method
-        @param other - The matrix instance to compare with.
-        @returns true if the matrix elements match; false otherwise.
-        */
-        equals(other: kendo.geometry.Matrix): boolean;
-        /**
-        Rounds the matrix elements to the specified number of fractional digits.
-        @method
-        @param digits - Number of fractional digits.
-        @returns The current matrix instance.
-        */
-        round(digits: number): kendo.geometry.Matrix;
-        /**
-        Multiplies the matrix with another one and returns the result as new instance.
-The current instance elements are not altered.
-        @method
-        @param matrix - The matrix to multiply by.
-        @returns The result of the multiplication.
-        */
-        multiplyCopy(matrix: kendo.geometry.Matrix): kendo.geometry.Matrix;
-        /**
-        Returns the matrix elements as an [a, b, c, d, e, f] array.
-        @method
-        @param digits - (Optional) Number of fractional digits.
-        @returns An array representation of the matrix.
-        */
-        toArray(digits: number): any;
-        /**
-        Formats the matrix elements as a string.
-        @method
-        @param digits - (Optional) Number of fractional digits.
-        @param separator - The separator to place between elements.
-        @returns A string representation of the matrix, e.g. "1, 0, 0, 1, 0, 0".
-        */
-        toString(digits: number, separator: string): string;
-
-    }
-
-    interface MatrixOptions {
-        name?: string;
-    }
-    interface MatrixEvent {
-        sender: Matrix;
-        preventDefault: Function;
-        isDefaultPrevented(): boolean;
-    }
-
-
-    class Point extends Observable {
-
-
-        options: PointOptions;
-
-        /**
-                The x coordinate of the point.
-                */
-                x: number;
-        /**
-                The y coordinate of the point.
-                */
-                y: number;
-
-
-        static create(x: number, y: number): kendo.geometry.Point;
-        static create(x: any, y: number): kendo.geometry.Point;
-        static create(x: kendo.geometry.Point, y: number): kendo.geometry.Point;
-        static min(): kendo.geometry.Point;
-        static max(): kendo.geometry.Point;
-        static minPoint(): kendo.geometry.Point;
-        static maxPoint(): kendo.geometry.Point;
-
-        /**
-        Creates a new instance with the same coordinates.
-        @method
-        @returns A new Point instance with the same coordinates.
-        */
-        clone(): kendo.geometry.Point;
-        /**
-        Calculates the distance to another point.
-        @method
-        @param point - The point to calculate the distance to.
-        @returns The straight line distance to the given point.
-        */
-        distanceTo(point: kendo.geometry.Point): number;
-        /**
-        Compares this point with another instance.
-        @method
-        @param other - The point to compare with.
-        @returns true if the point coordinates match; false otherwise.
-        */
-        equals(other: kendo.geometry.Point): boolean;
-        /**
-        Gets the x coordinate value.
-        @method
-        @returns The current x coordinate value.
-        */
-        getX(): number;
-        /**
-        Gets the y coordinate value.
-        @method
-        @returns The current y coordinate value.
-        */
-        getY(): number;
-        /**
-        Moves the point to the specified x and y coordinates.
-        @method
-        @param x - The new X coordinate.
-        @param y - The new Y coordinate.
-        @returns The current point instance.
-        */
-        move(x: number, y: number): kendo.geometry.Point;
-        /**
-        Rotates the point around the given center.
-        @method
-        @param angle - Angle in decimal degrees. Measured in clockwise direction with 0 pointing "right".
-Negative values or values greater than 360 will be normalized.
-        @param center - The rotation center. Can be a Point instance or an [x, y] array.
-        @returns The current Point instance.
-        */
-        rotate(angle: number, center: kendo.geometry.Point): kendo.geometry.Point;
-        /**
-        Rotates the point around the given center.
-        @method
-        @param angle - Angle in decimal degrees. Measured in clockwise direction with 0 pointing "right".
-Negative values or values greater than 360 will be normalized.
-        @param center - The rotation center. Can be a Point instance or an [x, y] array.
-        @returns The current Point instance.
-        */
-        rotate(angle: number, center: any): kendo.geometry.Point;
-        /**
-        Rounds the point coordinates to the specified number of fractional digits.
-        @method
-        @param digits - Number of fractional digits.
-        @returns The current Point instance.
-        */
-        round(digits: number): kendo.geometry.Point;
-        /**
-        Scales the point coordinates along the x and y axis.
-        @method
-        @param scaleX - The x scale multiplier.
-        @param scaleY - The y scale multiplier.
-        @returns The current point instance.
-        */
-        scale(scaleX: number, scaleY: number): kendo.geometry.Point;
-        /**
-        Scales the point coordinates on a copy of the current point.
-The callee coordinates will remain unchanged.
-        @method
-        @param scaleX - The x scale multiplier.
-        @param scaleY - The y scale multiplier.
-        @returns The new Point instance.
-        */
-        scaleCopy(scaleX: number, scaleY: number): kendo.geometry.Point;
-        /**
-        Sets the x coordinate to a new value.
-        @method
-        @param value - The new x coordinate value.
-        @returns The current Point instance.
-        */
-        setX(value: number): kendo.geometry.Point;
-        /**
-        Sets the y coordinate to a new value.
-        @method
-        @param value - The new y coordinate value.
-        @returns The current Point instance.
-        */
-        setY(value: number): kendo.geometry.Point;
-        /**
-        Returns the point coordinates as an [x, y] array.
-        @method
-        @param digits - (Optional) Number of fractional digits.
-        @returns An array representation of the point, e.g. [10, 20]
-        */
-        toArray(digits: number): any;
-        /**
-        Formats the point value to a string.
-        @method
-        @param digits - (Optional) Number of fractional digits.
-        @param separator - The separator to place between coordinates.
-        @returns A string representation of the point, e.g. "10 20".
-        */
-        toString(digits: number, separator: string): string;
-        /**
-        Applies a transformation to the point coordinates.
-The current coordinates will be overriden.
-        @method
-        @param tansformation - The transformation to apply.
-        @returns The current Point instance.
-        */
-        transform(tansformation: kendo.geometry.Transformation): kendo.geometry.Point;
-        /**
-        Applies a transformation on a copy of the current point.
-The callee coordinates will remain unchanged.
-        @method
-        @param tansformation - The transformation to apply.
-        @returns The new Point instance.
-        */
-        transformCopy(tansformation: kendo.geometry.Transformation): kendo.geometry.Point;
-        /**
-        Translates the point along the x and y axis.
-        @method
-        @param dx - The distance to move along the X axis.
-        @param dy - The distance to move along the Y axis.
-        @returns The current point instance.
-        */
-        translate(dx: number, dy: number): kendo.geometry.Point;
-        /**
-        Translates the point by using a Point instance as a vector of translation.
-        @method
-        @param vector - The vector of translation. Can be either a Point instance or an [x, y] array.
-        @returns The current point instance.
-        */
-        translateWith(vector: kendo.geometry.Point): kendo.geometry.Point;
-        /**
-        Translates the point by using a Point instance as a vector of translation.
-        @method
-        @param vector - The vector of translation. Can be either a Point instance or an [x, y] array.
-        @returns The current point instance.
-        */
-        translateWith(vector: any): kendo.geometry.Point;
-
-    }
-
-    interface PointOptions {
-        name?: string;
-    }
-    interface PointEvent {
-        sender: Point;
-        preventDefault: Function;
-        isDefaultPrevented(): boolean;
-    }
-
-
-    class Rect extends Observable {
-
-
-        options: RectOptions;
-
-        /**
-                The origin (top-left corner) of the rectangle.
-                */
-                origin: kendo.geometry.Point;
-        /**
-                The size of the rectangle.
-                */
-                size: kendo.geometry.Size;
-
-        constructor(origin: kendo.geometry.Point, size: kendo.geometry.Size);
-
-        static fromPoints(pointA: kendo.geometry.Point, pointB: kendo.geometry.Point): kendo.geometry.Rect;
-        static union(rectA: kendo.geometry.Rect, rectB: kendo.geometry.Rect): kendo.geometry.Rect;
-
-        /**
-        Returns the bounding box of this rectangle after applying the
-specified transformation matrix.
-        @method
-        @param matrix - Transformation matrix to apply.
-        @returns The bounding box after applying the transformation matrix.
-        */
-        bbox(matrix: kendo.geometry.Matrix): kendo.geometry.Rect;
-        /**
-        Gets the position of the bottom-left corner of the rectangle.
-This is also the rectangle origin
-        @method
-        @returns The position of the bottom-left corner.
-        */
-        bottomLeft(): kendo.geometry.Point;
-        /**
-        Gets the position of the bottom-right corner of the rectangle.
-        @method
-        @returns The position of the bottom-right corner.
-        */
-        bottomRight(): kendo.geometry.Point;
-        /**
-        Gets the position of the center of the rectangle.
-        @method
-        @returns The position of the center.
-        */
-        center(): kendo.geometry.Point;
-        /**
-        Creates a new instance with the same origin and size.
-        @method
-        @returns A new Rect instance with the same origin and size.
-        */
-        clone(): kendo.geometry.Rect;
-        /**
-        Compares this rectangle with another instance.
-        @method
-        @param other - The rectangle to compare with.
-        @returns true if the origin and size is the same for both rectangles; false otherwise.
-        */
-        equals(other: kendo.geometry.Rect): boolean;
-        /**
-        Gets the origin (top-left point) of the rectangle.
-        @method
-        @returns The origin (top-left point).
-        */
-        getOrigin(): kendo.geometry.Point;
-        /**
-        Gets the rectangle size.
-        @method
-        @returns The current rectangle Size.
-        */
-        getSize(): kendo.geometry.Size;
-        /**
-        Gets the rectangle height.
-        @method
-        @returns The rectangle height.
-        */
-        height(): number;
-        /**
-        Sets the origin (top-left point) of the rectangle.
-        @method
-        @param value - The new origin Point or equivalent [x, y] array.
-        @returns The current rectangle instance.
-        */
-        setOrigin(value: kendo.geometry.Point): kendo.geometry.Rect;
-        /**
-        Sets the origin (top-left point) of the rectangle.
-        @method
-        @param value - The new origin Point or equivalent [x, y] array.
-        @returns The current rectangle instance.
-        */
-        setOrigin(value: any): kendo.geometry.Rect;
-        /**
-        Sets the rectangle size.
-        @method
-        @param value - The new rectangle Size or equivalent [width, height] array.
-        @returns The current rectangle instance.
-        */
-        setSize(value: kendo.geometry.Size): kendo.geometry.Rect;
-        /**
-        Sets the rectangle size.
-        @method
-        @param value - The new rectangle Size or equivalent [width, height] array.
-        @returns The current rectangle instance.
-        */
-        setSize(value: any): kendo.geometry.Rect;
-        /**
-        Gets the position of the top-left corner of the rectangle.
-This is also the rectangle origin
-        @method
-        @returns The position of the top-left corner.
-        */
-        topLeft(): kendo.geometry.Point;
-        /**
-        Gets the position of the top-right corner of the rectangle.
-        @method
-        @returns The position of the top-right corner.
-        */
-        topRight(): kendo.geometry.Point;
-        /**
-        Gets the rectangle width.
-        @method
-        @returns The rectangle width.
-        */
-        width(): number;
-
-    }
-
-    interface RectOptions {
-        name?: string;
-    }
-    interface RectEvent {
-        sender: Rect;
-        preventDefault: Function;
-        isDefaultPrevented(): boolean;
-    }
-
-
-    class Size extends Observable {
-
-
-        options: SizeOptions;
-
-        /**
-                The horizontal size.
-                */
-                width: number;
-        /**
-                The vertical size.
-                */
-                height: number;
-
-
-        static create(width: number, height: number): kendo.geometry.Size;
-        static create(width: any, height: number): kendo.geometry.Size;
-        static create(width: kendo.geometry.Size, height: number): kendo.geometry.Size;
-
-        /**
-        Creates a new instance with the same width and height.
-        @method
-        @returns A new Size instance with the same coordinates.
-        */
-        clone(): kendo.geometry.Size;
-        /**
-        Compares this Size with another instance.
-        @method
-        @param other - The Size to compare with.
-        @returns true if the size members match; false otherwise.
-        */
-        equals(other: kendo.geometry.Size): boolean;
-        /**
-        Gets the width value.
-        @method
-        @returns The current width value.
-        */
-        getWidth(): number;
-        /**
-        Gets the height value.
-        @method
-        @returns The current height value.
-        */
-        getHeight(): number;
-        /**
-        Sets the width to a new value.
-        @method
-        @param value - The new width value.
-        @returns The current Size instance.
-        */
-        setWidth(value: number): kendo.geometry.Size;
-        /**
-        Sets the height to a new value.
-        @method
-        @param value - The new height value.
-        @returns The current Size instance.
-        */
-        setHeight(value: number): kendo.geometry.Size;
-
-    }
-
-    interface SizeOptions {
-        name?: string;
-    }
-    interface SizeEvent {
-        sender: Size;
-        preventDefault: Function;
-        isDefaultPrevented(): boolean;
-    }
-
-
-    class Transformation extends Observable {
-
-
-        options: TransformationOptions;
-
-
-
-
-        /**
-        Creates a new instance with the same transformation matrix.
-        @method
-        @returns A new Transformation instance with the same matrix.
-        */
-        clone(): kendo.geometry.Transformation;
-        /**
-        Compares this transformation with another instance.
-        @method
-        @param other - The transformation to compare with.
-        @returns true if the transformation matrix is the same; false otherwise.
-        */
-        equals(other: kendo.geometry.Transformation): boolean;
-        /**
-        Gets the current transformation matrix for this transformation.
-        @method
-        @returns The current transformation matrix.
-        */
-        matrix(): kendo.geometry.Matrix;
-        /**
-        Multiplies the transformation with another.
-The underlying transformation matrix is updated in-place.
-        @method
-        @param transformation - The transformation to multiply by.
-        @returns The current transformation instance.
-        */
-        multiply(transformation: kendo.geometry.Transformation): kendo.geometry.Transformation;
-        /**
-        Sets rotation with the specified parameters.
-        @method
-        @param angle - The angle of rotation in decimal degrees.
-Measured in clockwise direction with 0 pointing "right".
-Negative values or values greater than 360 will be normalized.
-        @param center - The center of rotation.
-        @returns The current transformation instance.
-        */
-        rotate(angle: number, center: any): kendo.geometry.Transformation;
-        /**
-        Sets rotation with the specified parameters.
-        @method
-        @param angle - The angle of rotation in decimal degrees.
-Measured in clockwise direction with 0 pointing "right".
-Negative values or values greater than 360 will be normalized.
-        @param center - The center of rotation.
-        @returns The current transformation instance.
-        */
-        rotate(angle: number, center: kendo.geometry.Point): kendo.geometry.Transformation;
-        /**
-        Sets scale with the specified parameters.
-        @method
-        @param scaleX - The scale factor on the X axis.
-        @param scaleY - The scale factor on the Y axis.
-        @returns The current transformation instance.
-        */
-        scale(scaleX: number, scaleY: number): kendo.geometry.Transformation;
-        /**
-        Sets translation with the specified parameters.
-        @method
-        @param x - The distance to translate along the X axis.
-        @param y - The distance to translate along the Y axis.
-        @returns The current transformation instance.
-        */
-        translate(x: number, y: number): kendo.geometry.Transformation;
-
-    }
-
-    interface TransformationOptions {
-        name?: string;
-    }
-    interface TransformationEvent {
-        sender: Transformation;
-        preventDefault: Function;
-        isDefaultPrevented(): boolean;
-    }
-
-
 }
 declare module kendo.drawing {
     class Arc extends kendo.drawing.Element {
@@ -2810,6 +2008,13 @@ Inherited from Element.clippedBBox
         @returns The bounding box of the element with clipping transformations applied.
         */
         clippedBBox(): kendo.geometry.Rect;
+        /**
+        Inserts an element at the specified position.
+        @method
+        @param position - The position to insert the element at. Existing children beyond this position will be shifted right.
+        @param element - The element to insert.
+        */
+        insert(position: number, element: kendo.drawing.Element): void;
         /**
         Gets or sets the group opacity.
 Inherited from Element.opacityThe opacity of any child groups and elements will be multiplied by this value.
@@ -3848,6 +3053,161 @@ Can contain either plain objects or GradientStop instances.
     }
 
 
+    class Rect extends kendo.drawing.Element {
+
+
+        options: RectOptions;
+
+
+        constructor(geometry: kendo.geometry.Rect, options?: RectOptions);
+
+
+        /**
+        Returns the bounding box of the element with transformations applied.
+Inherited from Element.bbox
+        @method
+        @returns The bounding box of the element with transformations applied.
+        */
+        bbox(): kendo.geometry.Rect;
+        /**
+        Gets or sets the element clipping path.
+Inherited from Element.clip
+        @method
+        @returns The current element clipping path.
+        */
+        clip(): kendo.drawing.Path;
+        /**
+        Gets or sets the element clipping path.
+Inherited from Element.clip
+        @method
+        @param clip - The element clipping path.
+        */
+        clip(clip: kendo.drawing.Path): void;
+        /**
+        Returns the bounding box of the element with clipping and transformations applied.
+Inherited from Element.clippedBBox
+        @method
+        @returns The bounding box of the element with clipping transformations applied.
+        */
+        clippedBBox(): kendo.geometry.Rect;
+        /**
+        Gets or sets the rectangle geometry.
+        @method
+        @returns The current rectangle geometry.
+        */
+        geometry(): kendo.geometry.Rect;
+        /**
+        Gets or sets the rectangle geometry.
+        @method
+        @param value - The new geometry to use.
+        */
+        geometry(value: kendo.geometry.Rect): void;
+        /**
+        Sets the shape fill.
+        @method
+        @param color - The fill color to set.
+        @param opacity - The fill opacity to set.
+        @returns The current instance to allow chaining.
+        */
+        fill(color: string, opacity?: number): kendo.drawing.Rect;
+        /**
+        Gets or sets the element opacity.
+Inherited from Element.opacityIf set, the stroke and fill opacity will be multiplied by the element opacity.
+        @method
+        @returns The current element opacity.
+        */
+        opacity(): number;
+        /**
+        Gets or sets the element opacity.
+Inherited from Element.opacityIf set, the stroke and fill opacity will be multiplied by the element opacity.
+        @method
+        @param opacity - The element opacity. Ranges from 0 (completely transparent) to 1 (completely opaque).
+        */
+        opacity(opacity: number): void;
+        /**
+        Sets the shape stroke.
+        @method
+        @param color - The stroke color to set.
+        @param width - The stroke width to set.
+        @param opacity - The stroke opacity to set.
+        @returns The current instance to allow chaining.
+        */
+        stroke(color: string, width?: number, opacity?: number): kendo.drawing.Rect;
+        /**
+        Gets or sets the transformation of the element.
+Inherited from Element.transform
+        @method
+        @returns The current transformation on the element.
+        */
+        transform(): kendo.geometry.Transformation;
+        /**
+        Gets or sets the transformation of the element.
+Inherited from Element.transform
+        @method
+        @param transform - The transformation to apply to the element.
+        */
+        transform(transform: kendo.geometry.Transformation): void;
+        /**
+        Gets or sets the visibility of the element.
+Inherited from Element.visible
+        @method
+        @returns true if the element is visible; false otherwise.
+        */
+        visible(): boolean;
+        /**
+        Gets or sets the visibility of the element.
+Inherited from Element.visible
+        @method
+        @param visible - A flag indicating if the element should be visible.
+        */
+        visible(visible: boolean): void;
+
+    }
+
+    interface RectOptions {
+        name?: string;
+        /**
+        The element clipping path.
+Inherited from Element.clip
+        @member {kendo.drawing.Path}
+        */
+        clip?: kendo.drawing.Path;
+        /**
+        The fill options of the shape.
+        @member {kendo.drawing.FillOptions}
+        */
+        fill?: kendo.drawing.FillOptions;
+        /**
+        The element opacity.
+Inherited from Element.opacity
+        @member {number}
+        */
+        opacity?: number;
+        /**
+        The stroke options of the shape.
+        @member {kendo.drawing.StrokeOptions}
+        */
+        stroke?: kendo.drawing.StrokeOptions;
+        /**
+        The transformation to apply to this element.
+Inherited from Element.transform
+        @member {kendo.geometry.Transformation}
+        */
+        transform?: kendo.geometry.Transformation;
+        /**
+        A flag, indicating if the element is visible.
+Inherited from Element.visible
+        @member {boolean}
+        */
+        visible?: boolean;
+    }
+    interface RectEvent {
+        sender: Rect;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+
     class Segment extends kendo.Class {
 
 
@@ -4260,6 +3620,815 @@ Inherited from Element.visible
 
 
 }
+declare module kendo.geometry {
+    class Arc extends Observable {
+
+
+        options: ArcOptions;
+
+        /**
+                A flag indicating if the arc should be drawn in clockwise or anticlockwise direction.
+Defaults to clockwise direction.
+                */
+                anticlockwise: boolean;
+        /**
+                The location of the arc center.
+                */
+                center: kendo.geometry.Point;
+        /**
+                The end angle of the arc in decimal degrees.
+Measured in clockwise direction with 0 pointing "right".
+Negative values or values greater than 360 will be normalized.
+                */
+                endAngle: number;
+        /**
+                The x radius of the arc.
+                */
+                radiusX: number;
+        /**
+                The y radius of the arc.
+                */
+                radiusY: number;
+        /**
+                The start angle of the arc in decimal degrees.
+Measured in clockwise direction with 0 pointing "right".
+Negative values or values greater than 360 will be normalized.
+                */
+                startAngle: number;
+
+
+
+        /**
+        Returns the bounding box of this arc after applying the specified transformation matrix.
+        @method
+        @param matrix - Transformation matrix to apply.
+        @returns The bounding box after applying the transformation matrix.
+        */
+        bbox(matrix: kendo.geometry.Matrix): kendo.geometry.Rect;
+        /**
+        Gets the arc anticlokwise flag.
+        @method
+        @returns The anticlokwise flag of the arc.
+        */
+        getAnticlockwise(): boolean;
+        /**
+        Gets the arc center location.
+        @method
+        @returns The location of the arc center.
+        */
+        getCenter(): kendo.geometry.Point;
+        /**
+        Gets the end angle of the arc in decimal degrees.
+Measured in clockwise direction with 0 pointing "right".
+        @method
+        @returns The end angle of the arc.
+        */
+        getEndAngle(): number;
+        /**
+        Gets the x radius of the arc.
+        @method
+        @returns The x radius of the arc.
+        */
+        getRadiusX(): number;
+        /**
+        Gets the y radius of the arc.
+        @method
+        @returns The y radius of the arc.
+        */
+        getRadiusY(): number;
+        /**
+        Gets the start angle of the arc in decimal degrees.
+Measured in clockwise direction with 0 pointing "right".
+        @method
+        @returns The start angle of the arc.
+        */
+        getStartAngle(): number;
+        /**
+        Gets the location of a point on the arc's circumference at a given angle.
+        @method
+        @param angle - Angle in decimal degrees. Measured in clockwise direction with 0 pointing "right".
+Negative values or values greater than 360 will be normalized.
+        @returns The point on the arc's circumference.
+        */
+        pointAt(angle: number): kendo.geometry.Point;
+        /**
+        Sets the arc anticlokwise flag.
+        @method
+        @param value - The new anticlockwise value.
+        @returns The current arc instance.
+        */
+        setAnticlockwise(value: boolean): kendo.geometry.Arc;
+        /**
+        Sets the arc center location.
+        @method
+        @param value - The new arc center.
+        @returns The current arc instance.
+        */
+        setCenter(value: kendo.geometry.Point): kendo.geometry.Arc;
+        /**
+        Sets the end angle of the arc in decimal degrees.
+Measured in clockwise direction with 0 pointing "right".
+        @method
+        @param value - The new arc end angle.
+        @returns The current arc instance.
+        */
+        setEndAngle(value: number): kendo.geometry.Arc;
+        /**
+        Sets the x radius of the arc.
+        @method
+        @param value - The new arc x radius.
+        @returns The current arc instance.
+        */
+        setRadiusX(value: number): kendo.geometry.Arc;
+        /**
+        Sets the y radius of the arc.
+        @method
+        @param value - The new arc y radius.
+        @returns The current arc instance.
+        */
+        setRadiusY(value: number): kendo.geometry.Arc;
+        /**
+        Sets the start angle of the arc in decimal degrees.
+Measured in clockwise direction with 0 pointing "right".
+        @method
+        @param value - The new arc atart angle.
+        @returns The current arc instance.
+        */
+        setStartAngle(value: number): kendo.geometry.Arc;
+
+    }
+
+    interface ArcOptions {
+        name?: string;
+    }
+    interface ArcEvent {
+        sender: Arc;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+
+    class Circle extends Observable {
+
+
+        options: CircleOptions;
+
+        /**
+                The location of the circle center.
+                */
+                center: kendo.geometry.Point;
+        /**
+                The radius of the circle.
+                */
+                radius: number;
+
+
+
+        /**
+        Returns the bounding box of this circle after applying the
+specified transformation matrix.
+        @method
+        @param matrix - Transformation matrix to apply.
+        @returns The bounding box after applying the transformation matrix.
+        */
+        bbox(matrix: kendo.geometry.Matrix): kendo.geometry.Rect;
+        /**
+        Creates a new instance with the same center and radius.
+        @method
+        @returns A new Circle instance with the same center and radius.
+        */
+        clone(): kendo.geometry.Circle;
+        /**
+        Compares this circle with another instance.
+        @method
+        @param other - The circle to compare with.
+        @returns true if the point coordinates match; false otherwise.
+        */
+        equals(other: kendo.geometry.Circle): boolean;
+        /**
+        Gets the circle center location.
+        @method
+        @returns The location of the circle center.
+        */
+        getCenter(): kendo.geometry.Point;
+        /**
+        Gets the circle radius.
+        @method
+        @returns The radius of the circle.
+        */
+        getRadius(): number;
+        /**
+        Gets the location of a point on the circle's circumference at a given angle.
+        @method
+        @param angle - Angle in decimal degrees. Measured in clockwise direction with 0 pointing "right".
+Negative values or values greater than 360 will be normalized.
+        @returns The point on the circle's circumference.
+        */
+        pointAt(angle: number): kendo.geometry.Point;
+        /**
+        Sets the location of the circle center.
+        @method
+        @param value - The new center Point or equivalent [x, y] array.
+        @returns The location of the circle center.
+        */
+        setCenter(value: kendo.geometry.Point): kendo.geometry.Point;
+        /**
+        Sets the location of the circle center.
+        @method
+        @param value - The new center Point or equivalent [x, y] array.
+        @returns The location of the circle center.
+        */
+        setCenter(value: any): kendo.geometry.Point;
+        /**
+        Sets the circle radius.
+        @method
+        @param value - The new circle radius.
+        @returns The current circle instance.
+        */
+        setRadius(value: number): kendo.geometry.Circle;
+
+    }
+
+    interface CircleOptions {
+        name?: string;
+    }
+    interface CircleEvent {
+        sender: Circle;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+
+    class Matrix extends Observable {
+
+
+        options: MatrixOptions;
+
+        /**
+                The a (1, 1) member of the matrix.
+                */
+                a: number;
+        /**
+                The b (2, 1) member of the matrix.
+                */
+                b: number;
+        /**
+                The a (1, 2) member of the matrix.
+                */
+                c: number;
+        /**
+                The d (2, 2) member of the matrix.
+                */
+                d: number;
+        /**
+                The e (1, 3) member of the matrix.
+                */
+                e: number;
+        /**
+                The f (2, 3) member of the matrix.
+                */
+                f: number;
+
+
+        static rotate(angle: number, x: number, y: number): kendo.geometry.Matrix;
+        static scale(scaleX: number, scaleY: number): kendo.geometry.Matrix;
+        static translate(x: number, y: number): kendo.geometry.Matrix;
+        static unit(): kendo.geometry.Matrix;
+
+        /**
+        Creates a new instance with the same element values.
+        @method
+        @returns A new Matrix instance with the same element values.
+        */
+        clone(): kendo.geometry.Matrix;
+        /**
+        Compares this matrix with another instance.
+        @method
+        @param other - The matrix instance to compare with.
+        @returns true if the matrix elements match; false otherwise.
+        */
+        equals(other: kendo.geometry.Matrix): boolean;
+        /**
+        Rounds the matrix elements to the specified number of fractional digits.
+        @method
+        @param digits - Number of fractional digits.
+        @returns The current matrix instance.
+        */
+        round(digits: number): kendo.geometry.Matrix;
+        /**
+        Multiplies the matrix with another one and returns the result as new instance.
+The current instance elements are not altered.
+        @method
+        @param matrix - The matrix to multiply by.
+        @returns The result of the multiplication.
+        */
+        multiplyCopy(matrix: kendo.geometry.Matrix): kendo.geometry.Matrix;
+        /**
+        Returns the matrix elements as an [a, b, c, d, e, f] array.
+        @method
+        @param digits - (Optional) Number of fractional digits.
+        @returns An array representation of the matrix.
+        */
+        toArray(digits: number): any;
+        /**
+        Formats the matrix elements as a string.
+        @method
+        @param digits - (Optional) Number of fractional digits.
+        @param separator - The separator to place between elements.
+        @returns A string representation of the matrix, e.g. "1, 0, 0, 1, 0, 0".
+        */
+        toString(digits: number, separator: string): string;
+
+    }
+
+    interface MatrixOptions {
+        name?: string;
+    }
+    interface MatrixEvent {
+        sender: Matrix;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+
+    class Point extends Observable {
+
+
+        options: PointOptions;
+
+        /**
+                The x coordinate of the point.
+                */
+                x: number;
+        /**
+                The y coordinate of the point.
+                */
+                y: number;
+
+
+        static create(x: number, y: number): kendo.geometry.Point;
+        static create(x: any, y: number): kendo.geometry.Point;
+        static create(x: kendo.geometry.Point, y: number): kendo.geometry.Point;
+        static min(): kendo.geometry.Point;
+        static max(): kendo.geometry.Point;
+        static minPoint(): kendo.geometry.Point;
+        static maxPoint(): kendo.geometry.Point;
+
+        /**
+        Creates a new instance with the same coordinates.
+        @method
+        @returns A new Point instance with the same coordinates.
+        */
+        clone(): kendo.geometry.Point;
+        /**
+        Calculates the distance to another point.
+        @method
+        @param point - The point to calculate the distance to.
+        @returns The straight line distance to the given point.
+        */
+        distanceTo(point: kendo.geometry.Point): number;
+        /**
+        Compares this point with another instance.
+        @method
+        @param other - The point to compare with.
+        @returns true if the point coordinates match; false otherwise.
+        */
+        equals(other: kendo.geometry.Point): boolean;
+        /**
+        Gets the x coordinate value.
+        @method
+        @returns The current x coordinate value.
+        */
+        getX(): number;
+        /**
+        Gets the y coordinate value.
+        @method
+        @returns The current y coordinate value.
+        */
+        getY(): number;
+        /**
+        Moves the point to the specified x and y coordinates.
+        @method
+        @param x - The new X coordinate.
+        @param y - The new Y coordinate.
+        @returns The current point instance.
+        */
+        move(x: number, y: number): kendo.geometry.Point;
+        /**
+        Rotates the point around the given center.
+        @method
+        @param angle - Angle in decimal degrees. Measured in clockwise direction with 0 pointing "right".
+Negative values or values greater than 360 will be normalized.
+        @param center - The rotation center. Can be a Point instance or an [x, y] array.
+        @returns The current Point instance.
+        */
+        rotate(angle: number, center: kendo.geometry.Point): kendo.geometry.Point;
+        /**
+        Rotates the point around the given center.
+        @method
+        @param angle - Angle in decimal degrees. Measured in clockwise direction with 0 pointing "right".
+Negative values or values greater than 360 will be normalized.
+        @param center - The rotation center. Can be a Point instance or an [x, y] array.
+        @returns The current Point instance.
+        */
+        rotate(angle: number, center: any): kendo.geometry.Point;
+        /**
+        Rounds the point coordinates to the specified number of fractional digits.
+        @method
+        @param digits - Number of fractional digits.
+        @returns The current Point instance.
+        */
+        round(digits: number): kendo.geometry.Point;
+        /**
+        Scales the point coordinates along the x and y axis.
+        @method
+        @param scaleX - The x scale multiplier.
+        @param scaleY - The y scale multiplier.
+        @returns The current point instance.
+        */
+        scale(scaleX: number, scaleY: number): kendo.geometry.Point;
+        /**
+        Scales the point coordinates on a copy of the current point.
+The callee coordinates will remain unchanged.
+        @method
+        @param scaleX - The x scale multiplier.
+        @param scaleY - The y scale multiplier.
+        @returns The new Point instance.
+        */
+        scaleCopy(scaleX: number, scaleY: number): kendo.geometry.Point;
+        /**
+        Sets the x coordinate to a new value.
+        @method
+        @param value - The new x coordinate value.
+        @returns The current Point instance.
+        */
+        setX(value: number): kendo.geometry.Point;
+        /**
+        Sets the y coordinate to a new value.
+        @method
+        @param value - The new y coordinate value.
+        @returns The current Point instance.
+        */
+        setY(value: number): kendo.geometry.Point;
+        /**
+        Returns the point coordinates as an [x, y] array.
+        @method
+        @param digits - (Optional) Number of fractional digits.
+        @returns An array representation of the point, e.g. [10, 20]
+        */
+        toArray(digits: number): any;
+        /**
+        Formats the point value to a string.
+        @method
+        @param digits - (Optional) Number of fractional digits.
+        @param separator - The separator to place between coordinates.
+        @returns A string representation of the point, e.g. "10 20".
+        */
+        toString(digits: number, separator: string): string;
+        /**
+        Applies a transformation to the point coordinates.
+The current coordinates will be overriden.
+        @method
+        @param tansformation - The transformation to apply.
+        @returns The current Point instance.
+        */
+        transform(tansformation: kendo.geometry.Transformation): kendo.geometry.Point;
+        /**
+        Applies a transformation on a copy of the current point.
+The callee coordinates will remain unchanged.
+        @method
+        @param tansformation - The transformation to apply.
+        @returns The new Point instance.
+        */
+        transformCopy(tansformation: kendo.geometry.Transformation): kendo.geometry.Point;
+        /**
+        Translates the point along the x and y axis.
+        @method
+        @param dx - The distance to move along the X axis.
+        @param dy - The distance to move along the Y axis.
+        @returns The current point instance.
+        */
+        translate(dx: number, dy: number): kendo.geometry.Point;
+        /**
+        Translates the point by using a Point instance as a vector of translation.
+        @method
+        @param vector - The vector of translation. Can be either a Point instance or an [x, y] array.
+        @returns The current point instance.
+        */
+        translateWith(vector: kendo.geometry.Point): kendo.geometry.Point;
+        /**
+        Translates the point by using a Point instance as a vector of translation.
+        @method
+        @param vector - The vector of translation. Can be either a Point instance or an [x, y] array.
+        @returns The current point instance.
+        */
+        translateWith(vector: any): kendo.geometry.Point;
+
+    }
+
+    interface PointOptions {
+        name?: string;
+    }
+    interface PointEvent {
+        sender: Point;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+
+    class Rect extends Observable {
+
+
+        options: RectOptions;
+
+        /**
+                The origin (top-left corner) of the rectangle.
+                */
+                origin: kendo.geometry.Point;
+        /**
+                The size of the rectangle.
+                */
+                size: kendo.geometry.Size;
+
+        constructor(origin: kendo.geometry.Point, size: kendo.geometry.Size);
+
+        static fromPoints(pointA: kendo.geometry.Point, pointB: kendo.geometry.Point): kendo.geometry.Rect;
+        static union(rectA: kendo.geometry.Rect, rectB: kendo.geometry.Rect): kendo.geometry.Rect;
+
+        /**
+        Returns the bounding box of this rectangle after applying the
+specified transformation matrix.
+        @method
+        @param matrix - Transformation matrix to apply.
+        @returns The bounding box after applying the transformation matrix.
+        */
+        bbox(matrix: kendo.geometry.Matrix): kendo.geometry.Rect;
+        /**
+        Gets the position of the bottom-left corner of the rectangle.
+This is also the rectangle origin
+        @method
+        @returns The position of the bottom-left corner.
+        */
+        bottomLeft(): kendo.geometry.Point;
+        /**
+        Gets the position of the bottom-right corner of the rectangle.
+        @method
+        @returns The position of the bottom-right corner.
+        */
+        bottomRight(): kendo.geometry.Point;
+        /**
+        Gets the position of the center of the rectangle.
+        @method
+        @returns The position of the center.
+        */
+        center(): kendo.geometry.Point;
+        /**
+        Creates a new instance with the same origin and size.
+        @method
+        @returns A new Rect instance with the same origin and size.
+        */
+        clone(): kendo.geometry.Rect;
+        /**
+        Compares this rectangle with another instance.
+        @method
+        @param other - The rectangle to compare with.
+        @returns true if the origin and size is the same for both rectangles; false otherwise.
+        */
+        equals(other: kendo.geometry.Rect): boolean;
+        /**
+        Gets the origin (top-left point) of the rectangle.
+        @method
+        @returns The origin (top-left point).
+        */
+        getOrigin(): kendo.geometry.Point;
+        /**
+        Gets the rectangle size.
+        @method
+        @returns The current rectangle Size.
+        */
+        getSize(): kendo.geometry.Size;
+        /**
+        Gets the rectangle height.
+        @method
+        @returns The rectangle height.
+        */
+        height(): number;
+        /**
+        Sets the origin (top-left point) of the rectangle.
+        @method
+        @param value - The new origin Point or equivalent [x, y] array.
+        @returns The current rectangle instance.
+        */
+        setOrigin(value: kendo.geometry.Point): kendo.geometry.Rect;
+        /**
+        Sets the origin (top-left point) of the rectangle.
+        @method
+        @param value - The new origin Point or equivalent [x, y] array.
+        @returns The current rectangle instance.
+        */
+        setOrigin(value: any): kendo.geometry.Rect;
+        /**
+        Sets the rectangle size.
+        @method
+        @param value - The new rectangle Size or equivalent [width, height] array.
+        @returns The current rectangle instance.
+        */
+        setSize(value: kendo.geometry.Size): kendo.geometry.Rect;
+        /**
+        Sets the rectangle size.
+        @method
+        @param value - The new rectangle Size or equivalent [width, height] array.
+        @returns The current rectangle instance.
+        */
+        setSize(value: any): kendo.geometry.Rect;
+        /**
+        Gets the position of the top-left corner of the rectangle.
+This is also the rectangle origin
+        @method
+        @returns The position of the top-left corner.
+        */
+        topLeft(): kendo.geometry.Point;
+        /**
+        Gets the position of the top-right corner of the rectangle.
+        @method
+        @returns The position of the top-right corner.
+        */
+        topRight(): kendo.geometry.Point;
+        /**
+        Gets the rectangle width.
+        @method
+        @returns The rectangle width.
+        */
+        width(): number;
+
+    }
+
+    interface RectOptions {
+        name?: string;
+    }
+    interface RectEvent {
+        sender: Rect;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+
+    class Size extends Observable {
+
+
+        options: SizeOptions;
+
+        /**
+                The horizontal size.
+                */
+                width: number;
+        /**
+                The vertical size.
+                */
+                height: number;
+
+
+        static create(width: number, height: number): kendo.geometry.Size;
+        static create(width: any, height: number): kendo.geometry.Size;
+        static create(width: kendo.geometry.Size, height: number): kendo.geometry.Size;
+
+        /**
+        Creates a new instance with the same width and height.
+        @method
+        @returns A new Size instance with the same coordinates.
+        */
+        clone(): kendo.geometry.Size;
+        /**
+        Compares this Size with another instance.
+        @method
+        @param other - The Size to compare with.
+        @returns true if the size members match; false otherwise.
+        */
+        equals(other: kendo.geometry.Size): boolean;
+        /**
+        Gets the width value.
+        @method
+        @returns The current width value.
+        */
+        getWidth(): number;
+        /**
+        Gets the height value.
+        @method
+        @returns The current height value.
+        */
+        getHeight(): number;
+        /**
+        Sets the width to a new value.
+        @method
+        @param value - The new width value.
+        @returns The current Size instance.
+        */
+        setWidth(value: number): kendo.geometry.Size;
+        /**
+        Sets the height to a new value.
+        @method
+        @param value - The new height value.
+        @returns The current Size instance.
+        */
+        setHeight(value: number): kendo.geometry.Size;
+
+    }
+
+    interface SizeOptions {
+        name?: string;
+    }
+    interface SizeEvent {
+        sender: Size;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+
+    class Transformation extends Observable {
+
+
+        options: TransformationOptions;
+
+
+
+
+        /**
+        Creates a new instance with the same transformation matrix.
+        @method
+        @returns A new Transformation instance with the same matrix.
+        */
+        clone(): kendo.geometry.Transformation;
+        /**
+        Compares this transformation with another instance.
+        @method
+        @param other - The transformation to compare with.
+        @returns true if the transformation matrix is the same; false otherwise.
+        */
+        equals(other: kendo.geometry.Transformation): boolean;
+        /**
+        Gets the current transformation matrix for this transformation.
+        @method
+        @returns The current transformation matrix.
+        */
+        matrix(): kendo.geometry.Matrix;
+        /**
+        Multiplies the transformation with another.
+The underlying transformation matrix is updated in-place.
+        @method
+        @param transformation - The transformation to multiply by.
+        @returns The current transformation instance.
+        */
+        multiply(transformation: kendo.geometry.Transformation): kendo.geometry.Transformation;
+        /**
+        Sets rotation with the specified parameters.
+        @method
+        @param angle - The angle of rotation in decimal degrees.
+Measured in clockwise direction with 0 pointing "right".
+Negative values or values greater than 360 will be normalized.
+        @param center - The center of rotation.
+        @returns The current transformation instance.
+        */
+        rotate(angle: number, center: any): kendo.geometry.Transformation;
+        /**
+        Sets rotation with the specified parameters.
+        @method
+        @param angle - The angle of rotation in decimal degrees.
+Measured in clockwise direction with 0 pointing "right".
+Negative values or values greater than 360 will be normalized.
+        @param center - The center of rotation.
+        @returns The current transformation instance.
+        */
+        rotate(angle: number, center: kendo.geometry.Point): kendo.geometry.Transformation;
+        /**
+        Sets scale with the specified parameters.
+        @method
+        @param scaleX - The scale factor on the X axis.
+        @param scaleY - The scale factor on the Y axis.
+        @returns The current transformation instance.
+        */
+        scale(scaleX: number, scaleY: number): kendo.geometry.Transformation;
+        /**
+        Sets translation with the specified parameters.
+        @method
+        @param x - The distance to translate along the X axis.
+        @param y - The distance to translate along the Y axis.
+        @returns The current transformation instance.
+        */
+        translate(x: number, y: number): kendo.geometry.Transformation;
+
+    }
+
+    interface TransformationOptions {
+        name?: string;
+    }
+    interface TransformationEvent {
+        sender: Transformation;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+
+}
 declare module kendo {
     class Color extends Observable {
 
@@ -4281,6 +4450,53 @@ declare module kendo {
         @returns returns true if the two colors are the same. Otherwise, false
         */
         equals(): boolean;
+        /**
+        Returns the color in HSV representation.  As HSV object, it has the
+following properties:This does not modify the current object, it creates a new one instead.
+        @method
+        @returns An object with h, s, v and a fields.
+        */
+        toHSV(): any;
+        /**
+        Returns the color in RGB representation.  The result has the following
+properties:This does not modify the current object, it creates a new one instead.
+        @method
+        @returns An object with r, g, b and a fields.
+        */
+        toRGB(): any;
+        /**
+        Returns the color in "Bytes" representation.  It has the same properties as
+RGB, but r, g and b are integers between 0 and 255 instead of floats.This does not modify the current object, it creates a new one instead.
+        @method
+        @returns An object with r, g and b fields.
+        */
+        toBytes(): any;
+        /**
+        Returns a string in "FF0000" form (without a leading #).
+        @method
+        @returns The color in hex notation.
+        */
+        toHex(): string;
+        /**
+        Like toHex, but includes a leading #.
+        @method
+        @returns The color in CSS notation.
+        */
+        toCss(): string;
+        /**
+        Returns the color in RGBA notation (includes the opacity).
+        @method
+        @returns The color in RGBA notation.
+        */
+        toCssRgba(): string;
+        /**
+        Returns the color in the best notation supported by the current browser.  In
+IE < 9 this returns the #FF0000 form; in all other browsers it returns the
+RGBA form.
+        @method
+        @returns The color in the best notation supported by the current browser.
+        */
+        toDisplay(): string;
 
     }
 
@@ -7175,6 +7391,12 @@ declare module kendo.ooxml {
         */
         autoWidth?: boolean;
         /**
+        The zero-based index of the column in the sheet.
+Defaults to the index of the object in the array.
+        @member {number}
+        */
+        index?: number;
+        /**
         The width of the column in pixels.
         @member {number}
         */
@@ -7196,12 +7418,14 @@ declare module kendo.ooxml {
 
     interface WorkbookSheetFreezePane {
         /**
-        Number of columns to freeze from the left.
+        Deprecated in versions 2015.3 and newer. Use
+frozenColumns instead.
         @member {number}
         */
         colSplit?: number;
         /**
-        Number of rows to freeze from the top.
+        Deprecated in versions 2015.3 and newer. Use
+frozenRows instead.
         @member {number}
         */
         rowSplit?: number;
@@ -7232,6 +7456,11 @@ declare module kendo.ooxml {
         Sets the font used to display the cell value.
         @member {string}
         */
+        fontFamily?: string;
+        /**
+        Deprecated in versions 2015.3 and newer. Use fontFamily instead.
+        @member {string}
+        */
         fontName?: string;
         /**
         Sets the font size in pixels.
@@ -7244,10 +7473,15 @@ declare module kendo.ooxml {
         */
         format?: string;
         /**
-        Sets the horizontal alignment of the cell value. Supported values are "left", "center" and "right".
+        Deprecated in versions 2015.3 and newer. Use textAlign instead.
         @member {string}
         */
         hAlign?: string;
+        /**
+        The zero-based index of the cell in the row.
+        @member {any}
+        */
+        index?: any;
         /**
         Setting it to true italicizes the cell value.
         @member {boolean}
@@ -7259,6 +7493,11 @@ declare module kendo.ooxml {
         */
         rowSpan?: number;
         /**
+        Sets the horizontal alignment of the cell value. Supported values are "left", "center" and "right".
+        @member {string}
+        */
+        textAlign?: string;
+        /**
         Setting it to true underlines the cell value.
         @member {boolean}
         */
@@ -7269,10 +7508,15 @@ declare module kendo.ooxml {
         */
         wrap?: boolean;
         /**
-        Sets the vertical alignment of the cell value. Supported values are "top", "center" and "bottom".
+        Deprecated in versions 2015.3 and newer. Use verticalAlign instead.
         @member {string}
         */
         vAlign?: string;
+        /**
+        Sets the vertical alignment of the cell value. Supported values are "top", "center" and "bottom".
+        @member {string}
+        */
+        verticalAlign?: string;
         /**
         The value of the cell. Numbers and dates will be formatted as strings. String values are HTML encoded.
         @member {any}
@@ -7282,23 +7526,51 @@ declare module kendo.ooxml {
 
     interface WorkbookSheetRow {
         cells?: WorkbookSheetRowCell[];
+        /**
+        The zero-based index of the row in the sheet.
+Defaults to the index of the object in the array.
+        @member {number}
+        */
+        index?: number;
+        /**
+        The row height in pixels.
+        @member {number}
+        */
+        height?: number;
     }
 
     interface WorkbookSheet {
         columns?: WorkbookSheetColumn[];
         /**
-        Frozen rows and columns configuration.
+        Deprecated in versions 2015.3 and newer. Use
+frozenColumns and
+frozenRows instead.
         @member {WorkbookSheetFreezePane}
         */
         freezePane?: WorkbookSheetFreezePane;
+        /**
+        The number of frozen columns in this sheet.
+        @member {number}
+        */
+        frozenColumns?: number;
+        /**
+        The number of frozen rows in this sheet.
+        @member {number}
+        */
+        frozenRows?: number;
         /**
         Excel auto filter configuration. When set the final document will have auto filtering enabled.
         @member {WorkbookSheetFilter}
         */
         filter?: WorkbookSheetFilter;
+        /**
+        Sets the name of the exported workbook sheet.
+        @member {string}
+        */
+        name?: string;
         rows?: WorkbookSheetRow[];
         /**
-        Sets the title of the exported workbook sheet.
+        Deprecated in versions 2015.3 and newer. Use name instead.
         @member {string}
         */
         title?: string;
@@ -7327,815 +7599,6 @@ declare module kendo.ooxml {
 
 }
 
-declare module kendo.dataviz.geometry {
-    class Arc extends Observable {
-
-
-        options: ArcOptions;
-
-        /**
-                A flag indicating if the arc should be drawn in clockwise or anticlockwise direction.
-Defaults to clockwise direction.
-                */
-                anticlockwise: boolean;
-        /**
-                The location of the arc center.
-                */
-                center: kendo.geometry.Point;
-        /**
-                The end angle of the arc in decimal degrees.
-Measured in clockwise direction with 0 pointing "right".
-Negative values or values greater than 360 will be normalized.
-                */
-                endAngle: number;
-        /**
-                The x radius of the arc.
-                */
-                radiusX: number;
-        /**
-                The y radius of the arc.
-                */
-                radiusY: number;
-        /**
-                The start angle of the arc in decimal degrees.
-Measured in clockwise direction with 0 pointing "right".
-Negative values or values greater than 360 will be normalized.
-                */
-                startAngle: number;
-
-
-
-        /**
-        Returns the bounding box of this arc after applying the specified transformation matrix.
-        @method
-        @param matrix - Transformation matrix to apply.
-        @returns The bounding box after applying the transformation matrix.
-        */
-        bbox(matrix: kendo.geometry.Matrix): kendo.geometry.Rect;
-        /**
-        Gets the arc anticlokwise flag.
-        @method
-        @returns The anticlokwise flag of the arc.
-        */
-        getAnticlockwise(): boolean;
-        /**
-        Gets the arc center location.
-        @method
-        @returns The location of the arc center.
-        */
-        getCenter(): kendo.geometry.Point;
-        /**
-        Gets the end angle of the arc in decimal degrees.
-Measured in clockwise direction with 0 pointing "right".
-        @method
-        @returns The end angle of the arc.
-        */
-        getEndAngle(): number;
-        /**
-        Gets the x radius of the arc.
-        @method
-        @returns The x radius of the arc.
-        */
-        getRadiusX(): number;
-        /**
-        Gets the y radius of the arc.
-        @method
-        @returns The y radius of the arc.
-        */
-        getRadiusY(): number;
-        /**
-        Gets the start angle of the arc in decimal degrees.
-Measured in clockwise direction with 0 pointing "right".
-        @method
-        @returns The start angle of the arc.
-        */
-        getStartAngle(): number;
-        /**
-        Gets the location of a point on the arc's circumference at a given angle.
-        @method
-        @param angle - Angle in decimal degrees. Measured in clockwise direction with 0 pointing "right".
-Negative values or values greater than 360 will be normalized.
-        @returns The point on the arc's circumference.
-        */
-        pointAt(angle: number): kendo.geometry.Point;
-        /**
-        Sets the arc anticlokwise flag.
-        @method
-        @param value - The new anticlockwise value.
-        @returns The current arc instance.
-        */
-        setAnticlockwise(value: boolean): kendo.geometry.Arc;
-        /**
-        Sets the arc center location.
-        @method
-        @param value - The new arc center.
-        @returns The current arc instance.
-        */
-        setCenter(value: kendo.geometry.Point): kendo.geometry.Arc;
-        /**
-        Sets the end angle of the arc in decimal degrees.
-Measured in clockwise direction with 0 pointing "right".
-        @method
-        @param value - The new arc end angle.
-        @returns The current arc instance.
-        */
-        setEndAngle(value: number): kendo.geometry.Arc;
-        /**
-        Sets the x radius of the arc.
-        @method
-        @param value - The new arc x radius.
-        @returns The current arc instance.
-        */
-        setRadiusX(value: number): kendo.geometry.Arc;
-        /**
-        Sets the y radius of the arc.
-        @method
-        @param value - The new arc y radius.
-        @returns The current arc instance.
-        */
-        setRadiusY(value: number): kendo.geometry.Arc;
-        /**
-        Sets the start angle of the arc in decimal degrees.
-Measured in clockwise direction with 0 pointing "right".
-        @method
-        @param value - The new arc atart angle.
-        @returns The current arc instance.
-        */
-        setStartAngle(value: number): kendo.geometry.Arc;
-
-    }
-
-    interface ArcOptions {
-        name?: string;
-    }
-    interface ArcEvent {
-        sender: Arc;
-        preventDefault: Function;
-        isDefaultPrevented(): boolean;
-    }
-
-
-    class Circle extends Observable {
-
-
-        options: CircleOptions;
-
-        /**
-                The location of the circle center.
-                */
-                center: kendo.geometry.Point;
-        /**
-                The radius of the circle.
-                */
-                radius: number;
-
-
-
-        /**
-        Returns the bounding box of this circle after applying the
-specified transformation matrix.
-        @method
-        @param matrix - Transformation matrix to apply.
-        @returns The bounding box after applying the transformation matrix.
-        */
-        bbox(matrix: kendo.geometry.Matrix): kendo.geometry.Rect;
-        /**
-        Creates a new instance with the same center and radius.
-        @method
-        @returns A new Circle instance with the same center and radius.
-        */
-        clone(): kendo.geometry.Circle;
-        /**
-        Compares this circle with another instance.
-        @method
-        @param other - The circle to compare with.
-        @returns true if the point coordinates match; false otherwise.
-        */
-        equals(other: kendo.geometry.Circle): boolean;
-        /**
-        Gets the circle center location.
-        @method
-        @returns The location of the circle center.
-        */
-        getCenter(): kendo.geometry.Point;
-        /**
-        Gets the circle radius.
-        @method
-        @returns The radius of the circle.
-        */
-        getRadius(): number;
-        /**
-        Gets the location of a point on the circle's circumference at a given angle.
-        @method
-        @param angle - Angle in decimal degrees. Measured in clockwise direction with 0 pointing "right".
-Negative values or values greater than 360 will be normalized.
-        @returns The point on the circle's circumference.
-        */
-        pointAt(angle: number): kendo.geometry.Point;
-        /**
-        Sets the location of the circle center.
-        @method
-        @param value - The new center Point or equivalent [x, y] array.
-        @returns The location of the circle center.
-        */
-        setCenter(value: kendo.geometry.Point): kendo.geometry.Point;
-        /**
-        Sets the location of the circle center.
-        @method
-        @param value - The new center Point or equivalent [x, y] array.
-        @returns The location of the circle center.
-        */
-        setCenter(value: any): kendo.geometry.Point;
-        /**
-        Sets the circle radius.
-        @method
-        @param value - The new circle radius.
-        @returns The current circle instance.
-        */
-        setRadius(value: number): kendo.geometry.Circle;
-
-    }
-
-    interface CircleOptions {
-        name?: string;
-    }
-    interface CircleEvent {
-        sender: Circle;
-        preventDefault: Function;
-        isDefaultPrevented(): boolean;
-    }
-
-
-    class Matrix extends Observable {
-
-
-        options: MatrixOptions;
-
-        /**
-                The a (1, 1) member of the matrix.
-                */
-                a: number;
-        /**
-                The b (2, 1) member of the matrix.
-                */
-                b: number;
-        /**
-                The a (1, 2) member of the matrix.
-                */
-                c: number;
-        /**
-                The d (2, 2) member of the matrix.
-                */
-                d: number;
-        /**
-                The e (1, 3) member of the matrix.
-                */
-                e: number;
-        /**
-                The f (2, 3) member of the matrix.
-                */
-                f: number;
-
-
-        static rotate(angle: number, x: number, y: number): kendo.geometry.Matrix;
-        static scale(scaleX: number, scaleY: number): kendo.geometry.Matrix;
-        static translate(x: number, y: number): kendo.geometry.Matrix;
-        static unit(): kendo.geometry.Matrix;
-
-        /**
-        Creates a new instance with the same element values.
-        @method
-        @returns A new Matrix instance with the same element values.
-        */
-        clone(): kendo.geometry.Matrix;
-        /**
-        Compares this matrix with another instance.
-        @method
-        @param other - The matrix instance to compare with.
-        @returns true if the matrix elements match; false otherwise.
-        */
-        equals(other: kendo.geometry.Matrix): boolean;
-        /**
-        Rounds the matrix elements to the specified number of fractional digits.
-        @method
-        @param digits - Number of fractional digits.
-        @returns The current matrix instance.
-        */
-        round(digits: number): kendo.geometry.Matrix;
-        /**
-        Multiplies the matrix with another one and returns the result as new instance.
-The current instance elements are not altered.
-        @method
-        @param matrix - The matrix to multiply by.
-        @returns The result of the multiplication.
-        */
-        multiplyCopy(matrix: kendo.geometry.Matrix): kendo.geometry.Matrix;
-        /**
-        Returns the matrix elements as an [a, b, c, d, e, f] array.
-        @method
-        @param digits - (Optional) Number of fractional digits.
-        @returns An array representation of the matrix.
-        */
-        toArray(digits: number): any;
-        /**
-        Formats the matrix elements as a string.
-        @method
-        @param digits - (Optional) Number of fractional digits.
-        @param separator - The separator to place between elements.
-        @returns A string representation of the matrix, e.g. "1, 0, 0, 1, 0, 0".
-        */
-        toString(digits: number, separator: string): string;
-
-    }
-
-    interface MatrixOptions {
-        name?: string;
-    }
-    interface MatrixEvent {
-        sender: Matrix;
-        preventDefault: Function;
-        isDefaultPrevented(): boolean;
-    }
-
-
-    class Point extends Observable {
-
-
-        options: PointOptions;
-
-        /**
-                The x coordinate of the point.
-                */
-                x: number;
-        /**
-                The y coordinate of the point.
-                */
-                y: number;
-
-
-        static create(x: number, y: number): kendo.geometry.Point;
-        static create(x: any, y: number): kendo.geometry.Point;
-        static create(x: kendo.geometry.Point, y: number): kendo.geometry.Point;
-        static min(): kendo.geometry.Point;
-        static max(): kendo.geometry.Point;
-        static minPoint(): kendo.geometry.Point;
-        static maxPoint(): kendo.geometry.Point;
-
-        /**
-        Creates a new instance with the same coordinates.
-        @method
-        @returns A new Point instance with the same coordinates.
-        */
-        clone(): kendo.geometry.Point;
-        /**
-        Calculates the distance to another point.
-        @method
-        @param point - The point to calculate the distance to.
-        @returns The straight line distance to the given point.
-        */
-        distanceTo(point: kendo.geometry.Point): number;
-        /**
-        Compares this point with another instance.
-        @method
-        @param other - The point to compare with.
-        @returns true if the point coordinates match; false otherwise.
-        */
-        equals(other: kendo.geometry.Point): boolean;
-        /**
-        Gets the x coordinate value.
-        @method
-        @returns The current x coordinate value.
-        */
-        getX(): number;
-        /**
-        Gets the y coordinate value.
-        @method
-        @returns The current y coordinate value.
-        */
-        getY(): number;
-        /**
-        Moves the point to the specified x and y coordinates.
-        @method
-        @param x - The new X coordinate.
-        @param y - The new Y coordinate.
-        @returns The current point instance.
-        */
-        move(x: number, y: number): kendo.geometry.Point;
-        /**
-        Rotates the point around the given center.
-        @method
-        @param angle - Angle in decimal degrees. Measured in clockwise direction with 0 pointing "right".
-Negative values or values greater than 360 will be normalized.
-        @param center - The rotation center. Can be a Point instance or an [x, y] array.
-        @returns The current Point instance.
-        */
-        rotate(angle: number, center: kendo.geometry.Point): kendo.geometry.Point;
-        /**
-        Rotates the point around the given center.
-        @method
-        @param angle - Angle in decimal degrees. Measured in clockwise direction with 0 pointing "right".
-Negative values or values greater than 360 will be normalized.
-        @param center - The rotation center. Can be a Point instance or an [x, y] array.
-        @returns The current Point instance.
-        */
-        rotate(angle: number, center: any): kendo.geometry.Point;
-        /**
-        Rounds the point coordinates to the specified number of fractional digits.
-        @method
-        @param digits - Number of fractional digits.
-        @returns The current Point instance.
-        */
-        round(digits: number): kendo.geometry.Point;
-        /**
-        Scales the point coordinates along the x and y axis.
-        @method
-        @param scaleX - The x scale multiplier.
-        @param scaleY - The y scale multiplier.
-        @returns The current point instance.
-        */
-        scale(scaleX: number, scaleY: number): kendo.geometry.Point;
-        /**
-        Scales the point coordinates on a copy of the current point.
-The callee coordinates will remain unchanged.
-        @method
-        @param scaleX - The x scale multiplier.
-        @param scaleY - The y scale multiplier.
-        @returns The new Point instance.
-        */
-        scaleCopy(scaleX: number, scaleY: number): kendo.geometry.Point;
-        /**
-        Sets the x coordinate to a new value.
-        @method
-        @param value - The new x coordinate value.
-        @returns The current Point instance.
-        */
-        setX(value: number): kendo.geometry.Point;
-        /**
-        Sets the y coordinate to a new value.
-        @method
-        @param value - The new y coordinate value.
-        @returns The current Point instance.
-        */
-        setY(value: number): kendo.geometry.Point;
-        /**
-        Returns the point coordinates as an [x, y] array.
-        @method
-        @param digits - (Optional) Number of fractional digits.
-        @returns An array representation of the point, e.g. [10, 20]
-        */
-        toArray(digits: number): any;
-        /**
-        Formats the point value to a string.
-        @method
-        @param digits - (Optional) Number of fractional digits.
-        @param separator - The separator to place between coordinates.
-        @returns A string representation of the point, e.g. "10 20".
-        */
-        toString(digits: number, separator: string): string;
-        /**
-        Applies a transformation to the point coordinates.
-The current coordinates will be overriden.
-        @method
-        @param tansformation - The transformation to apply.
-        @returns The current Point instance.
-        */
-        transform(tansformation: kendo.geometry.Transformation): kendo.geometry.Point;
-        /**
-        Applies a transformation on a copy of the current point.
-The callee coordinates will remain unchanged.
-        @method
-        @param tansformation - The transformation to apply.
-        @returns The new Point instance.
-        */
-        transformCopy(tansformation: kendo.geometry.Transformation): kendo.geometry.Point;
-        /**
-        Translates the point along the x and y axis.
-        @method
-        @param dx - The distance to move along the X axis.
-        @param dy - The distance to move along the Y axis.
-        @returns The current point instance.
-        */
-        translate(dx: number, dy: number): kendo.geometry.Point;
-        /**
-        Translates the point by using a Point instance as a vector of translation.
-        @method
-        @param vector - The vector of translation. Can be either a Point instance or an [x, y] array.
-        @returns The current point instance.
-        */
-        translateWith(vector: kendo.geometry.Point): kendo.geometry.Point;
-        /**
-        Translates the point by using a Point instance as a vector of translation.
-        @method
-        @param vector - The vector of translation. Can be either a Point instance or an [x, y] array.
-        @returns The current point instance.
-        */
-        translateWith(vector: any): kendo.geometry.Point;
-
-    }
-
-    interface PointOptions {
-        name?: string;
-    }
-    interface PointEvent {
-        sender: Point;
-        preventDefault: Function;
-        isDefaultPrevented(): boolean;
-    }
-
-
-    class Rect extends Observable {
-
-
-        options: RectOptions;
-
-        /**
-                The origin (top-left corner) of the rectangle.
-                */
-                origin: kendo.geometry.Point;
-        /**
-                The size of the rectangle.
-                */
-                size: kendo.geometry.Size;
-
-        constructor(origin: kendo.geometry.Point, size: kendo.geometry.Size);
-
-        static fromPoints(pointA: kendo.geometry.Point, pointB: kendo.geometry.Point): kendo.geometry.Rect;
-        static union(rectA: kendo.geometry.Rect, rectB: kendo.geometry.Rect): kendo.geometry.Rect;
-
-        /**
-        Returns the bounding box of this rectangle after applying the
-specified transformation matrix.
-        @method
-        @param matrix - Transformation matrix to apply.
-        @returns The bounding box after applying the transformation matrix.
-        */
-        bbox(matrix: kendo.geometry.Matrix): kendo.geometry.Rect;
-        /**
-        Gets the position of the bottom-left corner of the rectangle.
-This is also the rectangle origin
-        @method
-        @returns The position of the bottom-left corner.
-        */
-        bottomLeft(): kendo.geometry.Point;
-        /**
-        Gets the position of the bottom-right corner of the rectangle.
-        @method
-        @returns The position of the bottom-right corner.
-        */
-        bottomRight(): kendo.geometry.Point;
-        /**
-        Gets the position of the center of the rectangle.
-        @method
-        @returns The position of the center.
-        */
-        center(): kendo.geometry.Point;
-        /**
-        Creates a new instance with the same origin and size.
-        @method
-        @returns A new Rect instance with the same origin and size.
-        */
-        clone(): kendo.geometry.Rect;
-        /**
-        Compares this rectangle with another instance.
-        @method
-        @param other - The rectangle to compare with.
-        @returns true if the origin and size is the same for both rectangles; false otherwise.
-        */
-        equals(other: kendo.geometry.Rect): boolean;
-        /**
-        Gets the origin (top-left point) of the rectangle.
-        @method
-        @returns The origin (top-left point).
-        */
-        getOrigin(): kendo.geometry.Point;
-        /**
-        Gets the rectangle size.
-        @method
-        @returns The current rectangle Size.
-        */
-        getSize(): kendo.geometry.Size;
-        /**
-        Gets the rectangle height.
-        @method
-        @returns The rectangle height.
-        */
-        height(): number;
-        /**
-        Sets the origin (top-left point) of the rectangle.
-        @method
-        @param value - The new origin Point or equivalent [x, y] array.
-        @returns The current rectangle instance.
-        */
-        setOrigin(value: kendo.geometry.Point): kendo.geometry.Rect;
-        /**
-        Sets the origin (top-left point) of the rectangle.
-        @method
-        @param value - The new origin Point or equivalent [x, y] array.
-        @returns The current rectangle instance.
-        */
-        setOrigin(value: any): kendo.geometry.Rect;
-        /**
-        Sets the rectangle size.
-        @method
-        @param value - The new rectangle Size or equivalent [width, height] array.
-        @returns The current rectangle instance.
-        */
-        setSize(value: kendo.geometry.Size): kendo.geometry.Rect;
-        /**
-        Sets the rectangle size.
-        @method
-        @param value - The new rectangle Size or equivalent [width, height] array.
-        @returns The current rectangle instance.
-        */
-        setSize(value: any): kendo.geometry.Rect;
-        /**
-        Gets the position of the top-left corner of the rectangle.
-This is also the rectangle origin
-        @method
-        @returns The position of the top-left corner.
-        */
-        topLeft(): kendo.geometry.Point;
-        /**
-        Gets the position of the top-right corner of the rectangle.
-        @method
-        @returns The position of the top-right corner.
-        */
-        topRight(): kendo.geometry.Point;
-        /**
-        Gets the rectangle width.
-        @method
-        @returns The rectangle width.
-        */
-        width(): number;
-
-    }
-
-    interface RectOptions {
-        name?: string;
-    }
-    interface RectEvent {
-        sender: Rect;
-        preventDefault: Function;
-        isDefaultPrevented(): boolean;
-    }
-
-
-    class Size extends Observable {
-
-
-        options: SizeOptions;
-
-        /**
-                The horizontal size.
-                */
-                width: number;
-        /**
-                The vertical size.
-                */
-                height: number;
-
-
-        static create(width: number, height: number): kendo.geometry.Size;
-        static create(width: any, height: number): kendo.geometry.Size;
-        static create(width: kendo.geometry.Size, height: number): kendo.geometry.Size;
-
-        /**
-        Creates a new instance with the same width and height.
-        @method
-        @returns A new Size instance with the same coordinates.
-        */
-        clone(): kendo.geometry.Size;
-        /**
-        Compares this Size with another instance.
-        @method
-        @param other - The Size to compare with.
-        @returns true if the size members match; false otherwise.
-        */
-        equals(other: kendo.geometry.Size): boolean;
-        /**
-        Gets the width value.
-        @method
-        @returns The current width value.
-        */
-        getWidth(): number;
-        /**
-        Gets the height value.
-        @method
-        @returns The current height value.
-        */
-        getHeight(): number;
-        /**
-        Sets the width to a new value.
-        @method
-        @param value - The new width value.
-        @returns The current Size instance.
-        */
-        setWidth(value: number): kendo.geometry.Size;
-        /**
-        Sets the height to a new value.
-        @method
-        @param value - The new height value.
-        @returns The current Size instance.
-        */
-        setHeight(value: number): kendo.geometry.Size;
-
-    }
-
-    interface SizeOptions {
-        name?: string;
-    }
-    interface SizeEvent {
-        sender: Size;
-        preventDefault: Function;
-        isDefaultPrevented(): boolean;
-    }
-
-
-    class Transformation extends Observable {
-
-
-        options: TransformationOptions;
-
-
-
-
-        /**
-        Creates a new instance with the same transformation matrix.
-        @method
-        @returns A new Transformation instance with the same matrix.
-        */
-        clone(): kendo.geometry.Transformation;
-        /**
-        Compares this transformation with another instance.
-        @method
-        @param other - The transformation to compare with.
-        @returns true if the transformation matrix is the same; false otherwise.
-        */
-        equals(other: kendo.geometry.Transformation): boolean;
-        /**
-        Gets the current transformation matrix for this transformation.
-        @method
-        @returns The current transformation matrix.
-        */
-        matrix(): kendo.geometry.Matrix;
-        /**
-        Multiplies the transformation with another.
-The underlying transformation matrix is updated in-place.
-        @method
-        @param transformation - The transformation to multiply by.
-        @returns The current transformation instance.
-        */
-        multiply(transformation: kendo.geometry.Transformation): kendo.geometry.Transformation;
-        /**
-        Sets rotation with the specified parameters.
-        @method
-        @param angle - The angle of rotation in decimal degrees.
-Measured in clockwise direction with 0 pointing "right".
-Negative values or values greater than 360 will be normalized.
-        @param center - The center of rotation.
-        @returns The current transformation instance.
-        */
-        rotate(angle: number, center: any): kendo.geometry.Transformation;
-        /**
-        Sets rotation with the specified parameters.
-        @method
-        @param angle - The angle of rotation in decimal degrees.
-Measured in clockwise direction with 0 pointing "right".
-Negative values or values greater than 360 will be normalized.
-        @param center - The center of rotation.
-        @returns The current transformation instance.
-        */
-        rotate(angle: number, center: kendo.geometry.Point): kendo.geometry.Transformation;
-        /**
-        Sets scale with the specified parameters.
-        @method
-        @param scaleX - The scale factor on the X axis.
-        @param scaleY - The scale factor on the Y axis.
-        @returns The current transformation instance.
-        */
-        scale(scaleX: number, scaleY: number): kendo.geometry.Transformation;
-        /**
-        Sets translation with the specified parameters.
-        @method
-        @param x - The distance to translate along the X axis.
-        @param y - The distance to translate along the Y axis.
-        @returns The current transformation instance.
-        */
-        translate(x: number, y: number): kendo.geometry.Transformation;
-
-    }
-
-    interface TransformationOptions {
-        name?: string;
-    }
-    interface TransformationEvent {
-        sender: Transformation;
-        preventDefault: Function;
-        isDefaultPrevented(): boolean;
-    }
-
-
-}
 declare module kendo.dataviz.drawing {
     class Arc extends kendo.drawing.Element {
 
@@ -8716,6 +8179,13 @@ Inherited from Element.clippedBBox
         @returns The bounding box of the element with clipping transformations applied.
         */
         clippedBBox(): kendo.geometry.Rect;
+        /**
+        Inserts an element at the specified position.
+        @method
+        @param position - The position to insert the element at. Existing children beyond this position will be shifted right.
+        @param element - The element to insert.
+        */
+        insert(position: number, element: kendo.drawing.Element): void;
         /**
         Gets or sets the group opacity.
 Inherited from Element.opacityThe opacity of any child groups and elements will be multiplied by this value.
@@ -9754,6 +9224,161 @@ Can contain either plain objects or GradientStop instances.
     }
 
 
+    class Rect extends kendo.drawing.Element {
+
+
+        options: RectOptions;
+
+
+        constructor(geometry: kendo.geometry.Rect, options?: RectOptions);
+
+
+        /**
+        Returns the bounding box of the element with transformations applied.
+Inherited from Element.bbox
+        @method
+        @returns The bounding box of the element with transformations applied.
+        */
+        bbox(): kendo.geometry.Rect;
+        /**
+        Gets or sets the element clipping path.
+Inherited from Element.clip
+        @method
+        @returns The current element clipping path.
+        */
+        clip(): kendo.drawing.Path;
+        /**
+        Gets or sets the element clipping path.
+Inherited from Element.clip
+        @method
+        @param clip - The element clipping path.
+        */
+        clip(clip: kendo.drawing.Path): void;
+        /**
+        Returns the bounding box of the element with clipping and transformations applied.
+Inherited from Element.clippedBBox
+        @method
+        @returns The bounding box of the element with clipping transformations applied.
+        */
+        clippedBBox(): kendo.geometry.Rect;
+        /**
+        Gets or sets the rectangle geometry.
+        @method
+        @returns The current rectangle geometry.
+        */
+        geometry(): kendo.geometry.Rect;
+        /**
+        Gets or sets the rectangle geometry.
+        @method
+        @param value - The new geometry to use.
+        */
+        geometry(value: kendo.geometry.Rect): void;
+        /**
+        Sets the shape fill.
+        @method
+        @param color - The fill color to set.
+        @param opacity - The fill opacity to set.
+        @returns The current instance to allow chaining.
+        */
+        fill(color: string, opacity?: number): kendo.drawing.Rect;
+        /**
+        Gets or sets the element opacity.
+Inherited from Element.opacityIf set, the stroke and fill opacity will be multiplied by the element opacity.
+        @method
+        @returns The current element opacity.
+        */
+        opacity(): number;
+        /**
+        Gets or sets the element opacity.
+Inherited from Element.opacityIf set, the stroke and fill opacity will be multiplied by the element opacity.
+        @method
+        @param opacity - The element opacity. Ranges from 0 (completely transparent) to 1 (completely opaque).
+        */
+        opacity(opacity: number): void;
+        /**
+        Sets the shape stroke.
+        @method
+        @param color - The stroke color to set.
+        @param width - The stroke width to set.
+        @param opacity - The stroke opacity to set.
+        @returns The current instance to allow chaining.
+        */
+        stroke(color: string, width?: number, opacity?: number): kendo.drawing.Rect;
+        /**
+        Gets or sets the transformation of the element.
+Inherited from Element.transform
+        @method
+        @returns The current transformation on the element.
+        */
+        transform(): kendo.geometry.Transformation;
+        /**
+        Gets or sets the transformation of the element.
+Inherited from Element.transform
+        @method
+        @param transform - The transformation to apply to the element.
+        */
+        transform(transform: kendo.geometry.Transformation): void;
+        /**
+        Gets or sets the visibility of the element.
+Inherited from Element.visible
+        @method
+        @returns true if the element is visible; false otherwise.
+        */
+        visible(): boolean;
+        /**
+        Gets or sets the visibility of the element.
+Inherited from Element.visible
+        @method
+        @param visible - A flag indicating if the element should be visible.
+        */
+        visible(visible: boolean): void;
+
+    }
+
+    interface RectOptions {
+        name?: string;
+        /**
+        The element clipping path.
+Inherited from Element.clip
+        @member {kendo.drawing.Path}
+        */
+        clip?: kendo.drawing.Path;
+        /**
+        The fill options of the shape.
+        @member {kendo.drawing.FillOptions}
+        */
+        fill?: kendo.drawing.FillOptions;
+        /**
+        The element opacity.
+Inherited from Element.opacity
+        @member {number}
+        */
+        opacity?: number;
+        /**
+        The stroke options of the shape.
+        @member {kendo.drawing.StrokeOptions}
+        */
+        stroke?: kendo.drawing.StrokeOptions;
+        /**
+        The transformation to apply to this element.
+Inherited from Element.transform
+        @member {kendo.geometry.Transformation}
+        */
+        transform?: kendo.geometry.Transformation;
+        /**
+        A flag, indicating if the element is visible.
+Inherited from Element.visible
+        @member {boolean}
+        */
+        visible?: boolean;
+    }
+    interface RectEvent {
+        sender: Rect;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+
     class Segment extends kendo.Class {
 
 
@@ -10160,6 +9785,815 @@ Inherited from Element.visible
     }
     interface TextEvent {
         sender: Text;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+
+}
+declare module kendo.dataviz.geometry {
+    class Arc extends Observable {
+
+
+        options: ArcOptions;
+
+        /**
+                A flag indicating if the arc should be drawn in clockwise or anticlockwise direction.
+Defaults to clockwise direction.
+                */
+                anticlockwise: boolean;
+        /**
+                The location of the arc center.
+                */
+                center: kendo.geometry.Point;
+        /**
+                The end angle of the arc in decimal degrees.
+Measured in clockwise direction with 0 pointing "right".
+Negative values or values greater than 360 will be normalized.
+                */
+                endAngle: number;
+        /**
+                The x radius of the arc.
+                */
+                radiusX: number;
+        /**
+                The y radius of the arc.
+                */
+                radiusY: number;
+        /**
+                The start angle of the arc in decimal degrees.
+Measured in clockwise direction with 0 pointing "right".
+Negative values or values greater than 360 will be normalized.
+                */
+                startAngle: number;
+
+
+
+        /**
+        Returns the bounding box of this arc after applying the specified transformation matrix.
+        @method
+        @param matrix - Transformation matrix to apply.
+        @returns The bounding box after applying the transformation matrix.
+        */
+        bbox(matrix: kendo.geometry.Matrix): kendo.geometry.Rect;
+        /**
+        Gets the arc anticlokwise flag.
+        @method
+        @returns The anticlokwise flag of the arc.
+        */
+        getAnticlockwise(): boolean;
+        /**
+        Gets the arc center location.
+        @method
+        @returns The location of the arc center.
+        */
+        getCenter(): kendo.geometry.Point;
+        /**
+        Gets the end angle of the arc in decimal degrees.
+Measured in clockwise direction with 0 pointing "right".
+        @method
+        @returns The end angle of the arc.
+        */
+        getEndAngle(): number;
+        /**
+        Gets the x radius of the arc.
+        @method
+        @returns The x radius of the arc.
+        */
+        getRadiusX(): number;
+        /**
+        Gets the y radius of the arc.
+        @method
+        @returns The y radius of the arc.
+        */
+        getRadiusY(): number;
+        /**
+        Gets the start angle of the arc in decimal degrees.
+Measured in clockwise direction with 0 pointing "right".
+        @method
+        @returns The start angle of the arc.
+        */
+        getStartAngle(): number;
+        /**
+        Gets the location of a point on the arc's circumference at a given angle.
+        @method
+        @param angle - Angle in decimal degrees. Measured in clockwise direction with 0 pointing "right".
+Negative values or values greater than 360 will be normalized.
+        @returns The point on the arc's circumference.
+        */
+        pointAt(angle: number): kendo.geometry.Point;
+        /**
+        Sets the arc anticlokwise flag.
+        @method
+        @param value - The new anticlockwise value.
+        @returns The current arc instance.
+        */
+        setAnticlockwise(value: boolean): kendo.geometry.Arc;
+        /**
+        Sets the arc center location.
+        @method
+        @param value - The new arc center.
+        @returns The current arc instance.
+        */
+        setCenter(value: kendo.geometry.Point): kendo.geometry.Arc;
+        /**
+        Sets the end angle of the arc in decimal degrees.
+Measured in clockwise direction with 0 pointing "right".
+        @method
+        @param value - The new arc end angle.
+        @returns The current arc instance.
+        */
+        setEndAngle(value: number): kendo.geometry.Arc;
+        /**
+        Sets the x radius of the arc.
+        @method
+        @param value - The new arc x radius.
+        @returns The current arc instance.
+        */
+        setRadiusX(value: number): kendo.geometry.Arc;
+        /**
+        Sets the y radius of the arc.
+        @method
+        @param value - The new arc y radius.
+        @returns The current arc instance.
+        */
+        setRadiusY(value: number): kendo.geometry.Arc;
+        /**
+        Sets the start angle of the arc in decimal degrees.
+Measured in clockwise direction with 0 pointing "right".
+        @method
+        @param value - The new arc atart angle.
+        @returns The current arc instance.
+        */
+        setStartAngle(value: number): kendo.geometry.Arc;
+
+    }
+
+    interface ArcOptions {
+        name?: string;
+    }
+    interface ArcEvent {
+        sender: Arc;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+
+    class Circle extends Observable {
+
+
+        options: CircleOptions;
+
+        /**
+                The location of the circle center.
+                */
+                center: kendo.geometry.Point;
+        /**
+                The radius of the circle.
+                */
+                radius: number;
+
+
+
+        /**
+        Returns the bounding box of this circle after applying the
+specified transformation matrix.
+        @method
+        @param matrix - Transformation matrix to apply.
+        @returns The bounding box after applying the transformation matrix.
+        */
+        bbox(matrix: kendo.geometry.Matrix): kendo.geometry.Rect;
+        /**
+        Creates a new instance with the same center and radius.
+        @method
+        @returns A new Circle instance with the same center and radius.
+        */
+        clone(): kendo.geometry.Circle;
+        /**
+        Compares this circle with another instance.
+        @method
+        @param other - The circle to compare with.
+        @returns true if the point coordinates match; false otherwise.
+        */
+        equals(other: kendo.geometry.Circle): boolean;
+        /**
+        Gets the circle center location.
+        @method
+        @returns The location of the circle center.
+        */
+        getCenter(): kendo.geometry.Point;
+        /**
+        Gets the circle radius.
+        @method
+        @returns The radius of the circle.
+        */
+        getRadius(): number;
+        /**
+        Gets the location of a point on the circle's circumference at a given angle.
+        @method
+        @param angle - Angle in decimal degrees. Measured in clockwise direction with 0 pointing "right".
+Negative values or values greater than 360 will be normalized.
+        @returns The point on the circle's circumference.
+        */
+        pointAt(angle: number): kendo.geometry.Point;
+        /**
+        Sets the location of the circle center.
+        @method
+        @param value - The new center Point or equivalent [x, y] array.
+        @returns The location of the circle center.
+        */
+        setCenter(value: kendo.geometry.Point): kendo.geometry.Point;
+        /**
+        Sets the location of the circle center.
+        @method
+        @param value - The new center Point or equivalent [x, y] array.
+        @returns The location of the circle center.
+        */
+        setCenter(value: any): kendo.geometry.Point;
+        /**
+        Sets the circle radius.
+        @method
+        @param value - The new circle radius.
+        @returns The current circle instance.
+        */
+        setRadius(value: number): kendo.geometry.Circle;
+
+    }
+
+    interface CircleOptions {
+        name?: string;
+    }
+    interface CircleEvent {
+        sender: Circle;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+
+    class Matrix extends Observable {
+
+
+        options: MatrixOptions;
+
+        /**
+                The a (1, 1) member of the matrix.
+                */
+                a: number;
+        /**
+                The b (2, 1) member of the matrix.
+                */
+                b: number;
+        /**
+                The a (1, 2) member of the matrix.
+                */
+                c: number;
+        /**
+                The d (2, 2) member of the matrix.
+                */
+                d: number;
+        /**
+                The e (1, 3) member of the matrix.
+                */
+                e: number;
+        /**
+                The f (2, 3) member of the matrix.
+                */
+                f: number;
+
+
+        static rotate(angle: number, x: number, y: number): kendo.geometry.Matrix;
+        static scale(scaleX: number, scaleY: number): kendo.geometry.Matrix;
+        static translate(x: number, y: number): kendo.geometry.Matrix;
+        static unit(): kendo.geometry.Matrix;
+
+        /**
+        Creates a new instance with the same element values.
+        @method
+        @returns A new Matrix instance with the same element values.
+        */
+        clone(): kendo.geometry.Matrix;
+        /**
+        Compares this matrix with another instance.
+        @method
+        @param other - The matrix instance to compare with.
+        @returns true if the matrix elements match; false otherwise.
+        */
+        equals(other: kendo.geometry.Matrix): boolean;
+        /**
+        Rounds the matrix elements to the specified number of fractional digits.
+        @method
+        @param digits - Number of fractional digits.
+        @returns The current matrix instance.
+        */
+        round(digits: number): kendo.geometry.Matrix;
+        /**
+        Multiplies the matrix with another one and returns the result as new instance.
+The current instance elements are not altered.
+        @method
+        @param matrix - The matrix to multiply by.
+        @returns The result of the multiplication.
+        */
+        multiplyCopy(matrix: kendo.geometry.Matrix): kendo.geometry.Matrix;
+        /**
+        Returns the matrix elements as an [a, b, c, d, e, f] array.
+        @method
+        @param digits - (Optional) Number of fractional digits.
+        @returns An array representation of the matrix.
+        */
+        toArray(digits: number): any;
+        /**
+        Formats the matrix elements as a string.
+        @method
+        @param digits - (Optional) Number of fractional digits.
+        @param separator - The separator to place between elements.
+        @returns A string representation of the matrix, e.g. "1, 0, 0, 1, 0, 0".
+        */
+        toString(digits: number, separator: string): string;
+
+    }
+
+    interface MatrixOptions {
+        name?: string;
+    }
+    interface MatrixEvent {
+        sender: Matrix;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+
+    class Point extends Observable {
+
+
+        options: PointOptions;
+
+        /**
+                The x coordinate of the point.
+                */
+                x: number;
+        /**
+                The y coordinate of the point.
+                */
+                y: number;
+
+
+        static create(x: number, y: number): kendo.geometry.Point;
+        static create(x: any, y: number): kendo.geometry.Point;
+        static create(x: kendo.geometry.Point, y: number): kendo.geometry.Point;
+        static min(): kendo.geometry.Point;
+        static max(): kendo.geometry.Point;
+        static minPoint(): kendo.geometry.Point;
+        static maxPoint(): kendo.geometry.Point;
+
+        /**
+        Creates a new instance with the same coordinates.
+        @method
+        @returns A new Point instance with the same coordinates.
+        */
+        clone(): kendo.geometry.Point;
+        /**
+        Calculates the distance to another point.
+        @method
+        @param point - The point to calculate the distance to.
+        @returns The straight line distance to the given point.
+        */
+        distanceTo(point: kendo.geometry.Point): number;
+        /**
+        Compares this point with another instance.
+        @method
+        @param other - The point to compare with.
+        @returns true if the point coordinates match; false otherwise.
+        */
+        equals(other: kendo.geometry.Point): boolean;
+        /**
+        Gets the x coordinate value.
+        @method
+        @returns The current x coordinate value.
+        */
+        getX(): number;
+        /**
+        Gets the y coordinate value.
+        @method
+        @returns The current y coordinate value.
+        */
+        getY(): number;
+        /**
+        Moves the point to the specified x and y coordinates.
+        @method
+        @param x - The new X coordinate.
+        @param y - The new Y coordinate.
+        @returns The current point instance.
+        */
+        move(x: number, y: number): kendo.geometry.Point;
+        /**
+        Rotates the point around the given center.
+        @method
+        @param angle - Angle in decimal degrees. Measured in clockwise direction with 0 pointing "right".
+Negative values or values greater than 360 will be normalized.
+        @param center - The rotation center. Can be a Point instance or an [x, y] array.
+        @returns The current Point instance.
+        */
+        rotate(angle: number, center: kendo.geometry.Point): kendo.geometry.Point;
+        /**
+        Rotates the point around the given center.
+        @method
+        @param angle - Angle in decimal degrees. Measured in clockwise direction with 0 pointing "right".
+Negative values or values greater than 360 will be normalized.
+        @param center - The rotation center. Can be a Point instance or an [x, y] array.
+        @returns The current Point instance.
+        */
+        rotate(angle: number, center: any): kendo.geometry.Point;
+        /**
+        Rounds the point coordinates to the specified number of fractional digits.
+        @method
+        @param digits - Number of fractional digits.
+        @returns The current Point instance.
+        */
+        round(digits: number): kendo.geometry.Point;
+        /**
+        Scales the point coordinates along the x and y axis.
+        @method
+        @param scaleX - The x scale multiplier.
+        @param scaleY - The y scale multiplier.
+        @returns The current point instance.
+        */
+        scale(scaleX: number, scaleY: number): kendo.geometry.Point;
+        /**
+        Scales the point coordinates on a copy of the current point.
+The callee coordinates will remain unchanged.
+        @method
+        @param scaleX - The x scale multiplier.
+        @param scaleY - The y scale multiplier.
+        @returns The new Point instance.
+        */
+        scaleCopy(scaleX: number, scaleY: number): kendo.geometry.Point;
+        /**
+        Sets the x coordinate to a new value.
+        @method
+        @param value - The new x coordinate value.
+        @returns The current Point instance.
+        */
+        setX(value: number): kendo.geometry.Point;
+        /**
+        Sets the y coordinate to a new value.
+        @method
+        @param value - The new y coordinate value.
+        @returns The current Point instance.
+        */
+        setY(value: number): kendo.geometry.Point;
+        /**
+        Returns the point coordinates as an [x, y] array.
+        @method
+        @param digits - (Optional) Number of fractional digits.
+        @returns An array representation of the point, e.g. [10, 20]
+        */
+        toArray(digits: number): any;
+        /**
+        Formats the point value to a string.
+        @method
+        @param digits - (Optional) Number of fractional digits.
+        @param separator - The separator to place between coordinates.
+        @returns A string representation of the point, e.g. "10 20".
+        */
+        toString(digits: number, separator: string): string;
+        /**
+        Applies a transformation to the point coordinates.
+The current coordinates will be overriden.
+        @method
+        @param tansformation - The transformation to apply.
+        @returns The current Point instance.
+        */
+        transform(tansformation: kendo.geometry.Transformation): kendo.geometry.Point;
+        /**
+        Applies a transformation on a copy of the current point.
+The callee coordinates will remain unchanged.
+        @method
+        @param tansformation - The transformation to apply.
+        @returns The new Point instance.
+        */
+        transformCopy(tansformation: kendo.geometry.Transformation): kendo.geometry.Point;
+        /**
+        Translates the point along the x and y axis.
+        @method
+        @param dx - The distance to move along the X axis.
+        @param dy - The distance to move along the Y axis.
+        @returns The current point instance.
+        */
+        translate(dx: number, dy: number): kendo.geometry.Point;
+        /**
+        Translates the point by using a Point instance as a vector of translation.
+        @method
+        @param vector - The vector of translation. Can be either a Point instance or an [x, y] array.
+        @returns The current point instance.
+        */
+        translateWith(vector: kendo.geometry.Point): kendo.geometry.Point;
+        /**
+        Translates the point by using a Point instance as a vector of translation.
+        @method
+        @param vector - The vector of translation. Can be either a Point instance or an [x, y] array.
+        @returns The current point instance.
+        */
+        translateWith(vector: any): kendo.geometry.Point;
+
+    }
+
+    interface PointOptions {
+        name?: string;
+    }
+    interface PointEvent {
+        sender: Point;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+
+    class Rect extends Observable {
+
+
+        options: RectOptions;
+
+        /**
+                The origin (top-left corner) of the rectangle.
+                */
+                origin: kendo.geometry.Point;
+        /**
+                The size of the rectangle.
+                */
+                size: kendo.geometry.Size;
+
+        constructor(origin: kendo.geometry.Point, size: kendo.geometry.Size);
+
+        static fromPoints(pointA: kendo.geometry.Point, pointB: kendo.geometry.Point): kendo.geometry.Rect;
+        static union(rectA: kendo.geometry.Rect, rectB: kendo.geometry.Rect): kendo.geometry.Rect;
+
+        /**
+        Returns the bounding box of this rectangle after applying the
+specified transformation matrix.
+        @method
+        @param matrix - Transformation matrix to apply.
+        @returns The bounding box after applying the transformation matrix.
+        */
+        bbox(matrix: kendo.geometry.Matrix): kendo.geometry.Rect;
+        /**
+        Gets the position of the bottom-left corner of the rectangle.
+This is also the rectangle origin
+        @method
+        @returns The position of the bottom-left corner.
+        */
+        bottomLeft(): kendo.geometry.Point;
+        /**
+        Gets the position of the bottom-right corner of the rectangle.
+        @method
+        @returns The position of the bottom-right corner.
+        */
+        bottomRight(): kendo.geometry.Point;
+        /**
+        Gets the position of the center of the rectangle.
+        @method
+        @returns The position of the center.
+        */
+        center(): kendo.geometry.Point;
+        /**
+        Creates a new instance with the same origin and size.
+        @method
+        @returns A new Rect instance with the same origin and size.
+        */
+        clone(): kendo.geometry.Rect;
+        /**
+        Compares this rectangle with another instance.
+        @method
+        @param other - The rectangle to compare with.
+        @returns true if the origin and size is the same for both rectangles; false otherwise.
+        */
+        equals(other: kendo.geometry.Rect): boolean;
+        /**
+        Gets the origin (top-left point) of the rectangle.
+        @method
+        @returns The origin (top-left point).
+        */
+        getOrigin(): kendo.geometry.Point;
+        /**
+        Gets the rectangle size.
+        @method
+        @returns The current rectangle Size.
+        */
+        getSize(): kendo.geometry.Size;
+        /**
+        Gets the rectangle height.
+        @method
+        @returns The rectangle height.
+        */
+        height(): number;
+        /**
+        Sets the origin (top-left point) of the rectangle.
+        @method
+        @param value - The new origin Point or equivalent [x, y] array.
+        @returns The current rectangle instance.
+        */
+        setOrigin(value: kendo.geometry.Point): kendo.geometry.Rect;
+        /**
+        Sets the origin (top-left point) of the rectangle.
+        @method
+        @param value - The new origin Point or equivalent [x, y] array.
+        @returns The current rectangle instance.
+        */
+        setOrigin(value: any): kendo.geometry.Rect;
+        /**
+        Sets the rectangle size.
+        @method
+        @param value - The new rectangle Size or equivalent [width, height] array.
+        @returns The current rectangle instance.
+        */
+        setSize(value: kendo.geometry.Size): kendo.geometry.Rect;
+        /**
+        Sets the rectangle size.
+        @method
+        @param value - The new rectangle Size or equivalent [width, height] array.
+        @returns The current rectangle instance.
+        */
+        setSize(value: any): kendo.geometry.Rect;
+        /**
+        Gets the position of the top-left corner of the rectangle.
+This is also the rectangle origin
+        @method
+        @returns The position of the top-left corner.
+        */
+        topLeft(): kendo.geometry.Point;
+        /**
+        Gets the position of the top-right corner of the rectangle.
+        @method
+        @returns The position of the top-right corner.
+        */
+        topRight(): kendo.geometry.Point;
+        /**
+        Gets the rectangle width.
+        @method
+        @returns The rectangle width.
+        */
+        width(): number;
+
+    }
+
+    interface RectOptions {
+        name?: string;
+    }
+    interface RectEvent {
+        sender: Rect;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+
+    class Size extends Observable {
+
+
+        options: SizeOptions;
+
+        /**
+                The horizontal size.
+                */
+                width: number;
+        /**
+                The vertical size.
+                */
+                height: number;
+
+
+        static create(width: number, height: number): kendo.geometry.Size;
+        static create(width: any, height: number): kendo.geometry.Size;
+        static create(width: kendo.geometry.Size, height: number): kendo.geometry.Size;
+
+        /**
+        Creates a new instance with the same width and height.
+        @method
+        @returns A new Size instance with the same coordinates.
+        */
+        clone(): kendo.geometry.Size;
+        /**
+        Compares this Size with another instance.
+        @method
+        @param other - The Size to compare with.
+        @returns true if the size members match; false otherwise.
+        */
+        equals(other: kendo.geometry.Size): boolean;
+        /**
+        Gets the width value.
+        @method
+        @returns The current width value.
+        */
+        getWidth(): number;
+        /**
+        Gets the height value.
+        @method
+        @returns The current height value.
+        */
+        getHeight(): number;
+        /**
+        Sets the width to a new value.
+        @method
+        @param value - The new width value.
+        @returns The current Size instance.
+        */
+        setWidth(value: number): kendo.geometry.Size;
+        /**
+        Sets the height to a new value.
+        @method
+        @param value - The new height value.
+        @returns The current Size instance.
+        */
+        setHeight(value: number): kendo.geometry.Size;
+
+    }
+
+    interface SizeOptions {
+        name?: string;
+    }
+    interface SizeEvent {
+        sender: Size;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+
+    class Transformation extends Observable {
+
+
+        options: TransformationOptions;
+
+
+
+
+        /**
+        Creates a new instance with the same transformation matrix.
+        @method
+        @returns A new Transformation instance with the same matrix.
+        */
+        clone(): kendo.geometry.Transformation;
+        /**
+        Compares this transformation with another instance.
+        @method
+        @param other - The transformation to compare with.
+        @returns true if the transformation matrix is the same; false otherwise.
+        */
+        equals(other: kendo.geometry.Transformation): boolean;
+        /**
+        Gets the current transformation matrix for this transformation.
+        @method
+        @returns The current transformation matrix.
+        */
+        matrix(): kendo.geometry.Matrix;
+        /**
+        Multiplies the transformation with another.
+The underlying transformation matrix is updated in-place.
+        @method
+        @param transformation - The transformation to multiply by.
+        @returns The current transformation instance.
+        */
+        multiply(transformation: kendo.geometry.Transformation): kendo.geometry.Transformation;
+        /**
+        Sets rotation with the specified parameters.
+        @method
+        @param angle - The angle of rotation in decimal degrees.
+Measured in clockwise direction with 0 pointing "right".
+Negative values or values greater than 360 will be normalized.
+        @param center - The center of rotation.
+        @returns The current transformation instance.
+        */
+        rotate(angle: number, center: any): kendo.geometry.Transformation;
+        /**
+        Sets rotation with the specified parameters.
+        @method
+        @param angle - The angle of rotation in decimal degrees.
+Measured in clockwise direction with 0 pointing "right".
+Negative values or values greater than 360 will be normalized.
+        @param center - The center of rotation.
+        @returns The current transformation instance.
+        */
+        rotate(angle: number, center: kendo.geometry.Point): kendo.geometry.Transformation;
+        /**
+        Sets scale with the specified parameters.
+        @method
+        @param scaleX - The scale factor on the X axis.
+        @param scaleY - The scale factor on the Y axis.
+        @returns The current transformation instance.
+        */
+        scale(scaleX: number, scaleY: number): kendo.geometry.Transformation;
+        /**
+        Sets translation with the specified parameters.
+        @method
+        @param x - The distance to translate along the X axis.
+        @param y - The distance to translate along the Y axis.
+        @returns The current transformation instance.
+        */
+        translate(x: number, y: number): kendo.geometry.Transformation;
+
+    }
+
+    interface TransformationOptions {
+        name?: string;
+    }
+    interface TransformationEvent {
+        sender: Transformation;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
     }
