@@ -6038,11 +6038,6 @@ Note: The dataItem must be from a non-primitive type (Object).
         */
         replace(url: string, transition: string): void;
         /**
-        
-        @method
-        */
-        Example(): void;
-        /**
         Show the loading animation.
         @method
         */
