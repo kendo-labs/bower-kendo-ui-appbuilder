@@ -2451,33 +2451,73 @@ Inherited from Element.clippedBBox
         @method
         @param controlOut - The first control point for the curve.
         @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
         @returns The current instance to allow chaining.
         */
-        curveTo(controlOut: any, controlIn: any): kendo.drawing.MultiPath;
+        curveTo(controlOut: any, controlIn: any, endPoint: any): kendo.drawing.MultiPath;
         /**
         Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
         @method
         @param controlOut - The first control point for the curve.
         @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
         @returns The current instance to allow chaining.
         */
-        curveTo(controlOut: any, controlIn: kendo.geometry.Point): kendo.drawing.MultiPath;
+        curveTo(controlOut: any, controlIn: any, endPoint: kendo.geometry.Point): kendo.drawing.MultiPath;
         /**
         Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
         @method
         @param controlOut - The first control point for the curve.
         @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
         @returns The current instance to allow chaining.
         */
-        curveTo(controlOut: kendo.geometry.Point, controlIn: any): kendo.drawing.MultiPath;
+        curveTo(controlOut: any, controlIn: kendo.geometry.Point, endPoint: any): kendo.drawing.MultiPath;
         /**
         Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
         @method
         @param controlOut - The first control point for the curve.
         @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
         @returns The current instance to allow chaining.
         */
-        curveTo(controlOut: kendo.geometry.Point, controlIn: kendo.geometry.Point): kendo.drawing.MultiPath;
+        curveTo(controlOut: any, controlIn: kendo.geometry.Point, endPoint: kendo.geometry.Point): kendo.drawing.MultiPath;
+        /**
+        Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
+        @method
+        @param controlOut - The first control point for the curve.
+        @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
+        @returns The current instance to allow chaining.
+        */
+        curveTo(controlOut: kendo.geometry.Point, controlIn: any, endPoint: any): kendo.drawing.MultiPath;
+        /**
+        Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
+        @method
+        @param controlOut - The first control point for the curve.
+        @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
+        @returns The current instance to allow chaining.
+        */
+        curveTo(controlOut: kendo.geometry.Point, controlIn: any, endPoint: kendo.geometry.Point): kendo.drawing.MultiPath;
+        /**
+        Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
+        @method
+        @param controlOut - The first control point for the curve.
+        @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
+        @returns The current instance to allow chaining.
+        */
+        curveTo(controlOut: kendo.geometry.Point, controlIn: kendo.geometry.Point, endPoint: any): kendo.drawing.MultiPath;
+        /**
+        Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
+        @method
+        @param controlOut - The first control point for the curve.
+        @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
+        @returns The current instance to allow chaining.
+        */
+        curveTo(controlOut: kendo.geometry.Point, controlIn: kendo.geometry.Point, endPoint: kendo.geometry.Point): kendo.drawing.MultiPath;
         /**
         Sets the shape fill.
         @method
@@ -2779,33 +2819,73 @@ Inherited from Element.clippedBBox
         @method
         @param controlOut - The first control point for the curve.
         @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
         @returns The current instance to allow chaining.
         */
-        curveTo(controlOut: any, controlIn: any): kendo.drawing.Path;
+        curveTo(controlOut: any, controlIn: any, endPoint: any): kendo.drawing.Path;
         /**
         Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
         @method
         @param controlOut - The first control point for the curve.
         @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
         @returns The current instance to allow chaining.
         */
-        curveTo(controlOut: any, controlIn: kendo.geometry.Point): kendo.drawing.Path;
+        curveTo(controlOut: any, controlIn: any, endPoint: kendo.geometry.Point): kendo.drawing.Path;
         /**
         Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
         @method
         @param controlOut - The first control point for the curve.
         @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
         @returns The current instance to allow chaining.
         */
-        curveTo(controlOut: kendo.geometry.Point, controlIn: any): kendo.drawing.Path;
+        curveTo(controlOut: any, controlIn: kendo.geometry.Point, endPoint: any): kendo.drawing.Path;
         /**
         Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
         @method
         @param controlOut - The first control point for the curve.
         @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
         @returns The current instance to allow chaining.
         */
-        curveTo(controlOut: kendo.geometry.Point, controlIn: kendo.geometry.Point): kendo.drawing.Path;
+        curveTo(controlOut: any, controlIn: kendo.geometry.Point, endPoint: kendo.geometry.Point): kendo.drawing.Path;
+        /**
+        Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
+        @method
+        @param controlOut - The first control point for the curve.
+        @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
+        @returns The current instance to allow chaining.
+        */
+        curveTo(controlOut: kendo.geometry.Point, controlIn: any, endPoint: any): kendo.drawing.Path;
+        /**
+        Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
+        @method
+        @param controlOut - The first control point for the curve.
+        @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
+        @returns The current instance to allow chaining.
+        */
+        curveTo(controlOut: kendo.geometry.Point, controlIn: any, endPoint: kendo.geometry.Point): kendo.drawing.Path;
+        /**
+        Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
+        @method
+        @param controlOut - The first control point for the curve.
+        @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
+        @returns The current instance to allow chaining.
+        */
+        curveTo(controlOut: kendo.geometry.Point, controlIn: kendo.geometry.Point, endPoint: any): kendo.drawing.Path;
+        /**
+        Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
+        @method
+        @param controlOut - The first control point for the curve.
+        @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
+        @returns The current instance to allow chaining.
+        */
+        curveTo(controlOut: kendo.geometry.Point, controlIn: kendo.geometry.Point, endPoint: kendo.geometry.Point): kendo.drawing.Path;
         /**
         Sets the shape fill.
         @method
@@ -8617,33 +8697,73 @@ Inherited from Element.clippedBBox
         @method
         @param controlOut - The first control point for the curve.
         @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
         @returns The current instance to allow chaining.
         */
-        curveTo(controlOut: any, controlIn: any): kendo.drawing.MultiPath;
+        curveTo(controlOut: any, controlIn: any, endPoint: any): kendo.drawing.MultiPath;
         /**
         Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
         @method
         @param controlOut - The first control point for the curve.
         @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
         @returns The current instance to allow chaining.
         */
-        curveTo(controlOut: any, controlIn: kendo.geometry.Point): kendo.drawing.MultiPath;
+        curveTo(controlOut: any, controlIn: any, endPoint: kendo.geometry.Point): kendo.drawing.MultiPath;
         /**
         Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
         @method
         @param controlOut - The first control point for the curve.
         @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
         @returns The current instance to allow chaining.
         */
-        curveTo(controlOut: kendo.geometry.Point, controlIn: any): kendo.drawing.MultiPath;
+        curveTo(controlOut: any, controlIn: kendo.geometry.Point, endPoint: any): kendo.drawing.MultiPath;
         /**
         Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
         @method
         @param controlOut - The first control point for the curve.
         @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
         @returns The current instance to allow chaining.
         */
-        curveTo(controlOut: kendo.geometry.Point, controlIn: kendo.geometry.Point): kendo.drawing.MultiPath;
+        curveTo(controlOut: any, controlIn: kendo.geometry.Point, endPoint: kendo.geometry.Point): kendo.drawing.MultiPath;
+        /**
+        Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
+        @method
+        @param controlOut - The first control point for the curve.
+        @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
+        @returns The current instance to allow chaining.
+        */
+        curveTo(controlOut: kendo.geometry.Point, controlIn: any, endPoint: any): kendo.drawing.MultiPath;
+        /**
+        Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
+        @method
+        @param controlOut - The first control point for the curve.
+        @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
+        @returns The current instance to allow chaining.
+        */
+        curveTo(controlOut: kendo.geometry.Point, controlIn: any, endPoint: kendo.geometry.Point): kendo.drawing.MultiPath;
+        /**
+        Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
+        @method
+        @param controlOut - The first control point for the curve.
+        @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
+        @returns The current instance to allow chaining.
+        */
+        curveTo(controlOut: kendo.geometry.Point, controlIn: kendo.geometry.Point, endPoint: any): kendo.drawing.MultiPath;
+        /**
+        Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
+        @method
+        @param controlOut - The first control point for the curve.
+        @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
+        @returns The current instance to allow chaining.
+        */
+        curveTo(controlOut: kendo.geometry.Point, controlIn: kendo.geometry.Point, endPoint: kendo.geometry.Point): kendo.drawing.MultiPath;
         /**
         Sets the shape fill.
         @method
@@ -8945,33 +9065,73 @@ Inherited from Element.clippedBBox
         @method
         @param controlOut - The first control point for the curve.
         @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
         @returns The current instance to allow chaining.
         */
-        curveTo(controlOut: any, controlIn: any): kendo.drawing.Path;
+        curveTo(controlOut: any, controlIn: any, endPoint: any): kendo.drawing.Path;
         /**
         Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
         @method
         @param controlOut - The first control point for the curve.
         @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
         @returns The current instance to allow chaining.
         */
-        curveTo(controlOut: any, controlIn: kendo.geometry.Point): kendo.drawing.Path;
+        curveTo(controlOut: any, controlIn: any, endPoint: kendo.geometry.Point): kendo.drawing.Path;
         /**
         Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
         @method
         @param controlOut - The first control point for the curve.
         @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
         @returns The current instance to allow chaining.
         */
-        curveTo(controlOut: kendo.geometry.Point, controlIn: any): kendo.drawing.Path;
+        curveTo(controlOut: any, controlIn: kendo.geometry.Point, endPoint: any): kendo.drawing.Path;
         /**
         Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
         @method
         @param controlOut - The first control point for the curve.
         @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
         @returns The current instance to allow chaining.
         */
-        curveTo(controlOut: kendo.geometry.Point, controlIn: kendo.geometry.Point): kendo.drawing.Path;
+        curveTo(controlOut: any, controlIn: kendo.geometry.Point, endPoint: kendo.geometry.Point): kendo.drawing.Path;
+        /**
+        Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
+        @method
+        @param controlOut - The first control point for the curve.
+        @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
+        @returns The current instance to allow chaining.
+        */
+        curveTo(controlOut: kendo.geometry.Point, controlIn: any, endPoint: any): kendo.drawing.Path;
+        /**
+        Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
+        @method
+        @param controlOut - The first control point for the curve.
+        @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
+        @returns The current instance to allow chaining.
+        */
+        curveTo(controlOut: kendo.geometry.Point, controlIn: any, endPoint: kendo.geometry.Point): kendo.drawing.Path;
+        /**
+        Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
+        @method
+        @param controlOut - The first control point for the curve.
+        @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
+        @returns The current instance to allow chaining.
+        */
+        curveTo(controlOut: kendo.geometry.Point, controlIn: kendo.geometry.Point, endPoint: any): kendo.drawing.Path;
+        /**
+        Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
+        @method
+        @param controlOut - The first control point for the curve.
+        @param controlIn - The second control point for the curve.
+        @param endPoint - The curve end point.
+        @returns The current instance to allow chaining.
+        */
+        curveTo(controlOut: kendo.geometry.Point, controlIn: kendo.geometry.Point, endPoint: kendo.geometry.Point): kendo.drawing.Path;
         /**
         Sets the shape fill.
         @method
