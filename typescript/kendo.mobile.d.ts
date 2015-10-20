@@ -4045,6 +4045,7 @@ The current instance elements are not altered.
                 */
                 y: number;
 
+        constructor(x: number, y: number);
 
         static create(x: number, y: number): kendo.geometry.Point;
         static create(x: any, y: number): kendo.geometry.Point;
@@ -4603,9 +4604,10 @@ RGBA form.
         Converts the given DOM element to a Drawing API scene.The operation is asynchronous and returns a promise.The promise will be resolved with the root Group of the scene.
         @method
         @param element - The root DOM element to draw.
+        @param options - Configuration options
         @returns A promise that will be resolved with the root Group of the scene.
         */
-        drawDOM(element: JQuery): JQueryPromise<any>;
+        drawDOM(element: JQuery, options: any): JQueryPromise<any>;
         function /**
         Exports a group of drawing elements as an image.The export operation is asynchronous and returns a promise.The promise will be resolved with a PNG image encoded as a Data URI.
         @method
@@ -10291,6 +10293,7 @@ The current instance elements are not altered.
                 */
                 y: number;
 
+        constructor(x: number, y: number);
 
         static create(x: number, y: number): kendo.geometry.Point;
         static create(x: any, y: number): kendo.geometry.Point;
