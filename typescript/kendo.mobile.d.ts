@@ -1367,6 +1367,17 @@ declare module kendo.ui {
     interface GridColumn {
         editor?(container: JQuery, options: GridColumnEditorOptions): void;
     }
+
+    interface TreeListEditorOptions {
+        field?: string;
+        format?: string;
+        model?: kendo.data.Model;
+        values?: any[];
+    }
+
+    interface TreeListColumn {
+        editor?(container: JQuery, options: TreeListEditorOptions): void;
+    }
 }
 
 declare module kendo.mobile {
@@ -2268,17 +2279,17 @@ Inherited from Element.visible
     interface LayoutOptions {
         name?: string;
         /**
-        Specifies the alignment of the content.
+        Specifies the alignment of the content. The supported values are:
         @member {string}
         */
         alignContent?: string;
         /**
-        Specifies the alignment of the items based.
+        Specifies the alignment of the items based on the largest one. The supported values are:
         @member {string}
         */
         alignItems?: string;
         /**
-        Specifies how should the content be justified.
+        Specifies how should the content be justified. The supported values are:
         @member {string}
         */
         justifyContent?: string;
@@ -8516,17 +8527,17 @@ Inherited from Element.visible
     interface LayoutOptions {
         name?: string;
         /**
-        Specifies the alignment of the content.
+        Specifies the alignment of the content. The supported values are:
         @member {string}
         */
         alignContent?: string;
         /**
-        Specifies the alignment of the items based.
+        Specifies the alignment of the items based on the largest one. The supported values are:
         @member {string}
         */
         alignItems?: string;
         /**
-        Specifies how should the content be justified.
+        Specifies how should the content be justified. The supported values are:
         @member {string}
         */
         justifyContent?: string;
