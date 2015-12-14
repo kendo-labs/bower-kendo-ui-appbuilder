@@ -4837,7 +4837,7 @@ If no culture is found the default one is used.
         */
         htmlEncode(value: string): string;
         function /**
-        Parses as a formatted string as a Date.
+        Parses as a formatted string as a Date. Also see Date Parsing
         @method
         @param value - The string which should be parsed as Date.
         @param formats - The format(s) that will be used to parse the date. By default all standard date formats of the current culture are used.
@@ -4846,7 +4846,7 @@ If no culture is found the default one is used.
         */
         parseDate(value: string, formats?: string, culture?: string): Date;
         function /**
-        Parses as a formatted string as a Date.
+        Parses as a formatted string as a Date. Also see Date Parsing
         @method
         @param value - The string which should be parsed as Date.
         @param formats - The format(s) that will be used to parse the date. By default all standard date formats of the current culture are used.
