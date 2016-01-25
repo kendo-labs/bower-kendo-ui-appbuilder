@@ -7698,6 +7698,11 @@ frozenRows instead.
         */
         format?: string;
         /**
+        Sets the formula that Excel uses to compute and display the cell value
+        @member {string}
+        */
+        formula?: string;
+        /**
         Deprecated in versions 2015.3 and newer. Use textAlign instead.
         @member {string}
         */
