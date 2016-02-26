@@ -5042,6 +5042,17 @@ All descendant elements are traversed.
         */
         unbind(element: Element): void;
 
+    module pdf {
+        function /**
+        Defines a map with locations for TrueType Font (.ttf) files.The exportPDF method will use the font files when embedding them in a PDF document.
+As a fallback, fonts might be loaded from the locations listed in a style sheet font-face declarations.
+This will work only if the style sheet and fonts are loaded from the same domain.It's safe to call this method multiple times.
+        @method
+        @param map - A map for font names, variants and the location of its .ttf file.
+        */
+        defineFont(map: any): void;
+    }
+
 }
 declare module kendo.mobile.ui {
     class ActionSheet extends kendo.mobile.ui.Widget {
