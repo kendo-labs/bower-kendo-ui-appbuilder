@@ -1068,6 +1068,31 @@ declare module kendo.data {
         view(): kendo.data.ObservableArray;
     }
 
+    class Query {
+        data: any[];
+
+        static process(data: any[], options: DataSourceTransportReadOptionsData): QueryResult;
+
+        constructor(data: any[]);
+        toArray(): any[];
+        range(intex: number, count: number): kendo.data.Query;
+        skip(count: number): kendo.data.Query;
+        take(count: number): kendo.data.Query;
+        select(selector: Function): kendo.data.Query;
+        order(selector: string, dir?: string): kendo.data.Query;
+        order(selector: Function, dir?: string): kendo.data.Query;
+        filter(filters: DataSourceFilterItem): kendo.data.Query;
+        filter(filters: DataSourceFilterItem[]): kendo.data.Query;
+        filter(filters: DataSourceFilters): kendo.data.Query;
+        group(descriptors: DataSourceGroupItem): kendo.data.Query;
+        group(descriptors: DataSourceGroupItem[]): kendo.data.Query;
+    }
+
+    interface QueryResult {
+        total?: number;
+        data?: any[];
+    }
+
     interface DataSourceAggregateItem {
         field?: string;
         aggregate?: string;
@@ -3528,7 +3553,7 @@ Supported types (case insensitive):
 - svg
 - canvas
 - vmlThis option will be ignored if not supported by the browser.
-See Supported Browsers
+See Supported Browsers.
         @member {string}
         */
         type?: string;
@@ -9928,7 +9953,7 @@ Supported types (case insensitive):
 - svg
 - canvas
 - vmlThis option will be ignored if not supported by the browser.
-See Supported Browsers
+See Supported Browsers.
         @member {string}
         */
         type?: string;
