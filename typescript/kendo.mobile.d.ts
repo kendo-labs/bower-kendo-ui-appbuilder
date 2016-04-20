@@ -1446,14 +1446,20 @@ declare module kendo.mobile {
     }
 
     interface ApplicationOptions {
+        browserHistory?: boolean;
         hideAddressBar?: boolean;
         updateDocumentTitle?: boolean;
         initial?: string;
         layout?: string;
         loading?: string;
+        modelScope?: Object;
         platform?: string;
+        retina?: boolean;
         serverNavigation?: boolean;
+        skin?: string;
+        statusBarStyle?: string;
         transition?: string;
+        useNativeScrolling?: boolean;
     }
 
     interface ApplicationEvent {
@@ -7647,10 +7653,13 @@ frozenRows instead.
         */
         color?: string;
         /**
-        The width of the border in pixels.
-        @member {string}
+        The width of the border in pixels.The allowed values are:
+* 1 - Results in а "thin" border.
+* 2 - Results in а "medium" border.
+* 3 - Results in а "thick" border.
+        @member {number}
         */
-        size?: string;
+        size?: number;
     }
 
     interface WorkbookSheetRowCellBorderLeft {
@@ -7660,10 +7669,13 @@ frozenRows instead.
         */
         color?: string;
         /**
-        The width of the border in pixels.
-        @member {string}
+        The width of the border in pixels.The allowed values are:
+* 1 - Results in а "thin" border.
+* 2 - Results in а "medium" border.
+* 3 - Results in а "thick" border.
+        @member {number}
         */
-        size?: string;
+        size?: number;
     }
 
     interface WorkbookSheetRowCellBorderRight {
@@ -7673,10 +7685,13 @@ frozenRows instead.
         */
         color?: string;
         /**
-        The width of the border in pixels.
-        @member {string}
+        The width of the border in pixels.The allowed values are:
+* 1 - Results in а "thin" border.
+* 2 - Results in а "medium" border.
+* 3 - Results in а "thick" border.
+        @member {number}
         */
-        size?: string;
+        size?: number;
     }
 
     interface WorkbookSheetRowCellBorderTop {
@@ -7686,10 +7701,13 @@ frozenRows instead.
         */
         color?: string;
         /**
-        The width of the border in pixels.
-        @member {string}
+        The width of the border in pixels.The allowed values are:
+* 1 - Results in а "thin" border.
+* 2 - Results in а "medium" border.
+* 3 - Results in а "thick" border.
+        @member {number}
         */
-        size?: string;
+        size?: number;
     }
 
     interface WorkbookSheetRowCell {
