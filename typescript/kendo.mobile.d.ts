@@ -1,6 +1,8 @@
-// type definitions for Kendo UI
+// Type definitions for Kendo UI Professional v2016.1.314
+// Project: http://www.telerik.com/kendo-ui
+// Definitions by: Telerik <https://github.com/telerik/>
 
-declare module kendo {
+declare namespace kendo {
     function culture(): {
         name: string;
         calendar: {
@@ -256,8 +258,10 @@ declare module kendo {
         static fn: Observable;
         static extend(prototype: Object): Observable;
 
+        init(...args: any[]): void;
         bind(eventName: string, handler: Function): Observable;
         one(eventName: string, handler: Function): Observable;
+        first(eventName: string, handler: Function): Observable;
         trigger(eventName: string, e?: any): boolean;
         unbind(eventName: string, handler?: any): Observable;
     }
@@ -357,7 +361,7 @@ declare module kendo {
 
 }
 
-declare module kendo.effects {
+declare namespace kendo.effects {
     function enable(): void;
     function disable(): void;
 
@@ -458,7 +462,7 @@ declare module kendo.effects {
     }
 }
 
-declare module kendo.data {
+declare namespace kendo.data {
     interface ObservableObjectEvent {
         sender?: ObservableObject;
         field?: string;
@@ -500,7 +504,7 @@ declare module kendo.data {
         render(value: Object): string;
     }
 
-    module binders { }
+    namespace binders { }
 
     interface Bindings {
         [key: string]: Binding;
@@ -1281,11 +1285,11 @@ declare module kendo.data {
     }
 }
 
-declare module kendo.data.transports {
+declare namespace kendo.data.transports {
     var odata: DataSourceTransport;
 }
 
-declare module kendo.ui {
+declare namespace kendo.ui {
     function progress(container: JQuery, toggle: boolean): void;
 
     class Widget extends Observable {
@@ -1425,7 +1429,7 @@ declare module kendo.ui {
     }
 }
 
-declare module kendo.mobile {
+declare namespace kendo.mobile {
     function init(selector: string): void;
     function init(element: JQuery): void;
     function init(element: Element): void;
@@ -1467,7 +1471,7 @@ declare module kendo.mobile {
     }
 }
 
-declare module kendo.mobile.ui {
+declare namespace kendo.mobile.ui {
 
     class Widget extends kendo.ui.Widget {
     }
@@ -1491,7 +1495,7 @@ declare module kendo.mobile.ui {
         y?: number;
     }
 }
-declare module kendo.drawing {
+declare namespace kendo.drawing {
     class Arc extends kendo.drawing.Element {
 
 
@@ -1529,6 +1533,13 @@ Inherited from Element.clippedBBox
         @returns The bounding box of the element with clipping transformations applied.
         */
         clippedBBox(): kendo.geometry.Rect;
+        /**
+        Returns true if the shape contains the specified point.
+        @method
+        @param point - The point that should be checked.
+        @returns value indicating if the shape contains the point.
+        */
+        containsPoint(point: kendo.geometry.Point): boolean;
         /**
         Gets or sets the arc geometry.
         @method
@@ -1634,6 +1645,11 @@ Inherited from Element.opacity
         */
         stroke?: kendo.drawing.StrokeOptions;
         /**
+        The tooltip options of the shape.
+        @member {kendo.drawing.TooltipOptions}
+        */
+        tooltip?: kendo.drawing.TooltipOptions;
+        /**
         The transformation to apply to this element.
 Inherited from Element.transform
         @member {kendo.geometry.Transformation}
@@ -1690,6 +1706,13 @@ Inherited from Element.clippedBBox
         @returns The bounding box of the element with clipping transformations applied.
         */
         clippedBBox(): kendo.geometry.Rect;
+        /**
+        Returns true if the shape contains the specified point.
+        @method
+        @param point - The point that should be checked.
+        @returns value indicating if the shape contains the point.
+        */
+        containsPoint(point: kendo.geometry.Point): boolean;
         /**
         Gets or sets the circle geometry.
         @method
@@ -1795,6 +1818,11 @@ Inherited from Element.opacity
         */
         stroke?: kendo.drawing.StrokeOptions;
         /**
+        The tooltip options of the shape.
+        @member {kendo.drawing.TooltipOptions}
+        */
+        tooltip?: kendo.drawing.TooltipOptions;
+        /**
         The transformation to apply to this element.
 Inherited from Element.transform
         @member {kendo.geometry.Transformation}
@@ -1819,6 +1847,10 @@ Inherited from Element.visible
 
         options: ElementOptions;
 
+        /**
+                The parent group element, if any.
+                */
+                parent: kendo.drawing.Group;
 
         constructor(options?: ElementOptions);
 
@@ -1847,6 +1879,13 @@ Inherited from Element.visible
         @returns The bounding box of the element with clipping and transformations applied.
         */
         clippedBBox(): kendo.geometry.Rect;
+        /**
+        Returns true if the shape contains the specified point.
+        @method
+        @param point - The point that should be checked.
+        @returns value indicating if the shape contains the point.
+        */
+        containsPoint(point: kendo.geometry.Point): boolean;
         /**
         Gets or sets the element opacity.
         @method
@@ -2089,6 +2128,13 @@ Inherited from Element.clippedBBox
         */
         clippedBBox(): kendo.geometry.Rect;
         /**
+        Returns true if the shape contains the specified point.
+        @method
+        @param point - The point that should be checked.
+        @returns value indicating if the shape contains the point.
+        */
+        containsPoint(point: kendo.geometry.Point): boolean;
+        /**
         Inserts an element at the specified position.
         @method
         @param position - The position to insert the element at. Existing children beyond this position will be shifted right.
@@ -2162,6 +2208,11 @@ Inherited from Element.opacityThe opacity of any child groups and elements will 
         */
         pdf?: kendo.drawing.PDFOptions;
         /**
+        The tooltip options of the shape.
+        @member {kendo.drawing.TooltipOptions}
+        */
+        tooltip?: kendo.drawing.TooltipOptions;
+        /**
         The transformation to apply to this group and its children.
 Inherited from Element.transform
         @member {kendo.geometry.Transformation}
@@ -2218,6 +2269,13 @@ Inherited from Element.clippedBBox
         @returns The bounding box of the element with clipping transformations applied.
         */
         clippedBBox(): kendo.geometry.Rect;
+        /**
+        Returns true if the shape contains the specified point.
+        @method
+        @param point - The point that should be checked.
+        @returns value indicating if the shape contains the point.
+        */
+        containsPoint(point: kendo.geometry.Point): boolean;
         /**
         Gets or sets the element opacity.
 Inherited from Element.opacity
@@ -2307,6 +2365,11 @@ Inherited from Element.opacity
         @member {number}
         */
         opacity?: number;
+        /**
+        The tooltip options of the shape.
+        @member {kendo.drawing.TooltipOptions}
+        */
+        tooltip?: kendo.drawing.TooltipOptions;
         /**
         The transformation to apply to this element.
 Inherited from Element.transform
@@ -2539,6 +2602,13 @@ Inherited from Element.clippedBBox
         */
         close(): kendo.drawing.MultiPath;
         /**
+        Returns true if the shape contains the specified point.
+        @method
+        @param point - The point that should be checked.
+        @returns value indicating if the shape contains the point.
+        */
+        containsPoint(point: kendo.geometry.Point): boolean;
+        /**
         Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
         @method
         @param controlOut - The first control point for the curve.
@@ -2751,6 +2821,11 @@ Inherited from Element.opacity
         */
         stroke?: kendo.drawing.StrokeOptions;
         /**
+        The tooltip options of the shape.
+        @member {kendo.drawing.TooltipOptions}
+        */
+        tooltip?: kendo.drawing.TooltipOptions;
+        /**
         The transformation to apply to this element.
 Inherited from Element.transform
         @member {kendo.geometry.Transformation}
@@ -2912,6 +2987,13 @@ Inherited from Element.clippedBBox
         @returns The current instance to allow chaining.
         */
         close(): kendo.drawing.Path;
+        /**
+        Returns true if the shape contains the specified point.
+        @method
+        @param point - The point that should be checked.
+        @returns value indicating if the shape contains the point.
+        */
+        containsPoint(point: kendo.geometry.Point): boolean;
         /**
         Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
         @method
@@ -3125,6 +3207,11 @@ Inherited from Element.opacity
         */
         stroke?: kendo.drawing.StrokeOptions;
         /**
+        The tooltip options of the shape.
+        @member {kendo.drawing.TooltipOptions}
+        */
+        tooltip?: kendo.drawing.TooltipOptions;
+        /**
         The transformation to apply to this element.
 Inherited from Element.transform
         @member {kendo.geometry.Transformation}
@@ -3275,6 +3362,13 @@ Inherited from Element.clippedBBox
         */
         clippedBBox(): kendo.geometry.Rect;
         /**
+        Returns true if the shape contains the specified point.
+        @method
+        @param point - The point that should be checked.
+        @returns value indicating if the shape contains the point.
+        */
+        containsPoint(point: kendo.geometry.Point): boolean;
+        /**
         Gets or sets the rectangle geometry.
         @method
         @returns The current rectangle geometry.
@@ -3378,6 +3472,11 @@ Inherited from Element.opacity
         @member {kendo.drawing.StrokeOptions}
         */
         stroke?: kendo.drawing.StrokeOptions;
+        /**
+        The tooltip options of the shape.
+        @member {kendo.drawing.TooltipOptions}
+        */
+        tooltip?: kendo.drawing.TooltipOptions;
         /**
         The transformation to apply to this element.
 Inherited from Element.transform
@@ -3543,12 +3642,64 @@ Existing elements will remain visible.
         */
         eventTarget(e: any): kendo.drawing.Element;
         /**
+        Hides the surface tooltip.
+        @method
+        */
+        hideTooltip(): void;
+        /**
         Resizes the surface to match the size of the container.
         @method
         @param force - Whether to proceed with resizing even if the container dimensions have not changed.
         */
         resize(force?: boolean): void;
+        /**
+        Shows the surface tooltip for the passed shape.
+        @method
+        @param element - The element for which the tooltip should be shown.
+        @param options - Options for the tooltip.
+        */
+        showTooltip(element: kendo.drawing.Element, options?: any): void;
 
+    }
+
+    interface SurfaceTooltipAnimationClose {
+        /**
+        The effect(s) to use when playing the close animation. Multiple effects should be separated with a space.Complete list of available animations
+        @member {string}
+        */
+        effects?: string;
+        /**
+        The duration of the close animation in milliseconds.
+        @member {number}
+        */
+        duration?: number;
+    }
+
+    interface SurfaceTooltipAnimationOpen {
+        /**
+        The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.Complete list of available animations
+        @member {string}
+        */
+        effects?: string;
+        /**
+        The duration of the open animation in milliseconds.
+        @member {number}
+        */
+        duration?: number;
+    }
+
+    interface SurfaceTooltipAnimation {
+        close?: SurfaceTooltipAnimationClose;
+        open?: SurfaceTooltipAnimationOpen;
+    }
+
+    interface SurfaceTooltip {
+        animation?: boolean|SurfaceTooltipAnimation;
+        /**
+        Which element the tooltip will be appended to.
+        @member {string|JQuery}
+        */
+        appendTo?: string|JQuery;
     }
 
     interface SurfaceOptions {
@@ -3575,6 +3726,7 @@ By default the surface will expand to fill the width of the first positioned con
         @member {string}
         */
         width?: string;
+        tooltip?: SurfaceTooltip;
         /**
         Triggered when an element has been clicked.
         */
@@ -3587,6 +3739,14 @@ By default the surface will expand to fill the width of the first positioned con
         Triggered when the mouse is leaves an element.
         */
         mouseleave?(e: SurfaceMouseleaveEvent): void;
+        /**
+        Triggered when closing the surface tooltip.
+        */
+        tooltipClose?(e: SurfaceTooltipCloseEvent): void;
+        /**
+        Triggered when opening the surface tooltip.
+        */
+        tooltipOpen?(e: SurfaceTooltipOpenEvent): void;
     }
     interface SurfaceEvent {
         sender: Surface;
@@ -3633,6 +3793,32 @@ By default the surface will expand to fill the width of the first positioned con
         originalEvent?: any;
     }
 
+    interface SurfaceTooltipCloseEvent extends SurfaceEvent {
+        /**
+        The element with set tooltip options. Can differ from the target element for groups.
+        @member {kendo.drawing.Element}
+        */
+        element?: kendo.drawing.Element;
+        /**
+        The target element.
+        @member {kendo.drawing.Element}
+        */
+        target?: kendo.drawing.Element;
+    }
+
+    interface SurfaceTooltipOpenEvent extends SurfaceEvent {
+        /**
+        The element with set tooltip options. Can differ from the target element for groups.
+        @member {kendo.drawing.Element}
+        */
+        element?: kendo.drawing.Element;
+        /**
+        The target element.
+        @member {kendo.drawing.Element}
+        */
+        target?: kendo.drawing.Element;
+    }
+
 
     class Text extends kendo.drawing.Element {
 
@@ -3671,6 +3857,13 @@ Inherited from Element.clippedBBox
         @returns The bounding box of the element with clipping transformations applied.
         */
         clippedBBox(): kendo.geometry.Rect;
+        /**
+        Returns true if the shape contains the specified point.
+        @method
+        @param point - The point that should be checked.
+        @returns value indicating if the shape contains the point.
+        */
+        containsPoint(point: kendo.geometry.Point): boolean;
         /**
         Gets or sets the text content.
         @method
@@ -3796,6 +3989,11 @@ Inherited from Element.opacity
         */
         stroke?: kendo.drawing.StrokeOptions;
         /**
+        The tooltip options of the shape.
+        @member {kendo.drawing.TooltipOptions}
+        */
+        tooltip?: kendo.drawing.TooltipOptions;
+        /**
         The transformation to apply to this element.
 Inherited from Element.transform
         @member {kendo.geometry.Transformation}
@@ -3815,8 +4013,60 @@ Inherited from Element.visible
     }
 
 
+    interface TooltipOptions  {
+
+
+
+        /**
+                Specifies if the tooltip will be hidden when mouse leaves the shape. If set to false a close button will be shown within the tooltip.
+                */
+                autoHide?: boolean;
+        /**
+                The text or a function which result will be shown within the tooltip.
+                */
+                content?: string|Function;
+        /**
+                The position relative to the target shape, at which the Tooltip will be shown. Predefined values are:
+                */
+                position?: string;
+        /**
+                The height of the Tooltip.
+                */
+                height?: number|string;
+        /**
+                Specifies the delay in milliseconds before the tooltip is hidden after leaving the shape.
+                */
+                hideDelay?: number;
+        /**
+                Specifies the offset in pixels from the target position at which the tooltip should be shown.
+                */
+                offset?: number;
+        /**
+                Specifies if the same tooltip should be used for elements within a group or multipath. If set to true, the group or multipath bounding box will be used for the position and the tooltip will not be hidden and shown when moving from one element to another.
+                */
+                shared?: boolean;
+        /**
+                Specifies the delay in milliseconds before the tooltip is shown.
+                */
+                showAfter?: number;
+        /**
+                The event on which the tooltip will be shown. The available values are "mouseenter" and "click".
+                */
+                showOn?: string;
+        /**
+                The width of the Tooltip.
+                */
+                width?: number|string;
+
+
+
+
+    }
+
+
+
 }
-declare module kendo.geometry {
+declare namespace kendo.geometry {
     class Arc extends Observable {
 
 
@@ -4347,7 +4597,7 @@ The callee coordinates will remain unchanged.
                 */
                 size: kendo.geometry.Size;
 
-        constructor(origin: kendo.geometry.Point, size: kendo.geometry.Size);
+        constructor(origin: kendo.geometry.Point|any, size: kendo.geometry.Size|any);
 
         static fromPoints(pointA: kendo.geometry.Point, pointB: kendo.geometry.Point): kendo.geometry.Rect;
         static union(rectA: kendo.geometry.Rect, rectB: kendo.geometry.Rect): kendo.geometry.Rect;
@@ -4626,7 +4876,7 @@ Negative values or values greater than 360 will be normalized.
 
 
 }
-declare module kendo {
+declare namespace kendo {
     class Color extends Observable {
 
 
@@ -4707,7 +4957,7 @@ RGBA form.
     }
 
 
-    module drawing {
+    namespace drawing {
         function /**
         Aligns drawing elements x axis position to a given rectangle.
         @method
@@ -4793,7 +5043,7 @@ RGBA form.
         wrap(elements: any, rect: kendo.geometry.Rect): any;
     }
 
-    module effects {
+    namespace effects {
         function /**
         Calculates the offset and dimensions of the given element
         @method
@@ -5093,7 +5343,7 @@ All descendant elements are traversed.
         */
         unbind(element: Element): void;
 
-    module pdf {
+    namespace pdf {
         function /**
         Defines a map with locations for TrueType Font (.ttf) files.The exportPDF method will use the font files when embedding them in a PDF document.
 As a fallback, fonts might be loaded from the locations listed in a style sheet font-face declarations.
@@ -5105,7 +5355,7 @@ This will work only if the style sheet and fonts are loaded from the same domain
     }
 
 }
-declare module kendo.mobile.ui {
+declare namespace kendo.mobile.ui {
     class ActionSheet extends kendo.mobile.ui.Widget {
 
         static fn: ActionSheet;
@@ -5166,10 +5416,6 @@ declare module kendo.mobile.ui {
         @member {string}
         */
         cancel?: string;
-        /**
-        The popup configuration options (tablet only).
-        @member {ActionSheetPopup}
-        */
         popup?: ActionSheetPopup;
         /**
         By default, the actionsheet opens as a full screen dialog on a phone device or as a popover if a tablet is detected. Setting the type to "phone" or "tablet" will force the looks of the widget regardless of the device.
@@ -5955,10 +6201,6 @@ Applicable only when the type is set to group, or when binding to grouped DataSo
         @member {boolean}
         */
         loadMore?: boolean;
-        /**
-        Defines the text of the ListView messages. Used primary for localization.
-        @member {ListViewMessages}
-        */
         messages?: ListViewMessages;
         /**
         If set to true, the listview will reload its data when the user pulls the view over the top limit.
@@ -5986,11 +6228,7 @@ Previously loaded pages in the DataSource are also discarded.
         @member {string}
         */
         type?: string;
-        /**
-        Indicates whether the filter input must be visible or not.
-        @member {ListViewFilterable}
-        */
-        filterable?: ListViewFilterable;
+        filterable?: boolean|ListViewFilterable;
         /**
         Used when virtualization of local data is used. This configuration is needed to determine the items displayed, since the datasource does not (and should not) have paging set.
         @member {number}
@@ -6407,15 +6645,7 @@ Note: The dataItem must be from a non-primitive type (Object).
 
     interface PopOverOptions {
         name?: string;
-        /**
-        The pane configuration options.
-        @member {PopOverPane}
-        */
         pane?: PopOverPane;
-        /**
-        The popup configuration options.
-        @member {PopOverPopup}
-        */
         popup?: PopOverPopup;
         /**
         Fires when popover is closed.
@@ -6752,10 +6982,6 @@ Has effect only when the pullToRefresh option is set to true.
         @member {boolean}
         */
         elastic?: boolean;
-        /**
-        Defines the text of the Scroller pull to refresh messages. Used primary for localization.
-        @member {ScrollerMessages}
-        */
         messages?: ScrollerMessages;
         /**
         The threshold below which releasing the scroller will trigger the pull event.
@@ -7272,7 +7498,7 @@ Native scrolling is only enabled on platforms that support it: iOS > 5+, Android
 
 
 }
-declare module kendo.ui {
+declare namespace kendo.ui {
     class Touch extends kendo.ui.Widget {
 
         static fn: Touch;
@@ -7576,7 +7802,7 @@ Notice: After the last finger is moved, the dragend event is fired.
 
 
 }
-declare module kendo.ooxml {
+declare namespace kendo.ooxml {
     class Workbook extends Observable {
 
 
@@ -7716,25 +7942,9 @@ frozenRows instead.
         @member {string}
         */
         background?: string;
-        /**
-        The style information for the bottom border of the cell.
-        @member {WorkbookSheetRowCellBorderBottom}
-        */
         borderBottom?: WorkbookSheetRowCellBorderBottom;
-        /**
-        The style information for the left border of the cell.
-        @member {WorkbookSheetRowCellBorderLeft}
-        */
         borderLeft?: WorkbookSheetRowCellBorderLeft;
-        /**
-        The style information for the top border of the cell.
-        @member {WorkbookSheetRowCellBorderTop}
-        */
         borderTop?: WorkbookSheetRowCellBorderTop;
-        /**
-        The style information for the right border of the cell.
-        @member {WorkbookSheetRowCellBorderRight}
-        */
         borderRight?: WorkbookSheetRowCellBorderRight;
         /**
         Setting it to true makes the cell value bold.
@@ -7845,12 +8055,6 @@ Defaults to the index of the object in the array.
 
     interface WorkbookSheet {
         columns?: WorkbookSheetColumn[];
-        /**
-        Deprecated in versions 2015.3 and newer. Use
-frozenColumns and
-frozenRows instead.
-        @member {WorkbookSheetFreezePane}
-        */
         freezePane?: WorkbookSheetFreezePane;
         /**
         The number of frozen columns in this sheet.
@@ -7862,10 +8066,6 @@ frozenRows instead.
         @member {number}
         */
         frozenRows?: number;
-        /**
-        Excel auto filter configuration. When set the final document will have auto filtering enabled.
-        @member {WorkbookSheetFilter}
-        */
         filter?: WorkbookSheetFilter;
         /**
         Sets the name of the exported workbook sheet.
@@ -7873,6 +8073,11 @@ frozenRows instead.
         */
         name?: string;
         rows?: WorkbookSheetRow[];
+        /**
+        A boolean value indicating if the sheet grid lines should be displayed.
+        @member {boolean}
+        */
+        showGridLines?: boolean;
         /**
         Deprecated in versions 2015.3 and newer. Use name instead.
         @member {string}
@@ -7903,7 +8108,7 @@ frozenRows instead.
 
 }
 
-declare module kendo.dataviz.drawing {
+declare namespace kendo.dataviz.drawing {
     class Arc extends kendo.drawing.Element {
 
 
@@ -7941,6 +8146,13 @@ Inherited from Element.clippedBBox
         @returns The bounding box of the element with clipping transformations applied.
         */
         clippedBBox(): kendo.geometry.Rect;
+        /**
+        Returns true if the shape contains the specified point.
+        @method
+        @param point - The point that should be checked.
+        @returns value indicating if the shape contains the point.
+        */
+        containsPoint(point: kendo.geometry.Point): boolean;
         /**
         Gets or sets the arc geometry.
         @method
@@ -8046,6 +8258,11 @@ Inherited from Element.opacity
         */
         stroke?: kendo.drawing.StrokeOptions;
         /**
+        The tooltip options of the shape.
+        @member {kendo.drawing.TooltipOptions}
+        */
+        tooltip?: kendo.drawing.TooltipOptions;
+        /**
         The transformation to apply to this element.
 Inherited from Element.transform
         @member {kendo.geometry.Transformation}
@@ -8102,6 +8319,13 @@ Inherited from Element.clippedBBox
         @returns The bounding box of the element with clipping transformations applied.
         */
         clippedBBox(): kendo.geometry.Rect;
+        /**
+        Returns true if the shape contains the specified point.
+        @method
+        @param point - The point that should be checked.
+        @returns value indicating if the shape contains the point.
+        */
+        containsPoint(point: kendo.geometry.Point): boolean;
         /**
         Gets or sets the circle geometry.
         @method
@@ -8207,6 +8431,11 @@ Inherited from Element.opacity
         */
         stroke?: kendo.drawing.StrokeOptions;
         /**
+        The tooltip options of the shape.
+        @member {kendo.drawing.TooltipOptions}
+        */
+        tooltip?: kendo.drawing.TooltipOptions;
+        /**
         The transformation to apply to this element.
 Inherited from Element.transform
         @member {kendo.geometry.Transformation}
@@ -8231,6 +8460,10 @@ Inherited from Element.visible
 
         options: ElementOptions;
 
+        /**
+                The parent group element, if any.
+                */
+                parent: kendo.drawing.Group;
 
         constructor(options?: ElementOptions);
 
@@ -8259,6 +8492,13 @@ Inherited from Element.visible
         @returns The bounding box of the element with clipping and transformations applied.
         */
         clippedBBox(): kendo.geometry.Rect;
+        /**
+        Returns true if the shape contains the specified point.
+        @method
+        @param point - The point that should be checked.
+        @returns value indicating if the shape contains the point.
+        */
+        containsPoint(point: kendo.geometry.Point): boolean;
         /**
         Gets or sets the element opacity.
         @method
@@ -8501,6 +8741,13 @@ Inherited from Element.clippedBBox
         */
         clippedBBox(): kendo.geometry.Rect;
         /**
+        Returns true if the shape contains the specified point.
+        @method
+        @param point - The point that should be checked.
+        @returns value indicating if the shape contains the point.
+        */
+        containsPoint(point: kendo.geometry.Point): boolean;
+        /**
         Inserts an element at the specified position.
         @method
         @param position - The position to insert the element at. Existing children beyond this position will be shifted right.
@@ -8574,6 +8821,11 @@ Inherited from Element.opacityThe opacity of any child groups and elements will 
         */
         pdf?: kendo.drawing.PDFOptions;
         /**
+        The tooltip options of the shape.
+        @member {kendo.drawing.TooltipOptions}
+        */
+        tooltip?: kendo.drawing.TooltipOptions;
+        /**
         The transformation to apply to this group and its children.
 Inherited from Element.transform
         @member {kendo.geometry.Transformation}
@@ -8630,6 +8882,13 @@ Inherited from Element.clippedBBox
         @returns The bounding box of the element with clipping transformations applied.
         */
         clippedBBox(): kendo.geometry.Rect;
+        /**
+        Returns true if the shape contains the specified point.
+        @method
+        @param point - The point that should be checked.
+        @returns value indicating if the shape contains the point.
+        */
+        containsPoint(point: kendo.geometry.Point): boolean;
         /**
         Gets or sets the element opacity.
 Inherited from Element.opacity
@@ -8719,6 +8978,11 @@ Inherited from Element.opacity
         @member {number}
         */
         opacity?: number;
+        /**
+        The tooltip options of the shape.
+        @member {kendo.drawing.TooltipOptions}
+        */
+        tooltip?: kendo.drawing.TooltipOptions;
         /**
         The transformation to apply to this element.
 Inherited from Element.transform
@@ -8951,6 +9215,13 @@ Inherited from Element.clippedBBox
         */
         close(): kendo.drawing.MultiPath;
         /**
+        Returns true if the shape contains the specified point.
+        @method
+        @param point - The point that should be checked.
+        @returns value indicating if the shape contains the point.
+        */
+        containsPoint(point: kendo.geometry.Point): boolean;
+        /**
         Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
         @method
         @param controlOut - The first control point for the curve.
@@ -9163,6 +9434,11 @@ Inherited from Element.opacity
         */
         stroke?: kendo.drawing.StrokeOptions;
         /**
+        The tooltip options of the shape.
+        @member {kendo.drawing.TooltipOptions}
+        */
+        tooltip?: kendo.drawing.TooltipOptions;
+        /**
         The transformation to apply to this element.
 Inherited from Element.transform
         @member {kendo.geometry.Transformation}
@@ -9324,6 +9600,13 @@ Inherited from Element.clippedBBox
         @returns The current instance to allow chaining.
         */
         close(): kendo.drawing.Path;
+        /**
+        Returns true if the shape contains the specified point.
+        @method
+        @param point - The point that should be checked.
+        @returns value indicating if the shape contains the point.
+        */
+        containsPoint(point: kendo.geometry.Point): boolean;
         /**
         Draws a cubic Bézier curve (with two control points).A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.
         @method
@@ -9537,6 +9820,11 @@ Inherited from Element.opacity
         */
         stroke?: kendo.drawing.StrokeOptions;
         /**
+        The tooltip options of the shape.
+        @member {kendo.drawing.TooltipOptions}
+        */
+        tooltip?: kendo.drawing.TooltipOptions;
+        /**
         The transformation to apply to this element.
 Inherited from Element.transform
         @member {kendo.geometry.Transformation}
@@ -9687,6 +9975,13 @@ Inherited from Element.clippedBBox
         */
         clippedBBox(): kendo.geometry.Rect;
         /**
+        Returns true if the shape contains the specified point.
+        @method
+        @param point - The point that should be checked.
+        @returns value indicating if the shape contains the point.
+        */
+        containsPoint(point: kendo.geometry.Point): boolean;
+        /**
         Gets or sets the rectangle geometry.
         @method
         @returns The current rectangle geometry.
@@ -9790,6 +10085,11 @@ Inherited from Element.opacity
         @member {kendo.drawing.StrokeOptions}
         */
         stroke?: kendo.drawing.StrokeOptions;
+        /**
+        The tooltip options of the shape.
+        @member {kendo.drawing.TooltipOptions}
+        */
+        tooltip?: kendo.drawing.TooltipOptions;
         /**
         The transformation to apply to this element.
 Inherited from Element.transform
@@ -9955,12 +10255,64 @@ Existing elements will remain visible.
         */
         eventTarget(e: any): kendo.drawing.Element;
         /**
+        Hides the surface tooltip.
+        @method
+        */
+        hideTooltip(): void;
+        /**
         Resizes the surface to match the size of the container.
         @method
         @param force - Whether to proceed with resizing even if the container dimensions have not changed.
         */
         resize(force?: boolean): void;
+        /**
+        Shows the surface tooltip for the passed shape.
+        @method
+        @param element - The element for which the tooltip should be shown.
+        @param options - Options for the tooltip.
+        */
+        showTooltip(element: kendo.drawing.Element, options?: any): void;
 
+    }
+
+    interface SurfaceTooltipAnimationClose {
+        /**
+        The effect(s) to use when playing the close animation. Multiple effects should be separated with a space.Complete list of available animations
+        @member {string}
+        */
+        effects?: string;
+        /**
+        The duration of the close animation in milliseconds.
+        @member {number}
+        */
+        duration?: number;
+    }
+
+    interface SurfaceTooltipAnimationOpen {
+        /**
+        The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.Complete list of available animations
+        @member {string}
+        */
+        effects?: string;
+        /**
+        The duration of the open animation in milliseconds.
+        @member {number}
+        */
+        duration?: number;
+    }
+
+    interface SurfaceTooltipAnimation {
+        close?: SurfaceTooltipAnimationClose;
+        open?: SurfaceTooltipAnimationOpen;
+    }
+
+    interface SurfaceTooltip {
+        animation?: boolean|SurfaceTooltipAnimation;
+        /**
+        Which element the tooltip will be appended to.
+        @member {string|JQuery}
+        */
+        appendTo?: string|JQuery;
     }
 
     interface SurfaceOptions {
@@ -9987,6 +10339,7 @@ By default the surface will expand to fill the width of the first positioned con
         @member {string}
         */
         width?: string;
+        tooltip?: SurfaceTooltip;
         /**
         Triggered when an element has been clicked.
         */
@@ -9999,6 +10352,14 @@ By default the surface will expand to fill the width of the first positioned con
         Triggered when the mouse is leaves an element.
         */
         mouseleave?(e: SurfaceMouseleaveEvent): void;
+        /**
+        Triggered when closing the surface tooltip.
+        */
+        tooltipClose?(e: SurfaceTooltipCloseEvent): void;
+        /**
+        Triggered when opening the surface tooltip.
+        */
+        tooltipOpen?(e: SurfaceTooltipOpenEvent): void;
     }
     interface SurfaceEvent {
         sender: Surface;
@@ -10045,6 +10406,32 @@ By default the surface will expand to fill the width of the first positioned con
         originalEvent?: any;
     }
 
+    interface SurfaceTooltipCloseEvent extends SurfaceEvent {
+        /**
+        The element with set tooltip options. Can differ from the target element for groups.
+        @member {kendo.drawing.Element}
+        */
+        element?: kendo.drawing.Element;
+        /**
+        The target element.
+        @member {kendo.drawing.Element}
+        */
+        target?: kendo.drawing.Element;
+    }
+
+    interface SurfaceTooltipOpenEvent extends SurfaceEvent {
+        /**
+        The element with set tooltip options. Can differ from the target element for groups.
+        @member {kendo.drawing.Element}
+        */
+        element?: kendo.drawing.Element;
+        /**
+        The target element.
+        @member {kendo.drawing.Element}
+        */
+        target?: kendo.drawing.Element;
+    }
+
 
     class Text extends kendo.drawing.Element {
 
@@ -10083,6 +10470,13 @@ Inherited from Element.clippedBBox
         @returns The bounding box of the element with clipping transformations applied.
         */
         clippedBBox(): kendo.geometry.Rect;
+        /**
+        Returns true if the shape contains the specified point.
+        @method
+        @param point - The point that should be checked.
+        @returns value indicating if the shape contains the point.
+        */
+        containsPoint(point: kendo.geometry.Point): boolean;
         /**
         Gets or sets the text content.
         @method
@@ -10208,6 +10602,11 @@ Inherited from Element.opacity
         */
         stroke?: kendo.drawing.StrokeOptions;
         /**
+        The tooltip options of the shape.
+        @member {kendo.drawing.TooltipOptions}
+        */
+        tooltip?: kendo.drawing.TooltipOptions;
+        /**
         The transformation to apply to this element.
 Inherited from Element.transform
         @member {kendo.geometry.Transformation}
@@ -10227,8 +10626,60 @@ Inherited from Element.visible
     }
 
 
+    interface TooltipOptions  {
+
+
+
+        /**
+                Specifies if the tooltip will be hidden when mouse leaves the shape. If set to false a close button will be shown within the tooltip.
+                */
+                autoHide?: boolean;
+        /**
+                The text or a function which result will be shown within the tooltip.
+                */
+                content?: string|Function;
+        /**
+                The position relative to the target shape, at which the Tooltip will be shown. Predefined values are:
+                */
+                position?: string;
+        /**
+                The height of the Tooltip.
+                */
+                height?: number|string;
+        /**
+                Specifies the delay in milliseconds before the tooltip is hidden after leaving the shape.
+                */
+                hideDelay?: number;
+        /**
+                Specifies the offset in pixels from the target position at which the tooltip should be shown.
+                */
+                offset?: number;
+        /**
+                Specifies if the same tooltip should be used for elements within a group or multipath. If set to true, the group or multipath bounding box will be used for the position and the tooltip will not be hidden and shown when moving from one element to another.
+                */
+                shared?: boolean;
+        /**
+                Specifies the delay in milliseconds before the tooltip is shown.
+                */
+                showAfter?: number;
+        /**
+                The event on which the tooltip will be shown. The available values are "mouseenter" and "click".
+                */
+                showOn?: string;
+        /**
+                The width of the Tooltip.
+                */
+                width?: number|string;
+
+
+
+
+    }
+
+
+
 }
-declare module kendo.dataviz.geometry {
+declare namespace kendo.dataviz.geometry {
     class Arc extends Observable {
 
 
@@ -10759,7 +11210,7 @@ The callee coordinates will remain unchanged.
                 */
                 size: kendo.geometry.Size;
 
-        constructor(origin: kendo.geometry.Point, size: kendo.geometry.Size);
+        constructor(origin: kendo.geometry.Point|any, size: kendo.geometry.Size|any);
 
         static fromPoints(pointA: kendo.geometry.Point, pointB: kendo.geometry.Point): kendo.geometry.Rect;
         static union(rectA: kendo.geometry.Rect, rectB: kendo.geometry.Rect): kendo.geometry.Rect;
