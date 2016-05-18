@@ -839,6 +839,7 @@ declare namespace kendo.data {
         axes?: any;
         catalogs?: any;
         cubes?: any;
+        cube?: any;
         data?: any;
         dimensions?: any;
         hierarchies?: any;
@@ -1293,10 +1294,10 @@ declare namespace kendo.ui {
     function progress(container: JQuery, toggle: boolean): void;
 
     class Widget extends Observable {
-        static fn: Widget;
+        static fn: any;
 
         element: JQuery;
-        options: Object;
+        options: any;
         events: string[];
 
         static extend(prototype: Object): Widget;
