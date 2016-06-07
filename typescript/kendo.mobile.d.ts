@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2016.1.314
+// Type definitions for Kendo UI Professional v2016.2.607
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik/>
 
@@ -7994,6 +7994,7 @@ frozenRows instead.
         hAlign?: string;
         /**
         The zero-based index of the cell in the row.
+Records missing an index will be placed in the first available cell on the row.
         @member {any}
         */
         index?: any;
