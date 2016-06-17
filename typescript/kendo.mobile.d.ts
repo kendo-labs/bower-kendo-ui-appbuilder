@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2016.2.607
+// Type definitions for Kendo UI Professional v2016.2.617
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik/>
 
@@ -6240,15 +6240,15 @@ Previously loaded pages in the DataSource are also discarded.
         */
         click?(e: ListViewClickEvent): void;
         /**
-        Fires when the ListView has received data from the DataSource.
+        Fires when the ListView has received data from the DataSource. The event is used only when virtual (endless scrolling) mode is disabled.
         */
         dataBound?(e: ListViewEvent): void;
         /**
-        Fires when the ListView is about to be rendered.
+        Fires when the ListView is about to be rendered. The event is used only when virtual (endless scrolling) mode is disabled.
         */
         dataBinding?(e: ListViewEvent): void;
         /**
-        Fires when a new item is added to the listview (usually in virtual mode).
+        Fires when a new item is added to the listview. The event is used in virtual (endless scrolling) mode only.
         */
         itemChange?(e: ListViewEvent): void;
     }
