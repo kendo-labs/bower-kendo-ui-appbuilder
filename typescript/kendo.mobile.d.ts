@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2016.2.617
+// Type definitions for Kendo UI Professional v2016.2.630
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik/>
 
@@ -4103,6 +4103,7 @@ Negative values or values greater than 360 will be normalized.
                 */
                 startAngle: number;
 
+        constructor(center: any|kendo.geometry.Point, options?: ArcOptions);
 
 
         /**
@@ -4229,6 +4230,7 @@ Measured in clockwise direction with 0 pointing "right".
                 */
                 radius: number;
 
+        constructor(center: any|kendo.geometry.Point, radius: number);
 
 
         /**
@@ -10717,6 +10719,7 @@ Negative values or values greater than 360 will be normalized.
                 */
                 startAngle: number;
 
+        constructor(center: any|kendo.geometry.Point, options?: ArcOptions);
 
 
         /**
@@ -10843,6 +10846,7 @@ Measured in clockwise direction with 0 pointing "right".
                 */
                 radius: number;
 
+        constructor(center: any|kendo.geometry.Point, radius: number);
 
 
         /**
