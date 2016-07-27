@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2016.2.714
+// Type definitions for Kendo UI Professional v2016.2.727
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik/>
 
@@ -5897,7 +5897,7 @@ However, if the widget is placed in a scrollable view, the user may accidentally
         */
         position?: string;
         /**
-        If set to false, swiping the view will not activate the drawer. In this case, the drawer will only be open by a designated button
+        If set to false, swiping the view will not activate the drawer. In this case, the drawer will only be open by a designated button. should be disabled for browsers, which use side swiping gestures for back/forward navigation, such as iOS Safari. Otherwise, users should swipe from an inner part of the view, and not from the view edge.
         @member {boolean}
         */
         swipeToOpen?: boolean;
