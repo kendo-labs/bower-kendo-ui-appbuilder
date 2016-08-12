@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2016.2.805
+// Type definitions for Kendo UI Professional v2016.2.812
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik/>
 
@@ -1394,17 +1394,21 @@ declare namespace kendo.ui {
 
     interface DraggableOptions {
         axis?: string;
+        autoScroll?: boolean;
         container?: JQuery;
         cursorOffset?: any;
         distance?: number;
         filter?: string;
         group?: string;
         hint?: Function;
+        holdToDrag?: boolean;
         ignore?: string;
+        cancelHold(): void;
         drag?(e: DraggableEvent): void;
         dragcancel?(e: DraggableEvent): void;
         dragend?(e: DraggableEvent): void;
         dragstart?(e: DraggableEvent): void;
+        hold?(e: DraggableEvent): void;
     }
 
     interface GridColumnEditorOptions {
@@ -5197,7 +5201,7 @@ If no culture is found the default one is used.
         Parses as a formatted string as a Date. Also see Date Parsing
         @method
         @param value - The string which should be parsed as Date.
-        @param formats - The format(s) that will be used to parse the date. By default all standard date formats of the current culture are used.
+        @param formats - The format(s) that will be used to parse the date. If you do not explicitly state a date parsing format, the standard date formats of the current culture will apply.For more information on the custom date parsing formats, refer to this article.
         @param culture - The culture used to parse the number. The current culture is used by default.
         @returns the parsed date. Returns null if the value cannot be parsed as a valid Date.
         */
@@ -5206,7 +5210,7 @@ If no culture is found the default one is used.
         Parses as a formatted string as a Date. Also see Date Parsing
         @method
         @param value - The string which should be parsed as Date.
-        @param formats - The format(s) that will be used to parse the date. By default all standard date formats of the current culture are used.
+        @param formats - The format(s) that will be used to parse the date. If you do not explicitly state a date parsing format, the standard date formats of the current culture will apply.For more information on the custom date parsing formats, refer to this article.
         @param culture - The culture used to parse the number. The current culture is used by default.
         @returns the parsed date. Returns null if the value cannot be parsed as a valid Date.
         */
