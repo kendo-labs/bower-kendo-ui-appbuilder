@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2016.2.812
+// Type definitions for Kendo UI Professional v2016.2.909
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik/>
 
@@ -1378,18 +1378,21 @@ declare namespace kendo.ui {
     }
 
     interface DropTargetAreaDragenterEvent extends DropTargetAreaEvent {
-        draggable?: JQuery;
+        draggable?: kendo.ui.Draggable;
         dropTarget?: JQuery;
+        target?: Element;
     }
 
     interface DropTargetAreaDragleaveEvent extends DropTargetAreaEvent {
-        draggable?: JQuery;
+        draggable?: kendo.ui.Draggable;
         dropTarget?: JQuery;
+        target?: Element;
     }
 
     interface DropTargetAreaDropEvent extends DropTargetAreaEvent {
         draggable?: kendo.ui.Draggable;
         dropTarget?: JQuery;
+        target?: Element;
     }
 
     interface DraggableOptions {
@@ -1400,7 +1403,7 @@ declare namespace kendo.ui {
         distance?: number;
         filter?: string;
         group?: string;
-        hint?: Function;
+        hint?: Function|JQuery;
         holdToDrag?: boolean;
         ignore?: string;
         cancelHold(): void;
