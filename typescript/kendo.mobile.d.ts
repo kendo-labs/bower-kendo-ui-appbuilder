@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2016.2.909
+// Type definitions for Kendo UI Professional v2016.3.914
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik/>
 
@@ -4121,9 +4121,9 @@ Negative values or values greater than 360 will be normalized.
         */
         bbox(matrix: kendo.geometry.Matrix): kendo.geometry.Rect;
         /**
-        Gets the arc anticlokwise flag.
+        Gets the arc anticlockwise flag.
         @method
-        @returns The anticlokwise flag of the arc.
+        @returns The anticlockwise flag of the arc.
         */
         getAnticlockwise(): boolean;
         /**
@@ -4167,7 +4167,7 @@ Negative values or values greater than 360 will be normalized.
         */
         pointAt(angle: number): kendo.geometry.Point;
         /**
-        Sets the arc anticlokwise flag.
+        Sets the arc anticlockwise flag.
         @method
         @param value - The new anticlockwise value.
         @returns The current arc instance.
@@ -4206,7 +4206,7 @@ Measured in clockwise direction with 0 pointing "right".
         Sets the start angle of the arc in decimal degrees.
 Measured in clockwise direction with 0 pointing "right".
         @method
-        @param value - The new arc atart angle.
+        @param value - The new arc start angle.
         @returns The current arc instance.
         */
         setStartAngle(value: number): kendo.geometry.Arc;
@@ -5088,6 +5088,12 @@ RGBA form.
     }
 
         function /**
+        Opens a Kendo UI Alert popup. Similar to the native window.alert() method.
+        @method
+        @param text - The text to be shown in the Alert popup.
+        */
+        alert(text: string): void;
+        function /**
         Returns an object that contains common
 CSRF tokens
 found on the page.These include tokens used by ASP.NET, Ruby on Rails and others.
@@ -5168,6 +5174,12 @@ kendo.ui will be used. Multiple namespaces can be passed.
         */
         observableHierarchy(array: any): void;
         function /**
+        Opens a Kendo UI Confirm popup. Similar to the native window.confirm() method. method is designed by following the Promise pattern. That means that it returns you a jQuery Deferred object that resolves to:
+        @method
+        @param text - The text to be shown in the Confirm popup.
+        */
+        confirm(text: string): void;
+        function /**
         Sets or gets the current culture. Uses the passed culture name to select a culture from the culture scripts that you have included and then sets the current culture.
 If there is no corresponding culture then the method will try to find culture which is equal to the country part of the culture name.
 If no culture is found the default one is used.
@@ -5242,6 +5254,13 @@ If no culture is found the default one is used.
         @returns A Color object.
         */
         parseColor(color: string, noerror: boolean): kendo.Color;
+        function /**
+        Opens a Kendo UI Prompt popup. Similar to the native window.prompt() method. method is designed by following the Promise pattern. That means that it returns you a jQuery Deferred object that resolves to:
+        @method
+        @param text - The text to be shown in the Prompt popup.
+        @param defaultValue - The default value that will be shown in the popup's input.
+        */
+        prompt(text: string, defaultValue: string): void;
         function /**
         Creates a wrapper object over the passed one, with get/set properties that set the original object dirty flag. Suitable for a scenario where a dataSource item is used in a third-party MVVM implementation, like AngularJS.
         @method
@@ -5788,7 +5807,7 @@ However, if the widget is placed in a scrollable view, the user may accidentally
         */
         iconPosition?: string;
         /**
-        Forses inset appearance - the collapsible panel is padded from the View and receives rounded corners.
+        Forces inset appearance - the collapsible panel is padded from the View and receives rounded corners.
         @member {boolean}
         */
         inset?: boolean;
@@ -6167,7 +6186,7 @@ If this is not case the field must be defined.
         */
         refreshTemplate?: string;
         /**
-        Text that appears when scroller is pulled beyound the threshold (applies only if pullToRefresh is set to true).
+        Text that appears when scroller is pulled beyond the threshold (applies only if pullToRefresh is set to true).
         @member {string}
         */
         releaseTemplate?: string;
@@ -7890,9 +7909,9 @@ frozenRows instead.
         color?: string;
         /**
         The width of the border in pixels.The allowed values are:
-* 1 - Results in а "thin" border.
-* 2 - Results in а "medium" border.
-* 3 - Results in а "thick" border.
+* 1 - Results in a "thin" border.
+* 2 - Results in a "medium" border.
+* 3 - Results in a "thick" border.
         @member {number}
         */
         size?: number;
@@ -7906,9 +7925,9 @@ frozenRows instead.
         color?: string;
         /**
         The width of the border in pixels.The allowed values are:
-* 1 - Results in а "thin" border.
-* 2 - Results in а "medium" border.
-* 3 - Results in а "thick" border.
+* 1 - Results in a "thin" border.
+* 2 - Results in a "medium" border.
+* 3 - Results in a "thick" border.
         @member {number}
         */
         size?: number;
@@ -7922,9 +7941,9 @@ frozenRows instead.
         color?: string;
         /**
         The width of the border in pixels.The allowed values are:
-* 1 - Results in а "thin" border.
-* 2 - Results in а "medium" border.
-* 3 - Results in а "thick" border.
+* 1 - Results in a "thin" border.
+* 2 - Results in a "medium" border.
+* 3 - Results in a "thick" border.
         @member {number}
         */
         size?: number;
@@ -7938,9 +7957,9 @@ frozenRows instead.
         color?: string;
         /**
         The width of the border in pixels.The allowed values are:
-* 1 - Results in а "thin" border.
-* 2 - Results in а "medium" border.
-* 3 - Results in а "thick" border.
+* 1 - Results in a "thin" border.
+* 2 - Results in a "medium" border.
+* 3 - Results in a "thick" border.
         @member {number}
         */
         size?: number;
@@ -10737,9 +10756,9 @@ Negative values or values greater than 360 will be normalized.
         */
         bbox(matrix: kendo.geometry.Matrix): kendo.geometry.Rect;
         /**
-        Gets the arc anticlokwise flag.
+        Gets the arc anticlockwise flag.
         @method
-        @returns The anticlokwise flag of the arc.
+        @returns The anticlockwise flag of the arc.
         */
         getAnticlockwise(): boolean;
         /**
@@ -10783,7 +10802,7 @@ Negative values or values greater than 360 will be normalized.
         */
         pointAt(angle: number): kendo.geometry.Point;
         /**
-        Sets the arc anticlokwise flag.
+        Sets the arc anticlockwise flag.
         @method
         @param value - The new anticlockwise value.
         @returns The current arc instance.
@@ -10822,7 +10841,7 @@ Measured in clockwise direction with 0 pointing "right".
         Sets the start angle of the arc in decimal degrees.
 Measured in clockwise direction with 0 pointing "right".
         @method
-        @param value - The new arc atart angle.
+        @param value - The new arc start angle.
         @returns The current arc instance.
         */
         setStartAngle(value: number): kendo.geometry.Arc;
@@ -11505,6 +11524,9 @@ Negative values or values greater than 360 will be normalized.
 
 interface HTMLElement {
     kendoBindingTarget: kendo.data.BindingTarget;
+}
+
+interface JQueryAjaxSettings {
 }
 
 interface JQueryXHR {
