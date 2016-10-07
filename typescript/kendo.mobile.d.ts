@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2016.3.914
+// Type definitions for Kendo UI Professional v2016.3.1007
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik/>
 
@@ -1472,6 +1472,7 @@ declare namespace kendo.mobile {
         statusBarStyle?: string;
         transition?: string;
         useNativeScrolling?: boolean;
+		init?(e: ApplicationEvent): void;
     }
 
     interface ApplicationEvent {
@@ -5174,11 +5175,12 @@ kendo.ui will be used. Multiple namespaces can be passed.
         */
         observableHierarchy(array: any): void;
         function /**
-        Opens a Kendo UI Confirm popup. Similar to the native window.confirm() method. method is designed by following the Promise pattern. That means that it returns you a jQuery Deferred object that resolves to:
+        Opens a Kendo UI Confirm popup. Similar to the native window.confirm() method.
         @method
         @param text - The text to be shown in the Confirm popup.
+        @returns a jQuery promise instance, which can be used for callbacks, or passed to jQuery.when. The jQuery Deferred object resolves to:
         */
-        confirm(text: string): void;
+        confirm(text: string): JQueryPromise<any>;
         function /**
         Sets or gets the current culture. Uses the passed culture name to select a culture from the culture scripts that you have included and then sets the current culture.
 If there is no corresponding culture then the method will try to find culture which is equal to the country part of the culture name.
@@ -5255,12 +5257,13 @@ If no culture is found the default one is used.
         */
         parseColor(color: string, noerror: boolean): kendo.Color;
         function /**
-        Opens a Kendo UI Prompt popup. Similar to the native window.prompt() method. method is designed by following the Promise pattern. That means that it returns you a jQuery Deferred object that resolves to:
+        Opens a Kendo UI Prompt popup. Similar to the native window.prompt() method.
         @method
         @param text - The text to be shown in the Prompt popup.
         @param defaultValue - The default value that will be shown in the popup's input.
+        @returns a jQuery promise instance, which can be used for callbacks, or passed to jQuery.when. The jQuery Deferred object resolves to:
         */
-        prompt(text: string, defaultValue: string): void;
+        prompt(text: string, defaultValue: string): JQueryPromise<any>;
         function /**
         Creates a wrapper object over the passed one, with get/set properties that set the original object dirty flag. Suitable for a scenario where a dataSource item is used in a third-party MVVM implementation, like AngularJS.
         @method
