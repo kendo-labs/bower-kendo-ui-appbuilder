@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2016.3.1007
+// Type definitions for Kendo UI Professional v2016.3.1028
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik/>
 
@@ -1107,7 +1107,7 @@ declare namespace kendo.data {
     }
 
     interface DataSourceFilterItem extends DataSourceFilter {
-        operator?: string;
+        operator?: string|Function;
         field?: string;
         value?: any;
     }
@@ -1240,6 +1240,7 @@ declare namespace kendo.data {
         type?: string;
         change? (e: DataSourceChangeEvent): void;
         error?(e: DataSourceErrorEvent): void;
+		push?(e: DataSourcePushEvent): void;
         sync?(e: DataSourceEvent): void;
         requestStart?(e: DataSourceRequestStartEvent): void;
         requestEnd?(e: DataSourceRequestEndEvent): void;
@@ -1267,6 +1268,12 @@ declare namespace kendo.data {
         index?: number;
         items?: DataSourceItemOrGroup[];
         node?: any;
+    }
+
+	interface DataSourcePushEvent extends DataSourceEvent {
+        items?: DataSourceItemOrGroup[];
+		type?: string;
+       
     }
 
     interface DataSourceErrorEvent extends DataSourceEvent {
@@ -1406,7 +1413,6 @@ declare namespace kendo.ui {
         hint?: Function|JQuery;
         holdToDrag?: boolean;
         ignore?: string;
-        cancelHold(): void;
         drag?(e: DraggableEvent): void;
         dragcancel?(e: DraggableEvent): void;
         dragend?(e: DraggableEvent): void;
@@ -5315,8 +5321,9 @@ A server "echo" proxy might be required, depending on browser capabilities.
         @method
         @param fn - The function to be throttled.
         @param timeout - The amount of time that needs to pass before a subsequent function call is made.
+        @returns the throttled function
         */
-        throttle(fn: Function, timeout: number): void;
+        throttle(fn: Function, timeout: number): Function;
         function /**
         Enables kinetic scrolling on touch devices
         @method
