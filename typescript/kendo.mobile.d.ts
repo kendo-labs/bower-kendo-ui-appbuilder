@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2016.3.1118
+// Type definitions for Kendo UI Professional v2016.3.1202
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik/>
 
@@ -5514,9 +5514,8 @@ All descendant elements are traversed.
 
     namespace pdf {
         function /**
-        Defines a map with locations for TrueType Font (.ttf) files.The exportPDF method will use the font files when embedding them in a PDF document.
-As a fallback, fonts might be loaded from the locations listed in a style sheet font-face declarations.
-This will work only if the style sheet and fonts are loaded from the same domain.It's safe to call this method multiple times.
+        Defines a map with locations for TrueType Font (.ttf) files. It is safe to call this method multiple times.The exportPDF method will use the font files when embedding them in a PDF document.
+Since Kendo UI 2014 Q3 SP1, the Kendo UI PDF generator is able to dig CSS @font-face declarations directly from the stylesheets. "Manually" calling the pdf.defineFont()method is no longer necessary. For more information how to embed fonts using CSS at-rules - check this section. This will work only if the style sheet and fonts are loaded from the same domain.
         @method
         @param map - A map for font names, variants and the location of its .ttf file.
         */
