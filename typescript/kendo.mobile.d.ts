@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2016.3.1202
+// Type definitions for Kendo UI Professional v2016.3.1216
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik/>
 
@@ -8006,6 +8006,11 @@ Notice: After the last finger is moved, the dragend event is fired.
         @member {JQueryEventObject}
         */
         event?: JQueryEventObject;
+        /**
+        The swipe event direction. Can be either left or right.
+        @member {string}
+        */
+        direction?: string;
     }
 
     interface TouchGesturestartEvent extends TouchEvent {
