@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2016.3.1216
+// Type definitions for Kendo UI Professional v2016.3.1306
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik/>
 
@@ -5065,9 +5065,10 @@ RGBA form.
         Add days to a date object.
         @method
         @param targetDate - The date object to add days to.
+        @param numberOfDaysToAdd - The number of days to be added to the target date.
         @returns Returns a new date object with added days.
         */
-        addDays(targetDate: Date): Date;
+        addDays(targetDate: Date, numberOfDaysToAdd: number): Date;
         function /**
         Returns the current day without the time part.
         @method
