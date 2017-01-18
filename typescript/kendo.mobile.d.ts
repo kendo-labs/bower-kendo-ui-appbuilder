@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2016.3.1317
+// Type definitions for Kendo UI Professional v2017.1.118
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik/>
 
@@ -1285,6 +1285,7 @@ declare namespace kendo.data {
 
     interface DataSourceRequestStartEvent extends DataSourceEvent {
         type?: string;
+        preventDefault(): void;
     }
 
     interface DataSourceRequestEndEvent extends DataSourceEvent {
@@ -2761,7 +2762,7 @@ It can be replaced by calling the clip method.
         */
         clip?: kendo.drawing.Path;
         /**
-        The element CSS cursor.Applicable to SVG and VML outputs.
+        The element CSS cursor.Applicable to an SVG output.
         @member {string}
         */
         cursor?: string;
@@ -4535,8 +4536,7 @@ Existing elements will remain visible.
         The preferred type of surface to create.
 Supported types (case insensitive):
 - svg
-- canvas
-- vmlThis option will be ignored if not supported by the browser.
+- canvasThis option will be ignored if not supported by the browser.
 See Supported Browsers.
         @member {string}
         */
@@ -4992,6 +4992,16 @@ RGBA form.
         @returns A new date object that is set with a particular day of the week.
         */
         dayOfWeek(targetDate: Date, dayOfWeek: number, direction: number): Date;
+        function /**
+        Returns week number of a specific date. According to the ISO-8601 standard, weeks starting on Monday. 
+The first week of the year is the week that contains that year's first Thursday (='First 4-day week').
+The method allows defining diffent start day by using the second parameter.
+        @method
+        @param date - The given date.
+        @param weekStart - The date representing what day of week is considered as a starting point. This parameter is optional because by default Monday is considered as a first day of the week.
+        @returns A number resenting the week number of a given date.
+        */
+        weekInYear(date: Date, weekStart?: Date): number;
         function /**
         Gets the date only - that is, removes the time part.
         @method
@@ -9643,7 +9653,7 @@ It can be replaced by calling the clip method.
         */
         clip?: kendo.drawing.Path;
         /**
-        The element CSS cursor.Applicable to SVG and VML outputs.
+        The element CSS cursor.Applicable to an SVG output.
         @member {string}
         */
         cursor?: string;
@@ -11417,8 +11427,7 @@ Existing elements will remain visible.
         The preferred type of surface to create.
 Supported types (case insensitive):
 - svg
-- canvas
-- vmlThis option will be ignored if not supported by the browser.
+- canvasThis option will be ignored if not supported by the browser.
 See Supported Browsers.
         @member {string}
         */
