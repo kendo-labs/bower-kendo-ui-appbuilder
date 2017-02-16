@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2017.1.213
+// Type definitions for Kendo UI Professional v2017.1.216
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik/>
 
@@ -3777,8 +3777,9 @@ The default "auto" means paper size is determined by content.Supported values:
 
         constructor(options?: PathOptions);
 
-        static fromPoints(points: any): kendo.drawing.Path;
-        static fromRect(rect: kendo.geometry.Rect): kendo.drawing.Path;
+        static fromArc(arc: kendo.geometry.Arc, options?: any): kendo.drawing.Path;
+        static fromPoints(points: any, options?: any): kendo.drawing.Path;
+        static fromRect(rect: kendo.geometry.Rect, options?: any): kendo.drawing.Path;
         static parse(svgPath: string, options?: any): kendo.drawing.Path;
 
         /**
@@ -10668,8 +10669,9 @@ The default "auto" means paper size is determined by content.Supported values:
 
         constructor(options?: PathOptions);
 
-        static fromPoints(points: any): kendo.drawing.Path;
-        static fromRect(rect: kendo.geometry.Rect): kendo.drawing.Path;
+        static fromArc(arc: kendo.geometry.Arc, options?: any): kendo.drawing.Path;
+        static fromPoints(points: any, options?: any): kendo.drawing.Path;
+        static fromRect(rect: kendo.geometry.Rect, options?: any): kendo.drawing.Path;
         static parse(svgPath: string, options?: any): kendo.drawing.Path;
 
         /**
