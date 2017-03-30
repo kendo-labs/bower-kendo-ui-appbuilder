@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2017.1.321
+// Type definitions for Kendo UI Professional v2017.1.330
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik/>
 
@@ -939,6 +939,10 @@ declare namespace kendo.data {
         model?: any;
     }
 
+    interface DataSourceSchemaWithTimezone extends DataSourceSchema {
+        timezone?: String;
+    }
+
     interface DataSourceSchemaWithOptionsModel extends DataSourceSchema {
         model?: DataSourceSchemaModel;
     }
@@ -1273,7 +1277,7 @@ declare namespace kendo.data {
 	interface DataSourcePushEvent extends DataSourceEvent {
         items?: DataSourceItemOrGroup[];
 		type?: string;
-       
+
     }
 
     interface DataSourceErrorEvent extends DataSourceEvent {
