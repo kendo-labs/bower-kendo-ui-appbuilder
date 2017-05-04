@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2017.1.411
+// Type definitions for Kendo UI Professional v2017.2.504
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik/>
 
@@ -1770,7 +1770,7 @@ Negative values or values greater than 360 will be normalized.
                 */
                 b: number;
         /**
-                The a (1, 2) member of the matrix.
+                The c (1, 2) member of the matrix.
                 */
                 c: number;
         /**
@@ -2193,7 +2193,7 @@ This is also the rectangle origin
         /**
         Creates a new instance with the same width and height.
         @method
-        @returns A new Size instance with the same coordinates.
+        @returns A new Size instance with the same dimensions.
         */
         clone(): kendo.geometry.Size;
         /**
@@ -8662,7 +8662,7 @@ Negative values or values greater than 360 will be normalized.
                 */
                 b: number;
         /**
-                The a (1, 2) member of the matrix.
+                The c (1, 2) member of the matrix.
                 */
                 c: number;
         /**
@@ -9085,7 +9085,7 @@ This is also the rectangle origin
         /**
         Creates a new instance with the same width and height.
         @method
-        @returns A new Size instance with the same coordinates.
+        @returns A new Size instance with the same dimensions.
         */
         clone(): kendo.geometry.Size;
         /**
