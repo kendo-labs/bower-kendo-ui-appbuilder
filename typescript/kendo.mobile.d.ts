@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2017.2.504
+// Type definitions for Kendo UI Professional v2017.2.621
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik/>
 
@@ -212,6 +212,9 @@ declare namespace kendo {
         F2: number;
         F10: number;
         F12: number;
+        NUMPAD_PLUS: number;
+        NUMPAD_MINUS: number;
+        NUMPAD_DOT: number;
     };
 
     var support: {
@@ -221,7 +224,7 @@ declare namespace kendo {
         hasHW3D: boolean;
         hasNativeScrolling: boolean;
         devicePixelRatio: number;
-        placeHolder: boolean;
+        placeholder: boolean;
         zoomLevel: number;
         mobileOS: {
             device: string;
@@ -234,10 +237,12 @@ declare namespace kendo {
             appMode: boolean;
         };
         browser: {
+            edge: boolean;
             msie: boolean;
             webkit: boolean;
             safari: boolean;
             opera: boolean;
+            mozilla: boolean;
             version: string;
         };
     };
@@ -3784,7 +3789,7 @@ The default "auto" means paper size is determined by content.Supported values:
         static fromArc(arc: kendo.geometry.Arc, options?: any): kendo.drawing.Path;
         static fromPoints(points: any, options?: any): kendo.drawing.Path;
         static fromRect(rect: kendo.geometry.Rect, options?: any): kendo.drawing.Path;
-        static parse(svgPath: string, options?: any): kendo.drawing.Path;
+        static parse(svgPath: string, options?: any): kendo.drawing.MultiPath;
 
         /**
         Returns the bounding box of the element with transformations applied.
@@ -10676,7 +10681,7 @@ The default "auto" means paper size is determined by content.Supported values:
         static fromArc(arc: kendo.geometry.Arc, options?: any): kendo.drawing.Path;
         static fromPoints(points: any, options?: any): kendo.drawing.Path;
         static fromRect(rect: kendo.geometry.Rect, options?: any): kendo.drawing.Path;
-        static parse(svgPath: string, options?: any): kendo.drawing.Path;
+        static parse(svgPath: string, options?: any): kendo.drawing.MultiPath;
 
         /**
         Returns the bounding box of the element with transformations applied.
