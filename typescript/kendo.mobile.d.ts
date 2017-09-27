@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2017.3.921
+// Type definitions for Kendo UI Professional v2017.3.927
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik/>
 
@@ -4370,7 +4370,7 @@ declare namespace kendo.drawing {
     }
 
     interface SurfaceTooltip {
-        animation?: boolean|SurfaceTooltipAnimation;
+        animation?: boolean | SurfaceTooltipAnimation;
         /**
         Which element the tooltip will be appended to.
         @member {string|JQuery}
@@ -6317,7 +6317,7 @@ declare namespace kendo.mobile.ui {
         @member {string}
         */
         type?: string;
-        filterable?: boolean|ListViewFilterable;
+        filterable?: boolean | ListViewFilterable;
         /**
         Used when virtualization of local data is used. This configuration is needed to determine the items displayed, since the datasource does not (and should not) have paging set.
         @member {number}
@@ -11043,7 +11043,7 @@ declare namespace kendo.dataviz.drawing {
     }
 
     interface SurfaceTooltip {
-        animation?: boolean|SurfaceTooltipAnimation;
+        animation?: boolean | SurfaceTooltipAnimation;
         /**
         Which element the tooltip will be appended to.
         @member {string|JQuery}
