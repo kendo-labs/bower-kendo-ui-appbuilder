@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2017.3.1115
+// Type definitions for Kendo UI Professional v2017.3.1116
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik/>
 
@@ -4819,10 +4819,10 @@ declare namespace kendo {
         Returns week number of a specific date. According to the ISO-8601 standard, weeks starting on Monday.  The first week of the year is the week that contains that year's first Thursday (='First 4-day week'). The method allows defining diffent start day by using the second parameter.
         @method
         @param date - The given date.
-        @param weekStart - The date representing what day of week is considered as a starting point. This parameter is optional because by default Monday is considered as a first day of the week.
+        @param weekStart - The day number (from 0 (Sunday) to 6 (Saturday)) representing what day of week is considered as a starting point. This parameter is optional because by default Monday (1) is considered as a first day of the week.
         @returns A number resenting the week number of a given date.
         */
-        weekInYear(date: Date, weekStart?: Date): number;
+        weekInYear(date: Date, weekStart?: number): number;
         function /**
         Gets the date only - that is, removes the time part.
         @method
