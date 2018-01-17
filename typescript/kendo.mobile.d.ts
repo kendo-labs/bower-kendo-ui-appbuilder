@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2017.3.1206
+// Type definitions for Kendo UI Professional v2018.1.117
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik/>
 
@@ -3632,6 +3632,10 @@ declare namespace kendo.drawing {
                 The date when the PDF document is created. Defaults to new Date().
                 */
                 date?: Date;
+        /**
+                The forced resolution (in dpi) of the images in the exported PDF document. By default, the images are exported at their full resolution.
+                */
+                imgDPI?: number;
         /**
                 Specifies the keywords of the exported PDF file.
                 */
@@ -10305,6 +10309,10 @@ declare namespace kendo.dataviz.drawing {
                 The date when the PDF document is created. Defaults to new Date().
                 */
                 date?: Date;
+        /**
+                The forced resolution (in dpi) of the images in the exported PDF document. By default, the images are exported at their full resolution.
+                */
+                imgDPI?: number;
         /**
                 Specifies the keywords of the exported PDF file.
                 */
