@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2018.1.117
+// Type definitions for Kendo UI Professional v2018.1.131
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik/>
 
@@ -810,9 +810,9 @@ declare namespace kendo.data {
     }
 
     interface PivotDataSourceOptions extends DataSourceOptions {
-        columns?: PivotDataSourceAxisOptions[];
-        measures?: PivotDataSourceMeasureOptions[];
-        rows?: PivotDataSourceAxisOptions[];
+        columns?: string[]|PivotDataSourceAxisOptions[];
+        measures?: string[]|PivotDataSourceMeasureOptions;
+        rows?: string[]|PivotDataSourceAxisOptions[];
         transport?: PivotTransport;
         schema?: PivotSchema;
     }
