@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2018.1.131
+// Type definitions for Kendo UI Professional v2018.1.221
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik/>
 
@@ -1237,7 +1237,8 @@ declare namespace kendo.data {
         batch?: boolean;
         data?: any;
         filter?: any;
-        group?: DataSourceGroupItem[];
+        group?: DataSourceGroupItem | DataSourceGroupItem[];
+        inPlaceSort?: boolean;
         offlineStorage?: any;
         page?: number;
         pageSize?: number;
@@ -1661,7 +1662,6 @@ declare namespace kendo.geometry {
     }
 
 
-
     class Circle extends Observable {
 
 
@@ -1750,7 +1750,6 @@ declare namespace kendo.geometry {
         preventDefault: Function;
         isDefaultPrevented(): boolean;
     }
-
 
 
     class Matrix extends Observable {
@@ -1842,7 +1841,6 @@ declare namespace kendo.geometry {
         preventDefault: Function;
         isDefaultPrevented(): boolean;
     }
-
 
 
     class Point extends Observable {
@@ -2026,7 +2024,6 @@ declare namespace kendo.geometry {
     }
 
 
-
     class Rect extends Observable {
 
 
@@ -2161,7 +2158,6 @@ declare namespace kendo.geometry {
     }
 
 
-
     class Size extends Observable {
 
 
@@ -2231,7 +2227,6 @@ declare namespace kendo.geometry {
         preventDefault: Function;
         isDefaultPrevented(): boolean;
     }
-
 
 
     class Transformation extends Observable {
@@ -2311,7 +2306,6 @@ declare namespace kendo.geometry {
         preventDefault: Function;
         isDefaultPrevented(): boolean;
     }
-
 
 
 }
@@ -2474,7 +2468,6 @@ declare namespace kendo.drawing {
     }
 
 
-
     class Circle extends kendo.drawing.Element {
 
 
@@ -2633,7 +2626,6 @@ declare namespace kendo.drawing {
     }
 
 
-
     class Element extends kendo.Class {
 
 
@@ -2752,7 +2744,6 @@ declare namespace kendo.drawing {
     }
 
 
-
     interface FillOptions  {
 
 
@@ -2770,7 +2761,6 @@ declare namespace kendo.drawing {
 
 
     }
-
 
 
 
@@ -2820,7 +2810,6 @@ declare namespace kendo.drawing {
     }
 
 
-
     class GradientStop extends kendo.Class {
 
 
@@ -2856,7 +2845,6 @@ declare namespace kendo.drawing {
         preventDefault: Function;
         isDefaultPrevented(): boolean;
     }
-
 
 
     class Group extends kendo.drawing.Element {
@@ -2997,7 +2985,6 @@ declare namespace kendo.drawing {
         preventDefault: Function;
         isDefaultPrevented(): boolean;
     }
-
 
 
     class Image extends kendo.drawing.Element {
@@ -3143,7 +3130,6 @@ declare namespace kendo.drawing {
     }
 
 
-
     class Layout extends kendo.drawing.Group {
 
 
@@ -3216,7 +3202,6 @@ declare namespace kendo.drawing {
         preventDefault: Function;
         isDefaultPrevented(): boolean;
     }
-
 
 
     class LinearGradient extends kendo.drawing.Gradient {
@@ -3299,7 +3284,6 @@ declare namespace kendo.drawing {
         preventDefault: Function;
         isDefaultPrevented(): boolean;
     }
-
 
 
     class MultiPath extends kendo.drawing.Element {
@@ -3578,7 +3562,6 @@ declare namespace kendo.drawing {
     }
 
 
-
     class OptionsStore extends kendo.Class {
 
 
@@ -3617,7 +3600,6 @@ declare namespace kendo.drawing {
         preventDefault: Function;
         isDefaultPrevented(): boolean;
     }
-
 
 
     interface PDFOptions  {
@@ -3665,7 +3647,6 @@ declare namespace kendo.drawing {
 
 
     }
-
 
 
 
@@ -3949,7 +3930,6 @@ declare namespace kendo.drawing {
     }
 
 
-
     class RadialGradient extends kendo.drawing.Gradient {
 
 
@@ -4034,7 +4014,6 @@ declare namespace kendo.drawing {
         preventDefault: Function;
         isDefaultPrevented(): boolean;
     }
-
 
 
     class Rect extends kendo.drawing.Element {
@@ -4195,7 +4174,6 @@ declare namespace kendo.drawing {
     }
 
 
-
     class Segment extends kendo.Class {
 
 
@@ -4254,7 +4232,6 @@ declare namespace kendo.drawing {
     }
 
 
-
     interface StrokeOptions  {
 
 
@@ -4288,7 +4265,6 @@ declare namespace kendo.drawing {
 
 
     }
-
 
 
 
@@ -4493,7 +4469,6 @@ declare namespace kendo.drawing {
     }
 
 
-
     class Text extends kendo.drawing.Element {
 
 
@@ -4669,7 +4644,6 @@ declare namespace kendo.drawing {
     }
 
 
-
     interface TooltipOptions  {
 
 
@@ -4719,7 +4693,6 @@ declare namespace kendo.drawing {
 
 
     }
-
 
 
 
@@ -4798,7 +4771,6 @@ declare namespace kendo {
         preventDefault: Function;
         isDefaultPrevented(): boolean;
     }
-
 
 
     namespace date {
@@ -4940,7 +4912,6 @@ declare namespace kendo {
         getMilliseconds(targetDate: Date): Date;
     }
 
-
     namespace drawing {
         function /**
         Aligns drawing elements x axis position to a given rectangle.
@@ -5027,7 +4998,6 @@ declare namespace kendo {
         wrap(elements: any, rect: kendo.geometry.Rect): any;
     }
 
-
     namespace effects {
         function /**
         Calculates the offset and dimensions of the given element
@@ -5061,7 +5031,6 @@ declare namespace kendo {
         */
         transformOrigin(firstElement: HTMLElement, secondElement: HTMLElement): any;
     }
-
 
         function /**
         Opens a Kendo UI Alert popup. Similar to the native window.alert() method.
@@ -5325,7 +5294,6 @@ declare namespace kendo {
         */
         unbind(element: Element): void;
 
-
     namespace pdf {
         function /**
         Defines a map with locations for TrueType Font (.ttf) files. It is safe to call this method multiple times.The exportPDF method will use the font files when embedding them in a PDF document. Since Kendo UI 2014 Q3 SP1, the Kendo UI PDF generator is able to dig CSS @font-face declarations directly from the stylesheets. "Manually" calling the pdf.defineFont()method is no longer necessary. For more information how to embed fonts using CSS at-rules - check this section. This will work only if the style sheet and fonts are loaded from the same domain.
@@ -5334,7 +5302,6 @@ declare namespace kendo {
         */
         defineFont(map: any): void;
     }
-
 
     namespace timezone {
         function /**
@@ -5445,7 +5412,6 @@ declare namespace kendo {
         toLocalDate(targetDate: number): Date;
     }
 
-
 }
 declare namespace kendo.mobile.ui {
     class ActionSheet extends kendo.mobile.ui.Widget {
@@ -5543,7 +5509,6 @@ declare namespace kendo.mobile.ui {
     }
 
 
-
     class BackButton extends kendo.mobile.ui.Widget {
 
         static fn: BackButton;
@@ -5592,7 +5557,6 @@ declare namespace kendo.mobile.ui {
         */
         button?: JQuery;
     }
-
 
 
     class Button extends kendo.mobile.ui.Widget {
@@ -5683,7 +5647,6 @@ declare namespace kendo.mobile.ui {
         */
         button?: JQuery;
     }
-
 
 
     class ButtonGroup extends kendo.mobile.ui.Widget {
@@ -5802,7 +5765,6 @@ declare namespace kendo.mobile.ui {
     }
 
 
-
     class Collapsible extends kendo.mobile.ui.Widget {
 
         static fn: Collapsible;
@@ -5892,7 +5854,6 @@ declare namespace kendo.mobile.ui {
     }
 
 
-
     class DetailButton extends kendo.mobile.ui.Widget {
 
         static fn: DetailButton;
@@ -5941,7 +5902,6 @@ declare namespace kendo.mobile.ui {
         */
         button?: JQuery;
     }
-
 
 
     class Drawer extends kendo.mobile.ui.Widget {
@@ -6049,7 +6009,6 @@ declare namespace kendo.mobile.ui {
     }
 
 
-
     class Layout extends kendo.mobile.ui.Widget {
 
         static fn: Layout;
@@ -6132,7 +6091,6 @@ declare namespace kendo.mobile.ui {
         */
         view?: JQuery;
     }
-
 
 
     class ListView extends kendo.mobile.ui.Widget {
@@ -6374,7 +6332,6 @@ declare namespace kendo.mobile.ui {
     }
 
 
-
     class Loader extends kendo.mobile.ui.Widget {
 
         static fn: Loader;
@@ -6411,7 +6368,6 @@ declare namespace kendo.mobile.ui {
         preventDefault: Function;
         isDefaultPrevented(): boolean;
     }
-
 
 
     class ModalView extends kendo.mobile.ui.Widget {
@@ -6511,7 +6467,6 @@ declare namespace kendo.mobile.ui {
     }
 
 
-
     class NavBar extends kendo.mobile.ui.Widget {
 
         static fn: NavBar;
@@ -6549,7 +6504,6 @@ declare namespace kendo.mobile.ui {
         preventDefault: Function;
         isDefaultPrevented(): boolean;
     }
-
 
 
     class Pane extends kendo.mobile.ui.Widget {
@@ -6669,7 +6623,6 @@ declare namespace kendo.mobile.ui {
     }
 
 
-
     class PopOver extends kendo.mobile.ui.Widget {
 
         static fn: PopOver;
@@ -6769,7 +6722,6 @@ declare namespace kendo.mobile.ui {
         */
         target?: JQuery;
     }
-
 
 
     class ScrollView extends kendo.mobile.ui.Widget {
@@ -6969,7 +6921,6 @@ declare namespace kendo.mobile.ui {
     }
 
 
-
     class Scroller extends kendo.mobile.ui.Widget {
 
         static fn: Scroller;
@@ -7137,7 +7088,6 @@ declare namespace kendo.mobile.ui {
     }
 
 
-
     class SplitView extends kendo.mobile.ui.Widget {
 
         static fn: SplitView;
@@ -7208,7 +7158,6 @@ declare namespace kendo.mobile.ui {
         */
         view?: JQuery;
     }
-
 
 
     class Switch extends kendo.mobile.ui.Widget {
@@ -7302,7 +7251,6 @@ declare namespace kendo.mobile.ui {
         */
         checked?: any;
     }
-
 
 
     class TabStrip extends kendo.mobile.ui.Widget {
@@ -7414,7 +7362,6 @@ declare namespace kendo.mobile.ui {
         */
         item?: JQuery;
     }
-
 
 
     class View extends kendo.mobile.ui.Widget {
@@ -7590,7 +7537,6 @@ declare namespace kendo.mobile.ui {
         */
         type?: string;
     }
-
 
 
 }
@@ -7900,7 +7846,6 @@ declare namespace kendo.ui {
     }
 
 
-
 }
 declare namespace kendo.ooxml {
     class Workbook extends Observable {
@@ -8196,7 +8141,6 @@ declare namespace kendo.ooxml {
     }
 
 
-
 }
 
 declare namespace kendo.dataviz.geometry {
@@ -8338,7 +8282,6 @@ declare namespace kendo.dataviz.geometry {
     }
 
 
-
     class Circle extends Observable {
 
 
@@ -8427,7 +8370,6 @@ declare namespace kendo.dataviz.geometry {
         preventDefault: Function;
         isDefaultPrevented(): boolean;
     }
-
 
 
     class Matrix extends Observable {
@@ -8519,7 +8461,6 @@ declare namespace kendo.dataviz.geometry {
         preventDefault: Function;
         isDefaultPrevented(): boolean;
     }
-
 
 
     class Point extends Observable {
@@ -8703,7 +8644,6 @@ declare namespace kendo.dataviz.geometry {
     }
 
 
-
     class Rect extends Observable {
 
 
@@ -8838,7 +8778,6 @@ declare namespace kendo.dataviz.geometry {
     }
 
 
-
     class Size extends Observable {
 
 
@@ -8908,7 +8847,6 @@ declare namespace kendo.dataviz.geometry {
         preventDefault: Function;
         isDefaultPrevented(): boolean;
     }
-
 
 
     class Transformation extends Observable {
@@ -8988,7 +8926,6 @@ declare namespace kendo.dataviz.geometry {
         preventDefault: Function;
         isDefaultPrevented(): boolean;
     }
-
 
 
 }
@@ -9151,7 +9088,6 @@ declare namespace kendo.dataviz.drawing {
     }
 
 
-
     class Circle extends kendo.drawing.Element {
 
 
@@ -9310,7 +9246,6 @@ declare namespace kendo.dataviz.drawing {
     }
 
 
-
     class Element extends kendo.Class {
 
 
@@ -9429,7 +9364,6 @@ declare namespace kendo.dataviz.drawing {
     }
 
 
-
     interface FillOptions  {
 
 
@@ -9447,7 +9381,6 @@ declare namespace kendo.dataviz.drawing {
 
 
     }
-
 
 
 
@@ -9497,7 +9430,6 @@ declare namespace kendo.dataviz.drawing {
     }
 
 
-
     class GradientStop extends kendo.Class {
 
 
@@ -9533,7 +9465,6 @@ declare namespace kendo.dataviz.drawing {
         preventDefault: Function;
         isDefaultPrevented(): boolean;
     }
-
 
 
     class Group extends kendo.drawing.Element {
@@ -9674,7 +9605,6 @@ declare namespace kendo.dataviz.drawing {
         preventDefault: Function;
         isDefaultPrevented(): boolean;
     }
-
 
 
     class Image extends kendo.drawing.Element {
@@ -9820,7 +9750,6 @@ declare namespace kendo.dataviz.drawing {
     }
 
 
-
     class Layout extends kendo.drawing.Group {
 
 
@@ -9893,7 +9822,6 @@ declare namespace kendo.dataviz.drawing {
         preventDefault: Function;
         isDefaultPrevented(): boolean;
     }
-
 
 
     class LinearGradient extends kendo.drawing.Gradient {
@@ -9976,7 +9904,6 @@ declare namespace kendo.dataviz.drawing {
         preventDefault: Function;
         isDefaultPrevented(): boolean;
     }
-
 
 
     class MultiPath extends kendo.drawing.Element {
@@ -10255,7 +10182,6 @@ declare namespace kendo.dataviz.drawing {
     }
 
 
-
     class OptionsStore extends kendo.Class {
 
 
@@ -10294,7 +10220,6 @@ declare namespace kendo.dataviz.drawing {
         preventDefault: Function;
         isDefaultPrevented(): boolean;
     }
-
 
 
     interface PDFOptions  {
@@ -10342,7 +10267,6 @@ declare namespace kendo.dataviz.drawing {
 
 
     }
-
 
 
 
@@ -10626,7 +10550,6 @@ declare namespace kendo.dataviz.drawing {
     }
 
 
-
     class RadialGradient extends kendo.drawing.Gradient {
 
 
@@ -10711,7 +10634,6 @@ declare namespace kendo.dataviz.drawing {
         preventDefault: Function;
         isDefaultPrevented(): boolean;
     }
-
 
 
     class Rect extends kendo.drawing.Element {
@@ -10872,7 +10794,6 @@ declare namespace kendo.dataviz.drawing {
     }
 
 
-
     class Segment extends kendo.Class {
 
 
@@ -10931,7 +10852,6 @@ declare namespace kendo.dataviz.drawing {
     }
 
 
-
     interface StrokeOptions  {
 
 
@@ -10965,7 +10885,6 @@ declare namespace kendo.dataviz.drawing {
 
 
     }
-
 
 
 
@@ -11170,7 +11089,6 @@ declare namespace kendo.dataviz.drawing {
     }
 
 
-
     class Text extends kendo.drawing.Element {
 
 
@@ -11346,7 +11264,6 @@ declare namespace kendo.dataviz.drawing {
     }
 
 
-
     interface TooltipOptions  {
 
 
@@ -11399,7 +11316,6 @@ declare namespace kendo.dataviz.drawing {
 
 
 
-
 }
 
 interface HTMLElement {
@@ -11430,89 +11346,5 @@ interface JQuery {
     kendoDropTargetArea(options: kendo.ui.DropTargetAreaOptions): JQuery;
 
     data(key: any): any;
-
-    kendoMobileActionSheet(): JQuery;
-    kendoMobileActionSheet(options: kendo.mobile.ui.ActionSheetOptions): JQuery;
-    data(key: "kendoMobileActionSheet"): kendo.mobile.ui.ActionSheet;
-
-    kendoMobileBackButton(): JQuery;
-    kendoMobileBackButton(options: kendo.mobile.ui.BackButtonOptions): JQuery;
-    data(key: "kendoMobileBackButton"): kendo.mobile.ui.BackButton;
-
-    kendoMobileButton(): JQuery;
-    kendoMobileButton(options: kendo.mobile.ui.ButtonOptions): JQuery;
-    data(key: "kendoMobileButton"): kendo.mobile.ui.Button;
-
-    kendoMobileButtonGroup(): JQuery;
-    kendoMobileButtonGroup(options: kendo.mobile.ui.ButtonGroupOptions): JQuery;
-    data(key: "kendoMobileButtonGroup"): kendo.mobile.ui.ButtonGroup;
-
-    kendoMobileCollapsible(): JQuery;
-    kendoMobileCollapsible(options: kendo.mobile.ui.CollapsibleOptions): JQuery;
-    data(key: "kendoMobileCollapsible"): kendo.mobile.ui.Collapsible;
-
-    kendoMobileDetailButton(): JQuery;
-    kendoMobileDetailButton(options: kendo.mobile.ui.DetailButtonOptions): JQuery;
-    data(key: "kendoMobileDetailButton"): kendo.mobile.ui.DetailButton;
-
-    kendoMobileDrawer(): JQuery;
-    kendoMobileDrawer(options: kendo.mobile.ui.DrawerOptions): JQuery;
-    data(key: "kendoMobileDrawer"): kendo.mobile.ui.Drawer;
-
-    kendoMobileLayout(): JQuery;
-    kendoMobileLayout(options: kendo.mobile.ui.LayoutOptions): JQuery;
-    data(key: "kendoMobileLayout"): kendo.mobile.ui.Layout;
-
-    kendoMobileListView(): JQuery;
-    kendoMobileListView(options: kendo.mobile.ui.ListViewOptions): JQuery;
-    data(key: "kendoMobileListView"): kendo.mobile.ui.ListView;
-
-    kendoMobileLoader(): JQuery;
-    kendoMobileLoader(options: kendo.mobile.ui.LoaderOptions): JQuery;
-    data(key: "kendoMobileLoader"): kendo.mobile.ui.Loader;
-
-    kendoMobileModalView(): JQuery;
-    kendoMobileModalView(options: kendo.mobile.ui.ModalViewOptions): JQuery;
-    data(key: "kendoMobileModalView"): kendo.mobile.ui.ModalView;
-
-    kendoMobileNavBar(): JQuery;
-    kendoMobileNavBar(options: kendo.mobile.ui.NavBarOptions): JQuery;
-    data(key: "kendoMobileNavBar"): kendo.mobile.ui.NavBar;
-
-    kendoMobilePane(): JQuery;
-    kendoMobilePane(options: kendo.mobile.ui.PaneOptions): JQuery;
-    data(key: "kendoMobilePane"): kendo.mobile.ui.Pane;
-
-    kendoMobilePopOver(): JQuery;
-    kendoMobilePopOver(options: kendo.mobile.ui.PopOverOptions): JQuery;
-    data(key: "kendoMobilePopOver"): kendo.mobile.ui.PopOver;
-
-    kendoMobileScrollView(): JQuery;
-    kendoMobileScrollView(options: kendo.mobile.ui.ScrollViewOptions): JQuery;
-    data(key: "kendoMobileScrollView"): kendo.mobile.ui.ScrollView;
-
-    kendoMobileScroller(): JQuery;
-    kendoMobileScroller(options: kendo.mobile.ui.ScrollerOptions): JQuery;
-    data(key: "kendoMobileScroller"): kendo.mobile.ui.Scroller;
-
-    kendoMobileSplitView(): JQuery;
-    kendoMobileSplitView(options: kendo.mobile.ui.SplitViewOptions): JQuery;
-    data(key: "kendoMobileSplitView"): kendo.mobile.ui.SplitView;
-
-    kendoMobileSwitch(): JQuery;
-    kendoMobileSwitch(options: kendo.mobile.ui.SwitchOptions): JQuery;
-    data(key: "kendoMobileSwitch"): kendo.mobile.ui.Switch;
-
-    kendoMobileTabStrip(): JQuery;
-    kendoMobileTabStrip(options: kendo.mobile.ui.TabStripOptions): JQuery;
-    data(key: "kendoMobileTabStrip"): kendo.mobile.ui.TabStrip;
-
-    kendoMobileView(): JQuery;
-    kendoMobileView(options: kendo.mobile.ui.ViewOptions): JQuery;
-    data(key: "kendoMobileView"): kendo.mobile.ui.View;
-
-    kendoTouch(): JQuery;
-    kendoTouch(options: kendo.ui.TouchOptions): JQuery;
-    data(key: "kendoTouch"): kendo.ui.Touch;
 
 }
