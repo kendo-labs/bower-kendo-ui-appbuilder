@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2018.1.221
+// Type definitions for Kendo UI Professional v2018.1.226
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik/>
 
@@ -11346,5 +11346,89 @@ interface JQuery {
     kendoDropTargetArea(options: kendo.ui.DropTargetAreaOptions): JQuery;
 
     data(key: any): any;
+
+    kendoMobileActionSheet(): JQuery;
+    kendoMobileActionSheet(options: kendo.mobile.ui.ActionSheetOptions): JQuery;
+    data(key: "kendoMobileActionSheet"): kendo.mobile.ui.ActionSheet;
+
+    kendoMobileBackButton(): JQuery;
+    kendoMobileBackButton(options: kendo.mobile.ui.BackButtonOptions): JQuery;
+    data(key: "kendoMobileBackButton"): kendo.mobile.ui.BackButton;
+
+    kendoMobileButton(): JQuery;
+    kendoMobileButton(options: kendo.mobile.ui.ButtonOptions): JQuery;
+    data(key: "kendoMobileButton"): kendo.mobile.ui.Button;
+
+    kendoMobileButtonGroup(): JQuery;
+    kendoMobileButtonGroup(options: kendo.mobile.ui.ButtonGroupOptions): JQuery;
+    data(key: "kendoMobileButtonGroup"): kendo.mobile.ui.ButtonGroup;
+
+    kendoMobileCollapsible(): JQuery;
+    kendoMobileCollapsible(options: kendo.mobile.ui.CollapsibleOptions): JQuery;
+    data(key: "kendoMobileCollapsible"): kendo.mobile.ui.Collapsible;
+
+    kendoMobileDetailButton(): JQuery;
+    kendoMobileDetailButton(options: kendo.mobile.ui.DetailButtonOptions): JQuery;
+    data(key: "kendoMobileDetailButton"): kendo.mobile.ui.DetailButton;
+
+    kendoMobileDrawer(): JQuery;
+    kendoMobileDrawer(options: kendo.mobile.ui.DrawerOptions): JQuery;
+    data(key: "kendoMobileDrawer"): kendo.mobile.ui.Drawer;
+
+    kendoMobileLayout(): JQuery;
+    kendoMobileLayout(options: kendo.mobile.ui.LayoutOptions): JQuery;
+    data(key: "kendoMobileLayout"): kendo.mobile.ui.Layout;
+
+    kendoMobileListView(): JQuery;
+    kendoMobileListView(options: kendo.mobile.ui.ListViewOptions): JQuery;
+    data(key: "kendoMobileListView"): kendo.mobile.ui.ListView;
+
+    kendoMobileLoader(): JQuery;
+    kendoMobileLoader(options: kendo.mobile.ui.LoaderOptions): JQuery;
+    data(key: "kendoMobileLoader"): kendo.mobile.ui.Loader;
+
+    kendoMobileModalView(): JQuery;
+    kendoMobileModalView(options: kendo.mobile.ui.ModalViewOptions): JQuery;
+    data(key: "kendoMobileModalView"): kendo.mobile.ui.ModalView;
+
+    kendoMobileNavBar(): JQuery;
+    kendoMobileNavBar(options: kendo.mobile.ui.NavBarOptions): JQuery;
+    data(key: "kendoMobileNavBar"): kendo.mobile.ui.NavBar;
+
+    kendoMobilePane(): JQuery;
+    kendoMobilePane(options: kendo.mobile.ui.PaneOptions): JQuery;
+    data(key: "kendoMobilePane"): kendo.mobile.ui.Pane;
+
+    kendoMobilePopOver(): JQuery;
+    kendoMobilePopOver(options: kendo.mobile.ui.PopOverOptions): JQuery;
+    data(key: "kendoMobilePopOver"): kendo.mobile.ui.PopOver;
+
+    kendoMobileScrollView(): JQuery;
+    kendoMobileScrollView(options: kendo.mobile.ui.ScrollViewOptions): JQuery;
+    data(key: "kendoMobileScrollView"): kendo.mobile.ui.ScrollView;
+
+    kendoMobileScroller(): JQuery;
+    kendoMobileScroller(options: kendo.mobile.ui.ScrollerOptions): JQuery;
+    data(key: "kendoMobileScroller"): kendo.mobile.ui.Scroller;
+
+    kendoMobileSplitView(): JQuery;
+    kendoMobileSplitView(options: kendo.mobile.ui.SplitViewOptions): JQuery;
+    data(key: "kendoMobileSplitView"): kendo.mobile.ui.SplitView;
+
+    kendoMobileSwitch(): JQuery;
+    kendoMobileSwitch(options: kendo.mobile.ui.SwitchOptions): JQuery;
+    data(key: "kendoMobileSwitch"): kendo.mobile.ui.Switch;
+
+    kendoMobileTabStrip(): JQuery;
+    kendoMobileTabStrip(options: kendo.mobile.ui.TabStripOptions): JQuery;
+    data(key: "kendoMobileTabStrip"): kendo.mobile.ui.TabStrip;
+
+    kendoMobileView(): JQuery;
+    kendoMobileView(options: kendo.mobile.ui.ViewOptions): JQuery;
+    data(key: "kendoMobileView"): kendo.mobile.ui.View;
+
+    kendoTouch(): JQuery;
+    kendoTouch(options: kendo.ui.TouchOptions): JQuery;
+    data(key: "kendoTouch"): kendo.ui.Touch;
 
 }
