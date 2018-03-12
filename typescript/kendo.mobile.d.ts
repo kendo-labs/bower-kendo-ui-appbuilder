@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2018.1.226
+// Type definitions for Kendo UI Professional v2018.1.312
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik/>
 
@@ -5093,12 +5093,6 @@ declare namespace kendo {
         */
         bind(element: Element, viewModel: kendo.data.ObservableObject, namespace?: any): void;
         function /**
-        Creates an ObservableArray instance that is bound to a HierarchicalDataSource. Required to bind a HierarchicalDataSource-enabled widget (such as the Kendo UI TreeView) to a view-model.
-        @method
-        @param array - The array that will be converted to an ObservableArray.
-        */
-        observableHierarchy(array: any): void;
-        function /**
         Opens a Kendo UI Confirm popup. Similar to the native window.confirm() method.
         @method
         @param text - The text to be shown in the Confirm popup.
@@ -5130,12 +5124,24 @@ declare namespace kendo {
         */
         destroy(element: Element): void;
         function /**
+        Generates a random GUID (globally unique identifier).
+        @method
+        @returns The generated GUID.
+        */
+        guid(): string;
+        function /**
         Encodes HTML characters to entities.
         @method
         @param value - The string that needs to be HTML encoded.
         @returns The encoded string.
         */
         htmlEncode(value: string): string;
+        function /**
+        Creates an ObservableArray instance that is bound to a HierarchicalDataSource. Required to bind a HierarchicalDataSource-enabled widget (such as the Kendo UI TreeView) to a view-model.
+        @method
+        @param array - The array that will be converted to an ObservableArray.
+        */
+        observableHierarchy(array: any): void;
         function /**
         Parses as a formatted string as a Date. Also see Date Parsing
         @method
@@ -8102,6 +8108,11 @@ declare namespace kendo.ooxml {
         */
         frozenRows?: number;
         filter?: WorkbookSheetFilter;
+        /**
+        A range of cells to merge into one. The value of the first cell in the range will be displayed in the new merged cell.
+        @member {any}
+        */
+        mergedCells?: any;
         /**
         Sets the name of the exported workbook sheet.
         @member {string}
