@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2018.1.503
+// Type definitions for Kendo UI Professional v2018.2.515
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik/>
 
@@ -1455,6 +1455,7 @@ declare namespace kendo.ui {
         editor?(container: JQuery, options: TreeListEditorOptions): void;
     }
 }
+
 
 declare namespace kendo.mobile {
     function init(selector: string): void;
