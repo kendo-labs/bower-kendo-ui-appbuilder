@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2018.2.613
+// Type definitions for Kendo UI Professional v2018.2.620
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik/>
 
@@ -187,8 +187,8 @@ declare namespace kendo {
 
     function guid(): string;
 
-    function widgetInstance(element: JQuery, suite: typeof kendo.ui): kendo.ui.Widget;
-    function widgetInstance(element: JQuery, suite: typeof kendo.mobile.ui): kendo.ui.Widget;
+    function widgetInstance(element: JQuery, suite?: typeof kendo.ui): kendo.ui.Widget;
+    function widgetInstance(element: JQuery, suite?: typeof kendo.mobile.ui): kendo.ui.Widget;
 
 
     var ns: string;
