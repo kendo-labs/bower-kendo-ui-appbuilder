@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2018.2.704
+// Type definitions for Kendo UI Professional v2018.2.806
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik/>
 
@@ -5161,6 +5161,24 @@ declare namespace kendo {
         @returns the parsed date. Returns null if the value cannot be parsed as a valid Date.
         */
         parseDate(value: string, formats?: any, culture?: string): Date;
+        function /**
+        Parses a formatted string as a Date. The method returns null if the string doesn't match the format exactly. Also see Date Parsing
+        @method
+        @param value - The string which should be parsed as Date.
+        @param formats - The format(s) that will be used to parse the date. If you do not explicitly state a date parsing format, the standard date formats of the current culture will apply. If you state a format, and the date string doesn't match the format exactly, null is returned.For more information on the custom date parsing formats, refer to this article.
+        @param culture - The culture used to parse the number. The current culture is used by default.
+        @returns the parsed date. Returns null if the value cannot be parsed as a valid Date.
+        */
+        parseExactDate(value: string, formats?: string, culture?: string): Date;
+        function /**
+        Parses a formatted string as a Date. The method returns null if the string doesn't match the format exactly. Also see Date Parsing
+        @method
+        @param value - The string which should be parsed as Date.
+        @param formats - The format(s) that will be used to parse the date. If you do not explicitly state a date parsing format, the standard date formats of the current culture will apply. If you state a format, and the date string doesn't match the format exactly, null is returned.For more information on the custom date parsing formats, refer to this article.
+        @param culture - The culture used to parse the number. The current culture is used by default.
+        @returns the parsed date. Returns null if the value cannot be parsed as a valid Date.
+        */
+        parseExactDate(value: string, formats?: any, culture?: string): Date;
         function /**
         Parses a string as a floating point number.
         @method
